@@ -1,10 +1,7 @@
-﻿using Exiled.API.Enums;
-using Exiled.API.Features.Attributes;
-using Exiled.API.Features.Hazards;
+﻿using Exiled.API.Features.Attributes;
 using Exiled.API.Features.Spawn;
 using Exiled.CustomItems.API.Features;
 using Exiled.Events.EventArgs.Player;
-using Hazards;
 using Player = Exiled.Events.Handlers.Player;
 
 namespace scp_294.Items
@@ -19,7 +16,7 @@ namespace scp_294.Items
         public override ItemType Type { get; set; } = ItemType.AntiSCP207;
         public override SpawnProperties SpawnProperties { get; set; } = new SpawnProperties()
         {
-            Limit = 1, // Irrelevant
+            Limit = 1, // Irrelevant: determines the maximum of how many will spawn (they will not spawn in the map)
         };
 
         protected override void SubscribeEvents()

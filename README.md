@@ -1,12 +1,12 @@
-# Table of contents
-1. [Introduction](#introduction)
-2. [Prompts and results](#prompts)
-3. [How can you help?](#help)
-4. [Setup your coding environment](#coding)
 # SCP-249 The Vending Machine <a name="introduction"></a>
 ### SCP: Secret Laboratory plugin made with [EXILED](https://github.com/Exiled-Team/EXILED) and [MER](https://github.com/Michal78900/MapEditorReborn)
 This plugin adds SCP-249 to the game. SCP-249 is a vending machine that will give you a drink based on the prompt you give it.
 You will also be able to create and add your drinks to this repository! Learn how in this [section](#help) of the README.
+## Table of contents
+1. [Introduction](#introduction)
+2. [Prompts and results](#prompts)
+3. [How can you help?](#help)
+4. [Setup your coding environment](#coding)
 ## This is a list with every prompt and its respective drink <a name="prompts"></a>
 | Prompt   |  Result drink  |
 | :------: | :------------: |

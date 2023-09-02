@@ -1,9 +1,9 @@
 # Table of contents
 1. [Introduction](#introduction)
 2. [Prompts and results](#prompts)
-3. [How can you help](#help)
-4. [Setup coding environment](#coding)
-## SCP-249 The Vending Machine <a name="introduction"></a>
+3. [How can you help?](#help)
+4. [Setup your coding environment](#coding)
+# SCP-249 The Vending Machine <a name="introduction"></a>
 ### SCP: Secret Laboratory plugin made with [EXILED](https://github.com/Exiled-Team/EXILED) and [MER](https://github.com/Michal78900/MapEditorReborn)
 This plugin adds SCP-249 to the game. SCP-249 is a vending machine that will give you a drink based on the prompt you give it.
 You will also be able to create and add your drinks to this repository! Learn how in this [section](#help) of the README.
@@ -30,5 +30,5 @@ Follow their instructions on how to install them.
 7. Add the missing references and start coding.
 8. To test you will have to build your project, get the resulting dll and place it in the EXILED plugins folder, load your server, join and test!
 
-## That is everything. We recommend you join [EXILED'S discord server](https://discord.gg/PyUkWTg) if you have any question about developing a plugin.
+### That is everything. We recommend you join [EXILED'S discord server](https://discord.gg/PyUkWTg) if you have any question about developing a plugin.
 

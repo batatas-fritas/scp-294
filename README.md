@@ -10,7 +10,7 @@ You will also be able to create and add your drinks to this repository! Learn ho
 ## This is a list with every prompt and its respective drink <a name="prompts"></a>
 | Prompt   |  Result drink  |
 | :------: | :------------: |
-| drink of cum | when drunk a tantrum spawns beneath the player |
+| drink of cum | tantrum spawns beneath the player |
 ## How can you help and write your own drink? <a name="help"></a>
 1. You need to setup your coding environment. Here's the [guide](#coding) on how to do that.
 2. Create a new branch with the name related to what you will be developing.

@@ -6,6 +6,7 @@ using Exiled.API.Enums;
 using Player = Exiled.Events.Handlers.Player;
 using CustomPlayerEffects;
 using UnityEngine;
+using System.ComponentModel;
 
 namespace scp_294.Items
 {
@@ -34,6 +35,7 @@ namespace scp_294.Items
             base.UnsubscribeEvents();
         }
 
+        [Description("By how much the base effect will be multiplied: base effect * Times")]
         public float Times { get; set; } = 2.5f;
 
         private void UsedItem(UsedItemEventArgs ev)

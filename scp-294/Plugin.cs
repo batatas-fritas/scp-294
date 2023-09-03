@@ -2,6 +2,7 @@
 using Exiled.CustomItems.API;
 using Exiled.CustomItems.API.Features;
 using System;
+using Server = Exiled.Events.Handlers.Server;
 
 namespace scp_294
 {
@@ -20,6 +21,7 @@ namespace scp_294
         private void RegisterEvents()
         {
             _handler = new EventHandler(Config);
+            Server.RoundStarted += _handler.OnRoundStarted;
             // register events
         }
 

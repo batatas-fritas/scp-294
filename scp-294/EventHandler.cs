@@ -7,6 +7,9 @@
         public EventHandler(Config config) { Config = config; }
 
 
-        //events
+        public void OnRoundStarted()
+        {
+            // start coroutine
+        }
     }
 }

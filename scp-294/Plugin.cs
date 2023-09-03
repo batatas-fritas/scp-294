@@ -26,6 +26,14 @@ namespace scp_294
         private void RegisterItems()
         {
             Config.ThickJuice.Register();
+            Config.CandyJuice.Register();
+            Config.CandyRainbowJuice.Register();
+            Config.CandyYellowJuice.Register();
+            Config.CandyPurpleJuice.Register();
+            Config.CandyRedJuice.Register();
+            Config.CandyGreenJuice.Register();
+            Config.CandyBlueJuice.Register();
+            Config.CandyPinkJuice.Register();
         }
 
         private void DisableEvents()

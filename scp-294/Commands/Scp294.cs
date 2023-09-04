@@ -83,6 +83,8 @@ namespace scp_294.Commands
                         response = "Out of range";
                         return true;
                 }
+
+                return true;
             }
         }
 

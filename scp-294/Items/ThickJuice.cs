@@ -35,6 +35,7 @@ namespace scp_294.Items
         {
             if(Check(ev.Item))
             {
+                ev.Player.DisableEffect(EffectType.AntiScp207);
                 ev.Player.PlaceTantrum();
             }
         }

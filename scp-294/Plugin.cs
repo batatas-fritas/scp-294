@@ -3,6 +3,7 @@ using Exiled.CustomItems.API;
 using Exiled.CustomItems.API.Features;
 using System;
 using Server = Exiled.Events.Handlers.Server;
+using Schematic = MapEditorReborn.Events.Handlers.Schematic;
 
 namespace scp_294
 {
@@ -21,7 +22,8 @@ namespace scp_294
         private void RegisterEvents()
         {
             _handler = new EventHandler(Config);
-            Server.RoundStarted += _handler.OnRoundStarted;
+            Server.RoundEnded += _handler.OnRoundEnded;
+            Schematic.SchematicSpawned += _handler.SchematicSpawned;
             // register events
         }
 
@@ -41,6 +43,8 @@ namespace scp_294
         private void DisableEvents()
         {
             _handler = null;
+            Server.RoundEnded -= _handler.OnRoundEnded;
+            Schematic.SchematicSpawned -= _handler.SchematicSpawned;
             // unregister events
         }
 

@@ -35,6 +35,9 @@
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>..\..\..\..\Downloads\Dev\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
+    <Reference Include="MapEditorReborn">
+      <HintPath>..\..\..\..\Downloads\Dev\MapEditorReborn.dll</HintPath>
+    </Reference>
     <Reference Include="Mirror">
       <HintPath>..\..\..\..\Downloads\Dev\Mirror.dll</HintPath>
     </Reference>
@@ -51,7 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\Scp249.cs" />
+    <Compile Include="Commands\Scp294.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="EventHandler.cs" />
     <Compile Include="Items\CandyBlueJuice.cs" />

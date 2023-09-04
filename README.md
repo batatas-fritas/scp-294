@@ -19,6 +19,8 @@ You will also be able to create and add your drinks to this repository! Learn ho
 | drink of yellow candy | gives the player a boosted yellow candy effect (the boost can be specified in the config) |
 | drink of candy | gives the player a random combination of candy effects |
 | drink of cum | tantrum spawns beneath the player |
+| cola / scp207 | gives the player a cola |
+| anticola / scp207? / antiscp207 | gives the player an anti cola |
 ## How can you help and write your own drink? <a name="help"></a>
 1. You need to setup your coding environment. Here's the [guide](#coding) on how to do that.
 2. Create a new branch with the name related to what you will be developing.

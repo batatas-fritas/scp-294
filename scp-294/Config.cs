@@ -2,6 +2,7 @@
 using Exiled.CustomItems.API.Features;
 using scp_294.Items;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace scp_294
 {
@@ -9,6 +10,10 @@ namespace scp_294
     {
         public bool IsEnabled { get; set; } = true;
         public bool Debug { get; set; } = true;
+
+        [Description("Range to be able to use the machine")]
+        public int Range { get; set; } = 2;
+
         public ThickJuice ThickJuice { get; set; } = new ThickJuice();
         public CandyJuice CandyJuice { get; set; } = new CandyJuice();
         public CandyRainbowJuice CandyRainbowJuice { get; set; } = new CandyRainbowJuice();

@@ -18,7 +18,7 @@ namespace scp_294
 
         public static Vector3 Scp294_position { get; set; }
 
-        private CoroutineHandle _handler;
+        // private CoroutineHandle _handler;
 
         private List<Player> PlayersInRange = new List<Player>();
 

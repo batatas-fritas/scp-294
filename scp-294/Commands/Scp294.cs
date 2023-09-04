@@ -63,10 +63,27 @@ namespace scp_294.Commands
                 drink.Give(player);
                 
                 return true;
+            } else
+            {
+                response = "Enjoy your drink";
+                switch (drink_name)
+                {
+                    case "cola":
+                    case "scp207":
+                        RemoveCoinFromPlayer(player);
+                        player.AddItem(ItemType.SCP207);
+                        break;
+                    case "anticola":
+                    case "scp207?":
+                    case "antiscp207":
+                        RemoveCoinFromPlayer(player);
+                        player.AddItem(ItemType.AntiSCP207);
+                        break;
+                    default:
+                        response = "Out of range";
+                        return true;
+                }
             }
-
-            response = "Out of range";
-            return true;
         }
 
         private Player GetPlayer(CommandSender sender)

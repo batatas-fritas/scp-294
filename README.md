@@ -1,6 +1,6 @@
 # SCP-249 The Vending Machine <a name="introduction"></a>
 ### SCP: Secret Laboratory plugin made with [EXILED](https://github.com/Exiled-Team/EXILED) and [MER](https://github.com/Michal78900/MapEditorReborn)
-This plugin adds SCP-249 to the game. SCP-249 is a vending machine that will give you a drink based on the prompt you give it.
+This plugin adds SCP-294 to the game. SCP-294 is a vending machine that will give you a drink based on the prompt you give it.
 You will also be able to create and add your drinks to this repository! Learn how in this [section](#help) of the README.
 ## Table of contents
 1. [Introduction](#introduction)

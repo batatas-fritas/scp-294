@@ -1,20 +1,18 @@
-﻿using Exiled.API.Features.Attributes;
+﻿using Exiled.API.Enums;
+using Exiled.API.Features.Attributes;
 using Exiled.API.Features.Spawn;
 using Exiled.CustomItems.API.Features;
 using Exiled.Events.EventArgs.Player;
-using InventorySystem.Items.Usables.Scp330;
-using Exiled.API.Enums;
 using Player = Exiled.Events.Handlers.Player;
-using System.ComponentModel;
 
 namespace scp_294.Items
 {
     [CustomItem(ItemType.AntiSCP207)]
-    public class CandyRedJuice : CustomItem
+    public class Scp173Drink : CustomItem
     {
-        public override uint Id { get; set; } = 104;
-        public override string Name { get; set; } = "drink of red candy";
-        public override string Description { get; set; } = "A strong scent of cherry fills the room. It’s a bit... too strong.";
+        public override uint Id { get; set; } = 72;
+        public override string Name { get; set; } = "drink of scp173";
+        public override string Description { get; set; } = "REEEEEEEEEEEEEEEEE.";
         public override float Weight { get; set; } = 1f;
         public override ItemType Type { get; set; } = ItemType.AntiSCP207;
         public override SpawnProperties SpawnProperties { get; set; } = new()
@@ -34,15 +32,13 @@ namespace scp_294.Items
             base.UnsubscribeEvents();
         }
 
-        [Description("By how much the base effect will be multiplied: base effect * Times")]
-        public float Times { get; set; } = 2f;
-
         private void UsedItem(UsedItemEventArgs ev)
         {
             if (Check(ev.Item))
             {
                 ev.Player.DisableEffect(EffectType.AntiScp207);
-                Scp330Bag.AddSimpleRegeneration(ev.Player.ReferenceHub, 9f, 5f * Times);
+                ev.Player.EnableEffect(EffectType.MovementBoost, 120);
+                ev.Player.ChangeEffectIntensity(EffectType.MovementBoost, 50);
             }
         }
     }

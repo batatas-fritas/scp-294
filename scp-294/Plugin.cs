@@ -15,7 +15,7 @@ namespace scp_294
 
         public override string Author => "batatas-fritas";
 
-        public override Version Version => new Version(0, 0, 0);
+        public override Version Version => new Version(1, 0, 0);
 
         public override Version RequiredExiledVersion => new Version(8, 0, 0); // 7.2 may work
 
@@ -38,6 +38,9 @@ namespace scp_294
             Config.CandyGreenJuice.Register();
             Config.CandyBlueJuice.Register();
             Config.CandyPinkJuice.Register();
+            Config.TeleportationDrink.Register();
+            Config.ScpDrink.Register();
+            Config.Scp173Drink.Register();
         }
 
         private void DisableEvents()

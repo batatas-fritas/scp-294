@@ -9,6 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>scp_294</RootNamespace>
     <AssemblyName>scp-294</AssemblyName>
+    <LangVersion>latest</LangVersion>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -65,6 +66,9 @@
     <Compile Include="Items\CandyRainbowJuice.cs" />
     <Compile Include="Items\CandyRedJuice.cs" />
     <Compile Include="Items\CandyYellowJuice.cs" />
+    <Compile Include="Items\Scp173Drink.cs" />
+    <Compile Include="Items\ScpDrink.cs" />
+    <Compile Include="Items\TeleportationDrink.cs" />
     <Compile Include="Items\ThickJuice.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

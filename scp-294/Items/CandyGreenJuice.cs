@@ -17,7 +17,7 @@ namespace scp_294.Items
         public override string Description { get; set; } = "A nasty herbal smell emits from the juice.";
         public override float Weight { get; set; } = 1f;
         public override ItemType Type { get; set; } = ItemType.AntiSCP207;
-        public override SpawnProperties SpawnProperties { get; set; } = new SpawnProperties()
+        public override SpawnProperties SpawnProperties { get; set; } = new()
         {
             Limit = 1, // Irrelevant: determines the maximum of how many will spawn (they will not spawn in the map)
         };

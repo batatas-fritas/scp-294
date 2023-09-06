@@ -15,7 +15,7 @@ namespace scp_294.Items
         public override string Description { get; set; } = "The strawberry scent is as gentle as it looks.";
         public override float Weight { get; set; } = 1f;
         public override ItemType Type { get; set; } = ItemType.AntiSCP207;
-        public override SpawnProperties SpawnProperties { get; set; } = new SpawnProperties()
+        public override SpawnProperties SpawnProperties { get; set; } = new()
         {
             Limit = 1, // Irrelevant: determines the maximum of how many will spawn (they will not spawn in the map)
         };

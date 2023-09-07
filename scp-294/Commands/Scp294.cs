@@ -21,10 +21,16 @@ namespace scp_294.Commands
         {
             Player player = GetPlayer((CommandSender)sender);
 
-            if (player == null)
+            if (player == null || arguments.Count == 0)
             {
                 response = "error";
                 return false;
+            }
+
+            if (arguments.At(0).ToLower() == "list" && arguments.Count == 1)
+            {
+                response = "\n" + GetAllDrinkNames();
+                return true;
             }
 
             if(player.IsDead)
@@ -81,9 +87,6 @@ namespace scp_294.Commands
                         RemoveCoinFromPlayer(player);
                         player.AddItem(ItemType.AntiSCP207);
                         break;
-                    case "list":
-                        response = GetAllDrinkNames();
-                        break;
                     default:
                         response = "<color=#ff0000>Out of range</color>";
                         return true;
@@ -117,7 +120,7 @@ namespace scp_294.Commands
 
         private string GetAllDrinkNames()
         {
-            return "<color=#00ff00>\n" + string.Join("\n", CustomItem.Registered.Select(item => item.Name)) + "</color>";
+            return string.Join("\n", CustomItem.Registered.Select(item => "<color=#00ff00>" + item.Name + "</color>"));
         }
     }
 }

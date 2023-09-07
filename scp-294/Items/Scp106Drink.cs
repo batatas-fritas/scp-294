@@ -8,11 +8,11 @@ using Player = Exiled.Events.Handlers.Player;
 namespace scp_294.Items
 {
     [CustomItem(ItemType.AntiSCP207)]
-    public class Scp173Drink : CustomItem
+    public class Scp106Drink : CustomItem
     {
-        public override uint Id { get; set; } = 72;
-        public override string Name { get; set; } = "drink of scp173";
-        public override string Description { get; set; } = "REEEEEEEEEEEEEEEEE.";
+        public override uint Id { get; set; } = 73;
+        public override string Name { get; set; } = "drink of scp106";
+        public override string Description { get; set; } = "Old man sludge. Yum!";
         public override float Weight { get; set; } = 1f;
         public override ItemType Type { get; set; } = ItemType.AntiSCP207;
         public override SpawnProperties SpawnProperties { get; set; } = new()
@@ -37,8 +37,7 @@ namespace scp_294.Items
             if (Check(ev.Item))
             {
                 ev.Player.DisableEffect(EffectType.AntiScp207);
-                ev.Player.EnableEffect(EffectType.MovementBoost, 30);
-                ev.Player.ChangeEffectIntensity(EffectType.MovementBoost, 50);
+                ev.Player.EnableEffect(EffectType.PocketCorroding);
             }
         }
     }

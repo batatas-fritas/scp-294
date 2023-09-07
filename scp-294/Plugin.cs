@@ -41,6 +41,7 @@ namespace scp_294
             Config.TeleportationDrink.Register();
             Config.ScpDrink.Register();
             Config.Scp173Drink.Register();
+            Config.Scp106Drink.Register();
         }
 
         private void DisableEvents()

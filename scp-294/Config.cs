@@ -26,5 +26,6 @@ namespace scp_294
         public TeleportationDrink TeleportationDrink { get; set; } = new();
         public ScpDrink ScpDrink { get; set; } = new();
         public Scp173Drink Scp173Drink { get;set; } = new();
+        public Scp106Drink Scp106Drink { get; set;} = new();
     }
 }

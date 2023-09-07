@@ -3,6 +3,7 @@ using Exiled.API.Features;
 using System;
 using Exiled.CustomItems.API.Features;
 using Exiled.API.Features.Items;
+using System.Linq;
 
 namespace scp_294.Commands
 {
@@ -79,6 +80,9 @@ namespace scp_294.Commands
                         RemoveCoinFromPlayer(player);
                         player.AddItem(ItemType.AntiSCP207);
                         break;
+                    case "list":
+                        response = GetAllDrinkNames();
+                        break;
                     default:
                         response = "Out of range";
                         return true;
@@ -107,6 +111,12 @@ namespace scp_294.Commands
                     return;
                 }
             }
+        }
+
+
+        private string GetAllDrinkNames()
+        {
+            return string.Join("\n", CustomItem.Registered.Select(item => item.Name));
         }
     }
 }

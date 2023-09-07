@@ -10,6 +10,7 @@ You will also be able to create and add your drinks to this repository! Learn ho
 ## This is a list with every prompt and its respective drink <a name="prompts"></a>
 | Prompt   |  Result drink  |
 | :------: | :------------: |
+| list | not a drink. It lists every drink available |
 | drink of blue candy | gives the player a boosted blue candy effect (the boost can be specified in the config) |
 | drink of green candy | gives the player a boosted green candy effect (the boost can be specified in the config) | 
 | drink of pink candy | weirdly pink green, I wonder what happens when you drink it |
@@ -24,6 +25,7 @@ You will also be able to create and add your drinks to this repository! Learn ho
 | drink of scp173 | gives the player a massive movement boost |
 | drink of chorus fruit | teleports the player to a random room |
 | scp drink | disguises the player as a random scp |
+| drink of scp106 | teleports the player to the pocket dimension |
 ## How can you help and write your own drink? <a name="help"></a>
 1. You need to setup your coding environment. Here's the [guide](#coding) on how to do that.
 2. Create a new branch with the name related to what you will be developing.

@@ -66,6 +66,7 @@
     <Compile Include="Items\CandyRainbowJuice.cs" />
     <Compile Include="Items\CandyRedJuice.cs" />
     <Compile Include="Items\CandyYellowJuice.cs" />
+    <Compile Include="Items\Scp106Drink.cs" />
     <Compile Include="Items\Scp173Drink.cs" />
     <Compile Include="Items\ScpDrink.cs" />
     <Compile Include="Items\TeleportationDrink.cs" />

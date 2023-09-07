@@ -4,6 +4,7 @@ using System;
 using Exiled.CustomItems.API.Features;
 using Exiled.API.Features.Items;
 using System.Linq;
+using UnityEngine;
 
 namespace scp_294.Commands
 {
@@ -28,19 +29,19 @@ namespace scp_294.Commands
 
             if(player.IsDead)
             {
-                response = "bro you're dead. sit silently";
+                response = "<color=#ff0000>bro you're dead. sit silently</color>";
                 return false;
             }
 
             if (!player.IsHuman)
             {
-                response = "wtf are you doing dog. stop cooking";
+                response = "<color=#ff0000>wtf are you doing dog. stop cooking</color>";
                 return false;
             }
 
             if (player.CurrentRoom.name != "EZ_PCs" || !EventHandler.InRange(player.Position))
             {
-                response = "you are not close enough to the machine";
+                response = "<color=#ff0000>you are not close enough to the machine</color>";
                 return false;
             }
 
@@ -49,7 +50,7 @@ namespace scp_294.Commands
 
             if(player.CurrentItem == null || player.CurrentItem.Type != ItemType.Coin)
             {
-                response = "you need to be holding coin";
+                response = "<color=#ff0000>you need to be holding coin</color>";
                 return false;
             }
 
@@ -57,7 +58,7 @@ namespace scp_294.Commands
 
             if(drink != null) // Fetch drink by name and give it to player
             {
-                response = "Enjoy your drink";
+                response = "<color=#00ff00>Enjoy your drink</color>";
 
                 RemoveCoinFromPlayer(player);
 
@@ -66,7 +67,7 @@ namespace scp_294.Commands
                 return true;
             } else
             {
-                response = "Enjoy your drink";
+                response = "<color=#00ff00>Enjoy your drink</color>";
                 switch (drink_name)
                 {
                     case "cola":
@@ -84,7 +85,7 @@ namespace scp_294.Commands
                         response = GetAllDrinkNames();
                         break;
                     default:
-                        response = "Out of range";
+                        response = "<color=#ff0000>Out of range</color>";
                         return true;
                 }
 
@@ -116,7 +117,7 @@ namespace scp_294.Commands
 
         private string GetAllDrinkNames()
         {
-            return string.Join("\n", CustomItem.Registered.Select(item => item.Name));
+            return "<color=#00ff00>\n" + string.Join("\n", CustomItem.Registered.Select(item => item.Name)) + "</color>";
         }
     }
 }

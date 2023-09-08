@@ -38,7 +38,7 @@ namespace scp_294.Items
             {
                 ev.Player.DisableEffect(EffectType.AntiScp207);
                 ev.Player.EnableEffect(EffectType.MovementBoost, 30);
-                ev.Player.ChangeEffectIntensity(EffectType.MovementBoost, 50);
+                ev.Player.ChangeEffectIntensity(EffectType.MovementBoost, 50, 30);
             }
         }
     }

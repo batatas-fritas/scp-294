@@ -68,7 +68,7 @@ namespace scp_294.Items
             int time_left = duration;
             while (true)
             {
-                player.ShowHint($"You are disguised as {new_role.GetFullName()}. You have {time_left} seconds left.");
+                player.ShowHint($"You are disguised as {new_role.GetFullName()}. You have <color=#ff0000>{time_left}</color> seconds left.");
                 yield return Timing.WaitForSeconds(1f);
 
                 time_left -= 1;

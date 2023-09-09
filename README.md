@@ -3,7 +3,9 @@
 This plugin adds SCP-294 to the game. SCP-294 is a vending machine that will give you a drink based on the prompt you give it.
 Besides the release, you might also want to download the scp schematic and make sure it spawns in the map otherwise the plugin will not work.
 You can have your own schematic of scp294, however make sure its name and the name in the config are the same.
-## This is a list with every prompt and its respective drink <a name="prompts"></a>
+## Usage:
+Open your client game console in game close to the machine and type in '.scp294 whatever drink you'd like'. You need to be holding a coin
+## This is a list with every prompt and its respective drink.
 | Prompt   |  Result drink  |
 | :------: | :------------: |
 | list | not a drink. It lists every drink available |

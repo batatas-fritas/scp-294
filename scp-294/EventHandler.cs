@@ -20,8 +20,6 @@ namespace scp_294
 
         private CoroutineHandle _handler;
 
-        private List<Player> PlayersInRange = new List<Player>();
-
         public void OnRoundEnded(RoundEndedEventArgs ev)
         {
             // kill coroutine
@@ -31,7 +29,7 @@ namespace scp_294
 
         public void SchematicSpawned(SchematicSpawnedEventArgs ev)
         {
-            if (ev == null) return;
+            if(ev == null) return;
 
             if(ev.Schematic.Name == "scp294") 
             {
@@ -59,10 +57,11 @@ namespace scp_294
 
                 foreach(Player player in Player.List)
                 {
+                    Log.Debug("Checking player");
 
-                    if (player.IsDead || player.IsScp || player == null || player.CurrentRoom.name != "EZ_PCs") continue;
+                    if (player.IsDead || player.IsScp || player == null) continue;
 
-                    if(InRange(player.Position))
+                    if(InRange(player.Position) && player.CurrentRoom == Scp294_room)
                     {
                         player.ShowHint("You have approached SCP-294. Use .scp294 to get a drink");
                     }

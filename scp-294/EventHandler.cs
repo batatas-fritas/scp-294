@@ -18,15 +18,15 @@ namespace scp_294
 
         public static Vector3 Scp294_position { get; set; }
 
-        // private CoroutineHandle _handler;
+        private CoroutineHandle _handler;
 
         private List<Player> PlayersInRange = new List<Player>();
 
         public void OnRoundEnded(RoundEndedEventArgs ev)
         {
             // kill coroutine
-            // Log.Debug("killing coroutine");
-            // Timing.KillCoroutines(_handler); not working rn
+            Log.Debug("killing coroutine");
+            Timing.KillCoroutines(_handler); 
         }
 
         public void SchematicSpawned(SchematicSpawnedEventArgs ev)
@@ -40,14 +40,13 @@ namespace scp_294
                 Scp294_position = ev.Schematic.Position;
                 Log.Debug($"{Scp294_position.x}, {Scp294_position.y}, {Scp294_position.z}");
 
-                // start 294 coroutine (not working rn)
-                // _handler = Timing.RunCoroutine(CheckPlayersAroundSCP());
+                _handler = Timing.RunCoroutine(CheckPlayersAroundSCP());
             }
         }
 
         public static bool InRange(Vector3 position)
         {
-            double res = Math.Sqrt(Math.Pow(position.x - Scp294_position.x, 2) + Math.Pow(position.y - Scp294_position.y, 2) + Math.Pow(position.z - Scp294_position.z, 2));
+            float res = Vector3.Distance(position, Scp294_position);
             Log.Debug(res);
             return res < Config.Range;
         }
@@ -56,29 +55,16 @@ namespace scp_294
         {
             while(true)
             {
-                yield return Timing.WaitForSeconds(0.1f);
+                yield return Timing.WaitForSeconds(0.5f);
 
                 foreach(Player player in Player.List)
                 {
 
                     if (player.IsDead || player.IsScp || player == null || player.CurrentRoom.name != "EZ_PCs") continue;
 
-                    Log.Debug($"Player encontrado nome: {player.Nickname}. Posicao: {player.Position.x},{player.Position.y},{player.Position.z}");
-
-                    if(InRange(player.Position) && !PlayersInRange.Contains(player))
+                    if(InRange(player.Position))
                     {
                         player.ShowHint("You have approached SCP-294. Use .scp294 to get a drink");
-                        Log.Debug($"Added player {player.Nickname} to InRangeList");
-                        PlayersInRange.Add(player);
-                    }
-                }
-
-                foreach(Player player in PlayersInRange)
-                {
-                    if (!InRange(player.Position))
-                    {
-                        Log.Debug($"Removed player {player.Nickname} from InRangeList");
-                        PlayersInRange.Remove(player);
                     }
                 }
             }

@@ -12,6 +12,8 @@ namespace scp_294
         [Description("Range to be able to use the machine")]
         public int Range { get; set; } = 2;
 
+        [Description("Schematic Name. If you want to use a custom schematic, either change its name to scp294 or change this to the schematic's name")]
+        public string SchematicName { get; set; } = "scp294";
         public ThickJuice ThickJuice { get; set; } = new();
         public CandyJuice CandyJuice { get; set; } = new();
         public CandyRainbowJuice CandyRainbowJuice { get; set; } = new();

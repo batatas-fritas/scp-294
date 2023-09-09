@@ -21,9 +21,7 @@ namespace scp_294.Commands
         {
             Player player = GetPlayer((CommandSender)sender);
 
-            Scp294 scp = Scp294.Get();
-
-            if (scp == null || player == null || player.IsDead || !player.IsHuman)
+            if (Scp294.Get() == null || player == null || player.IsDead || !player.IsHuman)
             {
                 response = "<color=#ff0000>error occurred</color>";
                 return false;

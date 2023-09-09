@@ -19,7 +19,7 @@ namespace scp_294
         {
             if(ev == null) return;
 
-            if(ev.Schematic.Name == "scp294") 
+            if(ev.Schematic.Name == Config.SchematicName) 
             {
                 Scp294.Create(ev.Schematic.CurrentRoom, ev.Schematic.Position, Config.Range);
                 Scp294.Start();

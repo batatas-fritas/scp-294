@@ -17,14 +17,13 @@ namespace scp_294
 
         public override Version Version => new Version(1, 0, 0);
 
-        public override Version RequiredExiledVersion => new Version(8, 0, 0); // 7.2 may work
+        public override Version RequiredExiledVersion => new Version(8, 0, 0);
 
         private void RegisterEvents()
         {
             _handler = new EventHandler(Config);
             Server.RoundEnded += _handler.OnRoundEnded;
             Schematic.SchematicSpawned += _handler.SchematicSpawned;
-            // register events
         }
 
         private void RegisterItems()
@@ -49,7 +48,6 @@ namespace scp_294
             _handler = null;
             Server.RoundEnded -= _handler.OnRoundEnded;
             Schematic.SchematicSpawned -= _handler.SchematicSpawned;
-            // unregister events
         }
 
         public override void OnEnabled()

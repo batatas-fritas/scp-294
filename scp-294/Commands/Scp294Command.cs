@@ -4,16 +4,16 @@ using System;
 using Exiled.CustomItems.API.Features;
 using Exiled.API.Features.Items;
 using System.Linq;
-using UnityEngine;
+using scp_294.Scp;
 
 namespace scp_294.Commands
 {
     [CommandHandler(typeof(ClientCommandHandler))]
-    public class Scp294 : ICommand
+    public class Scp294Command : ICommand
     {
         public string Command => "scp294";
 
-        public string[] Aliases => new string[] { "scp294" };
+        public string[] Aliases => new string[] { "scp294", "SCP294" };
 
         public string Description => "Allows to order drinks from SCP-294";
 
@@ -21,38 +21,42 @@ namespace scp_294.Commands
         {
             Player player = GetPlayer((CommandSender)sender);
 
-            if (player == null || arguments.Count == 0)
+            Scp294 scp = Scp294.Get();
+
+            if (scp == null || player == null || player.IsDead || !player.IsHuman)
             {
-                response = "error";
+                response = "<color=#ff0000>error occurred</color>";
                 return false;
             }
 
-            if (arguments.At(0).ToLower() == "list" && arguments.Count == 1)
+            if(arguments.Count == 0) 
             {
-                response = "\n" + GetAllDrinkNames();
-                return true;
-            }
-
-            if(player.IsDead)
-            {
-                response = "<color=#ff0000>bro you're dead. sit silently</color>";
+                response = GetUsage();
                 return false;
             }
 
-            if (!player.IsHuman)
+            
+            if (arguments.At(0).ToLower() == "list")
             {
-                response = "<color=#ff0000>wtf are you doing dog. stop cooking</color>";
-                return false;
+                if(arguments.Count == 1)
+                {
+                    response = "\n" + GetAllDrinkNames();
+                    return true;
+                } else
+                {
+                    response = GetUsage();
+                    return false;
+                }
             }
 
-            if (player.CurrentRoom.name != "EZ_PCs" || !EventHandler.InRange(player.Position))
+            if (player.CurrentRoom.name != "EZ_PCs" || !Scp294.InRange(player.Position))
             {
                 response = "<color=#ff0000>you are not close enough to the machine</color>";
                 return false;
             }
 
             string drink_name = string.Join(" ", arguments);
-            Log.Debug($"{player.Nickname} pediu uma {drink_name}");
+            // Log.Debug($"{player.Nickname} ordered a {drink_name}");
 
             if(player.CurrentItem == null || player.CurrentItem.Type != ItemType.Coin)
             {
@@ -62,14 +66,11 @@ namespace scp_294.Commands
 
             CustomItem drink = CustomItem.Get(drink_name);
 
-            if(drink != null) // Fetch drink by name and give it to player
+            if(drink != null) 
             {
                 response = "<color=#00ff00>Enjoy your drink</color>";
-
                 RemoveCoinFromPlayer(player);
-
                 drink.Give(player);
-                
                 return true;
             } else
             {
@@ -103,6 +104,11 @@ namespace scp_294.Commands
                 if (player.Sender.SenderId == sender.SenderId) return player;
             }
             return null;
+        }
+
+        private string GetUsage()
+        {
+            return "\n<color=#ff0000>Incorrect Usage. Try .scp294 [drink you want]</color>\n<color=#ff0000>You can also use .scp294 list to print every drink currently available</color>";
         }
 
         private void RemoveCoinFromPlayer(Player player)

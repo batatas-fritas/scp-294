@@ -1,7 +1,5 @@
 ﻿using Exiled.API.Interfaces;
-using Exiled.CustomItems.API.Features;
 using scp_294.Items;
-using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace scp_294

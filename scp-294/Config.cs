@@ -6,9 +6,6 @@ namespace scp_294
 {
     public class Config : IConfig
     {
-        public bool IsEnabled { get; set; } = true;
-        public bool Debug { get; set; } = true;
-
         [Description("Range to be able to use the machine")]
         public int Range { get; set; } = 2;
 
@@ -27,5 +24,8 @@ namespace scp_294
         public ScpDrink ScpDrink { get; set; } = new();
         public Scp173Drink Scp173Drink { get;set; } = new();
         public Scp106Drink Scp106Drink { get; set;} = new();
+
+        public bool IsEnabled { get; set; } = true;
+        public bool Debug { get; set; } = false;
     }
 }

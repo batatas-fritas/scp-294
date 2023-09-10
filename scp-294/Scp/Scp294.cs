@@ -70,7 +70,7 @@ namespace scp_294.Scp
 
                     if (InRange(player.Position) && player.CurrentRoom == Room)
                     {
-                        player.ShowHint("You have approached SCP-294. Use .scp294 to get a drink");
+                        player.ShowHint(Config.ApproachMessage);
                     }
                 }
             }

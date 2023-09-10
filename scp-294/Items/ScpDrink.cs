@@ -19,11 +19,21 @@ namespace scp_294.Items
     {
         public override uint Id { get; set; } = 71;
         public override string Name { get; set; } = "scp drink";
+
         [Description("Text that shows once you hold the drink")]
         public override string Description { get; set; } = "Disguise yourself as a random scp.";
+
         [Description("Weight of the drink. Higher weights -> move slower")]
         public override float Weight { get; set; } = 1f;
+
+        [Description("Text that appears once you're in disguise. If you change this, make sure to add '$new_role_name' and '$time_left', these will be replaced by the actual values")]
+        public string CurrentDisguise { get; set; } = "You are disguised as $new_role_name. You have <color=#ff0000>$time_left</color> seconds left.";
+
+        [Description("Text that appears once you're no longer in disguise")]
+        public string NoLongerInDisguise { get; set; } = "You are no longer disguised";
+
         public override ItemType Type { get; set; } = ItemType.AntiSCP207;
+
         public override SpawnProperties SpawnProperties { get; set; } = new()
         {
             Limit = 1, // Irrelevant: determines the maximum of how many will spawn (they will not spawn in the map)
@@ -71,7 +81,7 @@ namespace scp_294.Items
             int time_left = duration;
             while (true)
             {
-                player.ShowHint($"You are disguised as {new_role.GetFullName()}. You have <color=#ff0000>{time_left}</color> seconds left.");
+                player.ShowHint(CurrentDisguise.Replace("$new_role_name", new_role.GetFullName()).Replace("$time_left", time_left.ToString()));
                 yield return Timing.WaitForSeconds(1f);
 
                 time_left -= 1;
@@ -79,7 +89,7 @@ namespace scp_294.Items
                 if(time_left == 0)
                 {
                     player.ChangeAppearance(player.Role.Type);
-                    player.ShowHint("You are no longer disguised");
+                    player.ShowHint(NoLongerInDisguise);
                     yield break;
                 }
               

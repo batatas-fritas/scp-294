@@ -23,7 +23,7 @@ namespace scp_294
         [Description("Message that appears if asked drink is not available")]
         public string OutOfRange { get; set; } = "<color=#ff0000>Out of range</color>";
 
-        [Description("Message that appears if player is asked ")]
+        [Description("Message that appears if player is asked")]
         public string PlayerOutOfRange { get; set; } = "<color=#ff0000>you are not close enough to the machine</color>";
 
         [Description("Message that appears if player is not holding a coin")]
@@ -33,24 +33,21 @@ namespace scp_294
         public string ErrorMessage { get; set; } = "<color=#ff0000>error occurred</color>";
 
         [Description("Message that appears if a player mistypes or uses the command incorrectly")]
-        public string UsageMessage { get; set; } = "\n<color=#ff0000>Incorrect Usage. Try .scp294 [drink you want]</color>\n<color=#ff0000>You can also use .scp294 list to print every drink currently available</color>";
+        public string UsageMessage { get; set; } = "<color=#ff0000>Incorrect Usage. Try .scp294 [drink you want]. You can also use .scp294 list to print every drink currently available</color>";
 
-        public List<CustomItem> Drinks { get; set; } = new()
-        {
-            new ThickJuice(),
-            new CandyJuice(),
-            new CandyRainbowJuice(),
-            new CandyYellowJuice(),
-            new CandyPurpleJuice(),
-            new CandyRedJuice(),
-            new CandyGreenJuice(),
-            new CandyBlueJuice(),
-            new CandyPinkJuice(),
-            new TeleportationDrink(),
-            new ScpDrink(),
-            new Scp173Drink(),
-            new Scp106Drink(),
-        };
+        public ThickJuice ThickJuice { get; set; } = new();
+        public CandyJuice CandyJuice { get; set; } = new();
+        public CandyRainbowJuice CandyRainbowJuice { get; set; } = new();
+        public CandyYellowJuice CandyYellowJuice { get; set; } = new();
+        public CandyPurpleJuice CandyPurpleJuice { get; set; } = new();
+        public CandyRedJuice CandyRedJuice { get; set; } = new();
+        public CandyGreenJuice CandyGreenJuice { get; set; } = new();
+        public CandyBlueJuice CandyBlueJuice { get; set; } = new();
+        public CandyPinkJuice CandyPinkJuice { get; set; } = new();
+        public TeleportationDrink TeleportationDrink { get; set; } = new();
+        public ScpDrink ScpDrink { get; set; } = new();
+        public Scp173Drink Scp173Drink { get; set; } = new();
+        public Scp106Drink Scp106Drink { get; set; } = new();
 
         public bool IsEnabled { get; set; } = true;
         public bool Debug { get; set; } = false;

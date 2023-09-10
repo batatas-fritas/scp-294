@@ -5,6 +5,7 @@ using Exiled.CustomItems.API.Features;
 using Exiled.API.Features.Items;
 using System.Linq;
 using scp_294.Scp;
+using System.Collections.Generic;
 
 namespace scp_294.Commands
 {
@@ -16,6 +17,31 @@ namespace scp_294.Commands
         public string[] Aliases => new string[] { "scp294", "SCP294" };
 
         public string Description => "Allows to order drinks from SCP-294";
+
+        private List<string> Drinks
+        {
+            get
+            {
+                if(Scp294.Get() == null) return null;
+
+                return new()
+                {
+                    Scp294.Config.CandyBlueJuice.Name,
+                    Scp294.Config.CandyGreenJuice.Name,
+                    Scp294.Config.CandyJuice.Name,
+                    Scp294.Config.CandyPinkJuice.Name,
+                    Scp294.Config.CandyPurpleJuice.Name,
+                    Scp294.Config.CandyRainbowJuice.Name,
+                    Scp294.Config.CandyRedJuice.Name,
+                    Scp294.Config.CandyYellowJuice.Name,
+                    Scp294.Config.Scp106Drink.Name,
+                    Scp294.Config.Scp173Drink.Name,
+                    Scp294.Config.ScpDrink.Name,
+                    Scp294.Config.TeleportationDrink.Name,
+                    Scp294.Config.ThickJuice.Name,
+                };
+            }
+        }
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
@@ -116,7 +142,7 @@ namespace scp_294.Commands
 
         private string GetAllDrinkNames()
         {
-            string drinks = "\n" + string.Join("\n", Scp294.Config.Drinks.Select(item => "<color=#00ff00>" + item.Name + "</color>"));
+            string drinks = "\n" + string.Join("\n", Drinks.Select(item => "<color=#00ff00>" + item + "</color>"));
             drinks += "\n" + "<color=#00ff00>scp207</color>";
             drinks += "\n" + "<color=#00ff00>scp207?</color>";
             return drinks;
@@ -124,9 +150,9 @@ namespace scp_294.Commands
 
         private CustomItem GetDrink(string name)
         {
-            foreach(CustomItem drink in Scp294.Config.Drinks)
+            if(Drinks.Contains(name))
             {
-                if (drink.Name == name) return drink;
+                return CustomItem.Get(name);
             }
             return null;
         }

@@ -3,6 +3,7 @@
 This plugin adds SCP-294 to the game. SCP-294 is a vending machine that will give you a drink based on the prompt you give it.
 Besides the release, you might also want to download the scp schematic and make sure it spawns in the map otherwise the plugin will not work.
 You can have your own schematic of scp294, however make sure its name and the name in the config are the same.
+**Keep in mind that you have to spawn the schematic yourself and place it in a map. This is easy for those who have used MER before, if you haven't used MER before read the following Setup section**
 ## Setup - If you have used MER before you might want to skip this, just make sure to add the schematic to the map you're using.
 1. Make sure you have MapEditorReborn Plugin in your server
 2. Add scp294 schematic provided to the schematics folder of your server

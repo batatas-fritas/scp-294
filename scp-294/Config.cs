@@ -11,6 +11,8 @@ namespace scp_294
 
         [Description("Schematic Name. If you want to use a custom schematic, either change its name to scp294 or change this to the schematic's name")]
         public string SchematicName { get; set; } = "scp294";
+        [Description("Message that appears once you approach Scp-294")]
+        public string ApproachMessage { get; set; } = "You have approached SCP-294. Use .scp294 to get a drink";
         public ThickJuice ThickJuice { get; set; } = new();
         public CandyJuice CandyJuice { get; set; } = new();
         public CandyRainbowJuice CandyRainbowJuice { get; set; } = new();

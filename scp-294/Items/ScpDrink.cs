@@ -9,6 +9,7 @@ using MEC;
 using PlayerRoles;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Player = Exiled.Events.Handlers.Player;
 
 namespace scp_294.Items
@@ -18,7 +19,9 @@ namespace scp_294.Items
     {
         public override uint Id { get; set; } = 71;
         public override string Name { get; set; } = "scp drink";
+        [Description("Text that shows once you hold the drink")]
         public override string Description { get; set; } = "Disguise yourself as a random scp.";
+        [Description("Weight of the drink. Higher weights -> move slower")]
         public override float Weight { get; set; } = 1f;
         public override ItemType Type { get; set; } = ItemType.AntiSCP207;
         public override SpawnProperties SpawnProperties { get; set; } = new()

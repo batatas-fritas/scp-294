@@ -4,6 +4,7 @@ using Exiled.CustomItems.API.Features;
 using Exiled.Events.EventArgs.Player;
 using Exiled.API.Enums;
 using Player = Exiled.Events.Handlers.Player;
+using System.ComponentModel;
 
 namespace scp_294.Items
 {
@@ -12,7 +13,9 @@ namespace scp_294.Items
     {
         public override uint Id { get; set; } = 107;
         public override string Name { get; set; } = "drink of pink candy";
+        [Description("Text that shows once you hold the drink")]
         public override string Description { get; set; } = "The strawberry scent is as gentle as it looks.";
+        [Description("Weight of the drink. Higher weights -> move slower")]
         public override float Weight { get; set; } = 1f;
         public override ItemType Type { get; set; } = ItemType.AntiSCP207;
         public override SpawnProperties SpawnProperties { get; set; } = new()

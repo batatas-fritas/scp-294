@@ -5,6 +5,7 @@ using Exiled.CustomItems.API.Features;
 using Exiled.Events.EventArgs.Player;
 using Player = Exiled.Events.Handlers.Player;
 using Exiled.API.Features;
+using System.ComponentModel;
 
 namespace scp_294.Items
 {
@@ -13,7 +14,9 @@ namespace scp_294.Items
     {
         public override uint Id { get; set; } = 70;
         public override string Name { get; set; } = "drink of chorus fruit";
+        [Description("Text that shows once you hold the drink")]
         public override string Description { get; set; } = "Ever played minecraft? Then you know what's about to go down.";
+        [Description("Weight of the drink. Higher weights -> move slower")]
         public override float Weight { get; set; } = 1f;
         public override ItemType Type { get; set; } = ItemType.AntiSCP207;
         public override SpawnProperties SpawnProperties { get; set; } = new()

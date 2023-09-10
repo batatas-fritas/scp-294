@@ -15,24 +15,27 @@ namespace scp_294.Scp
 
         public static int Range { get; private set; }
 
+        public static Config Config { get; private set; }
+
         private static CoroutineHandle _handler { get; set; }
 
         private Scp294() { }
 
-        private static void Update(Room room, Vector3 position, int range)
+        private static void Update(Room room, Vector3 position, int range, Config config)
         {
             Room = room;
             Position = position;
             Range = range;
+            Config = config;
         }
 
-        public static Scp294 Create(Room room, Vector3 position, int range)
+        public static Scp294 Create(Room room, Vector3 position, int range, Config config)
         {
             if(_instance == null)
             {
                 _instance = new Scp294();
             }
-            Update(room, position, range);
+            Update(room, position, range, config);
             return _instance;
         }
 

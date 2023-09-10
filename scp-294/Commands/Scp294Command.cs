@@ -47,7 +47,7 @@ namespace scp_294.Commands
                 }
             }
 
-            if (player.CurrentRoom.name != "EZ_PCs" || !Scp294.InRange(player.Position))
+            if (player.CurrentRoom.name != Scp294.Room.name || !Scp294.InRange(player.Position))
             {
                 response = "<color=#ff0000>you are not close enough to the machine</color>";
                 return false;

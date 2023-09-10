@@ -20,6 +20,7 @@ In this screenshot the name i gave to the map was 'scp294'. But it can be whatev
 
 7. Restart your server and check if the machine has automatically spawned in the room you placed it before. It should have if you followed the steps
 8. Scp294 is now ready to be used! Have fun!
+9. If you're still having issues I heavily encourage you to look at [MER](https://github.com/Michal78900/MapEditorReborn) tutorials. They are quick and quite simple.
 ## Usage In-Game
 Open your client game console in game close to the machine and type in '.scp294 whatever drink you'd like'. You need to be holding a coin
 ## This is a list with every prompt and its respective drink.

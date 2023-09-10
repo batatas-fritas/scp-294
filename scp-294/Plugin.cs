@@ -28,19 +28,10 @@ namespace scp_294
 
         private void RegisterItems()
         {
-            Config.ThickJuice.Register();
-            Config.CandyJuice.Register();
-            Config.CandyRainbowJuice.Register();
-            Config.CandyYellowJuice.Register();
-            Config.CandyPurpleJuice.Register();
-            Config.CandyRedJuice.Register();
-            Config.CandyGreenJuice.Register();
-            Config.CandyBlueJuice.Register();
-            Config.CandyPinkJuice.Register();
-            Config.TeleportationDrink.Register();
-            Config.ScpDrink.Register();
-            Config.Scp173Drink.Register();
-            Config.Scp106Drink.Register();
+            foreach(CustomItem drink in Config.Drinks)
+            {
+                drink.Register();
+            }
         }
 
         private void DisableEvents()

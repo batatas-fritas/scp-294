@@ -23,56 +23,54 @@ namespace scp_294.Commands
 
             if (Scp294.Get() == null || player == null || player.IsDead || !player.IsHuman)
             {
-                response = "<color=#ff0000>error occurred</color>";
+                response = Scp294.Config.ErrorMessage;
                 return false;
             }
 
             if(arguments.Count == 0) 
             {
-                response = GetUsage();
+                response = Scp294.Config.UsageMessage;
                 return false;
             }
-
-            
+           
             if (arguments.At(0).ToLower() == "list")
             {
                 if(arguments.Count == 1)
                 {
-                    response = "\n" + GetAllDrinkNames();
+                    response = GetAllDrinkNames();
                     return true;
                 } else
                 {
-                    response = GetUsage();
+                    response = Scp294.Config.UsageMessage;
                     return false;
                 }
             }
 
             if (player.CurrentRoom != Scp294.Room || !Scp294.InRange(player.Position))
             {
-                response = "<color=#ff0000>you are not close enough to the machine</color>";
+                response = Scp294.Config.PlayerOutOfRange;
+                return false;
+            }
+
+            if(player.CurrentItem == null || player.CurrentItem.Type != ItemType.Coin)
+            {
+                response = Scp294.Config.PlayerNotHoldingCoin;
                 return false;
             }
 
             string drink_name = string.Join(" ", arguments);
             // Log.Debug($"{player.Nickname} ordered a {drink_name}");
-
-            if(player.CurrentItem == null || player.CurrentItem.Type != ItemType.Coin)
-            {
-                response = "<color=#ff0000>you need to be holding coin</color>";
-                return false;
-            }
-
-            CustomItem drink = CustomItem.Get(drink_name);
+            CustomItem drink = GetDrink(drink_name);
 
             if(drink != null) 
             {
-                response = "<color=#00ff00>Enjoy your drink</color>";
+                response = Scp294.Config.EnjoyDrinkMessage;
                 RemoveCoinFromPlayer(player);
                 drink.Give(player);
                 return true;
             } else
             {
-                response = "<color=#00ff00>Enjoy your drink</color>";
+                response = Scp294.Config.EnjoyDrinkMessage;
                 switch (drink_name)
                 {
                     case "cola":
@@ -87,7 +85,7 @@ namespace scp_294.Commands
                         player.AddItem(ItemType.AntiSCP207);
                         break;
                     default:
-                        response = "<color=#ff0000>Out of range</color>";
+                        response = Scp294.Config.OutOfRange;
                         return true;
                 }
 
@@ -104,11 +102,6 @@ namespace scp_294.Commands
             return null;
         }
 
-        private string GetUsage()
-        {
-            return "\n<color=#ff0000>Incorrect Usage. Try .scp294 [drink you want]</color>\n<color=#ff0000>You can also use .scp294 list to print every drink currently available</color>";
-        }
-
         private void RemoveCoinFromPlayer(Player player)
         {
             foreach (Item item in player.Items)
@@ -121,10 +114,21 @@ namespace scp_294.Commands
             }
         }
 
-
         private string GetAllDrinkNames()
         {
-            return string.Join("\n", CustomItem.Registered.Select(item => "<color=#00ff00>" + item.Name + "</color>"));
+            string drinks = "\n" + string.Join("\n", Scp294.Config.Drinks.Select(item => "<color=#00ff00>" + item.Name + "</color>"));
+            drinks += "\n" + "<color=#00ff00>scp207</color>";
+            drinks += "\n" + "<color=#00ff00>scp207?</color>";
+            return drinks;
+        }
+
+        private CustomItem GetDrink(string name)
+        {
+            foreach(CustomItem drink in Scp294.Config.Drinks)
+            {
+                if (drink.Name == name) return drink;
+            }
+            return null;
         }
     }
 }

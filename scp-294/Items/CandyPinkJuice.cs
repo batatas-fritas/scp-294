@@ -5,6 +5,7 @@ using Exiled.Events.EventArgs.Player;
 using Exiled.API.Enums;
 using Player = Exiled.Events.Handlers.Player;
 using System.ComponentModel;
+using scp_294.Scp;
 
 namespace scp_294.Items
 {
@@ -39,7 +40,7 @@ namespace scp_294.Items
         {
             if (Check(ev.Item))
             {
-                ev.Player.DisableEffect(EffectType.AntiScp207);
+                Scp294.RemoveAntiScp207(ev.Player);
 
                 ev.Player.Explode();
             }

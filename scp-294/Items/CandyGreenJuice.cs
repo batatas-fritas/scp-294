@@ -6,6 +6,7 @@ using InventorySystem.Items.Usables.Scp330;
 using Exiled.API.Enums;
 using Player = Exiled.Events.Handlers.Player;
 using System.ComponentModel;
+using scp_294.Scp;
 
 namespace scp_294.Items
 {
@@ -43,7 +44,7 @@ namespace scp_294.Items
         {
             if (Check(ev.Item))
             {
-                ev.Player.DisableEffect(EffectType.AntiScp207);
+                Scp294.RemoveAntiScp207(ev.Player);
 
                 Scp330Bag.AddSimpleRegeneration(ev.Player.ReferenceHub, 1.5f * Times, 80f);
                 ev.Player.EnableEffect(EffectType.Vitality, 30f * Times);

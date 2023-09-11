@@ -17,7 +17,7 @@ namespace scp_294.Commands
         public string[] Aliases => new string[] { "scp294", "SCP294" };
 
         public string Description => "Allows to order drinks from SCP-294";
-
+       
         private List<string> Drinks
         {
             get
@@ -47,7 +47,13 @@ namespace scp_294.Commands
         {
             Player player = GetPlayer((CommandSender)sender);
 
-            if (Scp294.Get() == null || player == null || player.IsDead || !player.IsHuman)
+            if(Scp294.Get() == null)
+            {
+                response = "";
+                return false;
+            }
+
+            if (player == null || player.IsDead || !player.IsHuman)
             {
                 response = Scp294.Config.ErrorMessage;
                 return false;

@@ -1,6 +1,8 @@
-﻿using Exiled.API.Features;
+﻿using CustomPlayerEffects;
+using Exiled.API.Features;
 using MEC;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace scp_294.Scp
@@ -20,6 +22,8 @@ namespace scp_294.Scp
         private static CoroutineHandle _handler { get; set; }
 
         private Scp294() { }
+
+        private static List<Player> PlayersInRange { get; set; } = new();
 
         private static void Update(Room room, Vector3 position, int range, Config config)
         {
@@ -68,11 +72,14 @@ namespace scp_294.Scp
 
                     if (player.IsDead || player.IsScp || player == null) continue;
 
-                    if (InRange(player.Position) && player.CurrentRoom == Room)
+                    if (InRange(player.Position) && player.CurrentRoom == Room && !PlayersInRange.Contains(player))
                     {
                         player.ShowHint(Config.ApproachMessage);
+                        PlayersInRange.Add(player);
                     }
                 }
+
+                PlayersInRange = PlayersInRange.Where(player => InRange(player.Position)).ToList();
             }
         }
 
@@ -82,6 +89,19 @@ namespace scp_294.Scp
             float res = Vector3.Distance(position, Position);
             Log.Debug(res);
             return res < Range;
+        }
+
+        public static void RemoveAntiScp207(Player player)
+        {
+            int intensity = player.GetEffectIntensity<Scp207>();
+
+            if (intensity > 0)
+            {
+                player.ChangeEffectIntensity<Scp207>(0);
+            }
+
+            player.ChangeEffectIntensity<AntiScp207>(0);
+            player.ChangeEffectIntensity<Scp207>((byte)intensity);
         }
     }
 }

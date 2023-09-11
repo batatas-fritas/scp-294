@@ -7,6 +7,7 @@ using Player = Exiled.Events.Handlers.Player;
 using CustomPlayerEffects;
 using UnityEngine;
 using System.ComponentModel;
+using scp_294.Scp;
 
 namespace scp_294.Items
 {
@@ -44,7 +45,7 @@ namespace scp_294.Items
         {
             if (Check(ev.Item))
             {
-                ev.Player.DisableEffect(EffectType.AntiScp207);
+                Scp294.RemoveAntiScp207(ev.Player);
 
                 ev.Player.StaminaStat.ModifyAmount(0.25f * Times);
                 ev.Player.EnableEffect(EffectType.Invigorated, 8f * Times);

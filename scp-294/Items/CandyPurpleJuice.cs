@@ -8,6 +8,7 @@ using Player = Exiled.Events.Handlers.Player;
 using CustomPlayerEffects;
 using UnityEngine;
 using System.ComponentModel;
+using scp_294.Scp;
 
 namespace scp_294.Items
 {
@@ -45,7 +46,7 @@ namespace scp_294.Items
         {
             if (Check(ev.Item))
             {
-                ev.Player.DisableEffect(EffectType.AntiScp207);
+                Scp294.RemoveAntiScp207(ev.Player);
 
                 Scp330Bag.AddSimpleRegeneration(ev.Player.ReferenceHub, 1.5f, 10f * Times);
                 StatusEffectBase effect = ev.Player.GetEffect(EffectType.DamageReduction);

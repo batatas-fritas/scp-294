@@ -3,6 +3,7 @@ using Exiled.API.Features.Attributes;
 using Exiled.API.Features.Spawn;
 using Exiled.CustomItems.API.Features;
 using Exiled.Events.EventArgs.Player;
+using scp_294.Scp;
 using System.ComponentModel;
 using Player = Exiled.Events.Handlers.Player;
 
@@ -39,7 +40,7 @@ namespace scp_294.Items
         {
             if (Check(ev.Item))
             {
-                ev.Player.DisableEffect(EffectType.AntiScp207);
+                Scp294.RemoveAntiScp207(ev.Player);
                 ev.Player.EnableEffect(EffectType.PocketCorroding);
             }
         }

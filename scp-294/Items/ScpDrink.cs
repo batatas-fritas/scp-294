@@ -7,6 +7,7 @@ using Exiled.CustomItems.API.Features;
 using Exiled.Events.EventArgs.Player;
 using MEC;
 using PlayerRoles;
+using scp_294.Scp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -55,7 +56,7 @@ namespace scp_294.Items
         {
             if (Check(ev.Item))
             {
-                ev.Player.DisableEffect(EffectType.AntiScp207);
+                Scp294.RemoveAntiScp207(ev.Player);
                 List<RoleTypeId> roles = new()
                 {
                     RoleTypeId.Scp173,

@@ -1,11 +1,14 @@
-﻿using Exiled.API.Enums;
-using Exiled.API.Features.Attributes;
+﻿using Exiled.API.Features.Attributes;
 using Exiled.API.Features.Spawn;
 using Exiled.CustomItems.API.Features;
 using Exiled.Events.EventArgs.Player;
 using Player = Exiled.Events.Handlers.Player;
-using Exiled.API.Features;
+using System;
 using System.ComponentModel;
+using scp_294.Scp;
+using Exiled.API.Features.Doors;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace scp_294.Items
 {
@@ -40,9 +43,16 @@ namespace scp_294.Items
         {
             if (Check(ev.Item))
             {
-                ev.Player.DisableEffect(EffectType.AntiScp207);
-                ev.Player.Teleport(Room.Random().Type);
+                Scp294.RemoveAntiScp207(ev.Player);
+
+                List<Door> doors = Door.List.Where(door => door.Rooms.Count > 1).ToList();
+                Door door = doors[new Random().Next(doors.Count)];
+                
+                ev.Player.Teleport(door, door.Transform.forward);
             }
         }
+
+        //testing shit purpose
+
     }
 }

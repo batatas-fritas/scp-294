@@ -18,30 +18,6 @@ namespace scp_294.Commands
 
         public string Description => "Allows to order drinks from SCP-294";
        
-        private List<string> Drinks
-        {
-            get
-            {
-                if(Scp294.Get() == null) return null;
-
-                return new()
-                {
-                    Scp294.Config.CandyBlueJuice.Name,
-                    Scp294.Config.CandyGreenJuice.Name,
-                    Scp294.Config.CandyJuice.Name,
-                    Scp294.Config.CandyPinkJuice.Name,
-                    Scp294.Config.CandyPurpleJuice.Name,
-                    Scp294.Config.CandyRainbowJuice.Name,
-                    Scp294.Config.CandyRedJuice.Name,
-                    Scp294.Config.CandyYellowJuice.Name,
-                    Scp294.Config.Scp106Drink.Name,
-                    Scp294.Config.Scp173Drink.Name,
-                    Scp294.Config.ScpDrink.Name,
-                    Scp294.Config.TeleportationDrink.Name,
-                    Scp294.Config.ThickJuice.Name,
-                };
-            }
-        }
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {

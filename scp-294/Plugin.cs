@@ -4,12 +4,14 @@ using Exiled.CustomItems.API.Features;
 using System;
 using Server = Exiled.Events.Handlers.Server;
 using Schematic = MapEditorReborn.Events.Handlers.Schematic;
+using scp_294.Handlers;
+using PluginAPI.Core;
 
 namespace scp_294
 {
     public class Plugin : Plugin<Config>
     {
-        private EventHandler _handler;
+        private EventsHandler _handler;
 
         public override string Name => "scp-294";
 
@@ -19,10 +21,12 @@ namespace scp_294
 
         public override Version RequiredExiledVersion => new Version(8, 0, 0);
 
+        public static Plugin Instance { get; private set; }
+
 
         private void RegisterEvents()
         {
-            _handler = new EventHandler(Config);
+            _handler = new EventsHandler();
             Server.RoundEnded += _handler.OnRoundEnded;
             Schematic.SchematicSpawned += _handler.SchematicSpawned;
         }
@@ -46,13 +50,13 @@ namespace scp_294
 
         private void DisableEvents()
         {
-            _handler = null;
             Server.RoundEnded -= _handler.OnRoundEnded;
             Schematic.SchematicSpawned -= _handler.SchematicSpawned;
         }
 
         public override void OnEnabled()
         {
+            Instance = this;
             RegisterEvents();
             RegisterItems();
             base.OnEnabled();
@@ -62,6 +66,8 @@ namespace scp_294
         {
             DisableEvents();
             CustomItem.UnregisterItems();
+            _handler = null!;
+            Instance = null!;
             base.OnDisabled();
         }
     }

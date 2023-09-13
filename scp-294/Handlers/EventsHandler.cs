@@ -2,14 +2,10 @@
 using MapEditorReborn.Events.EventArgs;
 using scp_294.Scp;
 
-namespace scp_294
+namespace scp_294.Handlers
 {
-    public class EventHandler
+    public class EventsHandler
     {
-        private static Config Config { get; set; }
-
-        public EventHandler(Config config) { Config = config; }
-
         public void OnRoundEnded(RoundEndedEventArgs ev)
         {
             Scp294.End();
@@ -17,11 +13,11 @@ namespace scp_294
 
         public void SchematicSpawned(SchematicSpawnedEventArgs ev)
         {
-            if(ev == null) return;
+            if (ev == null) return;
 
-            if(ev.Schematic.Name == Config.SchematicName) 
+            if (ev.Schematic.Name == Plugin.Instance.Config.SchematicName)
             {
-                Scp294.Create(ev.Schematic.CurrentRoom, ev.Schematic.Position, Config.Range, Config);
+                Scp294.Create(ev.Schematic.CurrentRoom, ev.Schematic.Position);
                 Scp294.Start();
             }
         }

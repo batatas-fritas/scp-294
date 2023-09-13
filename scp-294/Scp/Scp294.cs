@@ -15,31 +15,25 @@ namespace scp_294.Scp
 
         public static Vector3 Position { get; private set; }
 
-        public static int Range { get; private set; }
-
-        public static Config Config { get; private set; }
-
         private static CoroutineHandle _handler { get; set; }
 
         private Scp294() { }
 
         private static List<Player> PlayersInRange { get; set; } = new();
 
-        private static void Update(Room room, Vector3 position, int range, Config config)
+        private static void Update(Room room, Vector3 position)
         {
             Room = room;
             Position = position;
-            Range = range;
-            Config = config;
         }
 
-        public static Scp294 Create(Room room, Vector3 position, int range, Config config)
+        public static Scp294 Create(Room room, Vector3 position)
         {
             if(_instance == null)
             {
                 _instance = new Scp294();
             }
-            Update(room, position, range, config);
+            Update(room, position);
             return _instance;
         }
 
@@ -68,17 +62,14 @@ namespace scp_294.Scp
 
                 foreach (Player player in Player.List)
                 {
-                    Log.Debug("Checking player");
-
                     if (player.IsDead || player.IsScp || player == null) continue;
 
                     if (InRange(player.Position) && player.CurrentRoom == Room && !PlayersInRange.Contains(player))
                     {
-                        player.ShowHint(Config.ApproachMessage);
+                        player.ShowHint(Plugin.Instance.Config.ApproachMessage);
                         PlayersInRange.Add(player);
                     }
                 }
-
                 PlayersInRange = PlayersInRange.Where(player => InRange(player.Position)).ToList();
             }
         }
@@ -87,21 +78,7 @@ namespace scp_294.Scp
         {
             if (_instance == null) return false;
             float res = Vector3.Distance(position, Position);
-            Log.Debug(res);
-            return res < Range;
-        }
-
-        public static void RemoveAntiScp207(Player player)
-        {
-            int intensity = player.GetEffectIntensity<Scp207>();
-
-            if (intensity > 0)
-            {
-                player.ChangeEffectIntensity<Scp207>(0);
-            }
-
-            player.ChangeEffectIntensity<AntiScp207>(0);
-            player.ChangeEffectIntensity<Scp207>((byte)intensity);
+            return res < Plugin.Instance.Config.Range;
         }
     }
 }

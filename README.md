@@ -16,7 +16,7 @@ You can have your own schematic of scp294, however make sure its name and the na
 6. Go into MER config and add the map name to the load_map_on_event - on_generated/on_round_started (it can be either one, choose one).
 In this screenshot the name i gave to the map was 'scp294'. But it can be whatever you'd like.
 
-![alt text](https://github.com/batatas-fritas/scp-294/blob/main/scp-294/Assets/MERconfig_example.png)
+![alt text](https://github.com/batatas-fritas/scp-294/blob/rework/scp-294/Assets/MERconfig_example.png)
 
 7. Restart your server and check if the machine has automatically spawned in the room you placed it before. It should have if you followed the steps
 8. Scp294 is now ready to be used! Have fun!

@@ -1,11 +1,10 @@
 ﻿using CommandSystem;
 using Exiled.API.Features;
 using System;
-using Exiled.CustomItems.API.Features;
 using Exiled.API.Features.Items;
 using System.Linq;
 using scp_294.Scp;
-using System.Collections.Generic;
+using scp_294.Classes;
 
 namespace scp_294.Commands
 {
@@ -23,21 +22,15 @@ namespace scp_294.Commands
         {
             Player player = GetPlayer((CommandSender)sender);
 
-            if(Scp294.Get() == null)
+            if (Scp294.Get() == null || player == null || player.IsDead || !player.IsHuman)
             {
-                response = "";
-                return false;
-            }
-
-            if (player == null || player.IsDead || !player.IsHuman)
-            {
-                response = Scp294.Config.ErrorMessage;
+                response = Plugin.Instance.Config.ErrorMessage;
                 return false;
             }
 
             if(arguments.Count == 0) 
             {
-                response = Scp294.Config.UsageMessage;
+                response = Plugin.Instance.Config.UsageMessage;
                 return false;
             }
            
@@ -49,56 +42,38 @@ namespace scp_294.Commands
                     return true;
                 } else
                 {
-                    response = Scp294.Config.UsageMessage;
+                    response = Plugin.Instance.Config.UsageMessage;
                     return false;
                 }
             }
 
             if (player.CurrentRoom != Scp294.Room || !Scp294.InRange(player.Position))
             {
-                response = Scp294.Config.PlayerOutOfRange;
+                response = Plugin.Instance.Config.PlayerOutOfRange;
                 return false;
             }
 
             if(player.CurrentItem == null || player.CurrentItem.Type != ItemType.Coin)
             {
-                response = Scp294.Config.PlayerNotHoldingCoin;
+                response = Plugin.Instance.Config.PlayerNotHoldingCoin;
                 return false;
             }
 
             string drink_name = string.Join(" ", arguments);
-            // Log.Debug($"{player.Nickname} ordered a {drink_name}");
-            CustomItem drink = GetDrink(drink_name);
+            Log.Debug($"{player.Nickname} ordered a {drink_name}");
+            Drink drink = GetDrink(drink_name);
 
             if(drink != null) 
             {
-                response = Scp294.Config.EnjoyDrinkMessage;
+                response = Plugin.Instance.Config.EnjoyDrinkMessage;
                 RemoveCoinFromPlayer(player);
                 drink.Give(player);
-                return true;
             } else
             {
-                response = Scp294.Config.EnjoyDrinkMessage;
-                switch (drink_name)
-                {
-                    case "cola":
-                    case "scp207":
-                        RemoveCoinFromPlayer(player);
-                        player.AddItem(ItemType.SCP207);
-                        break;
-                    case "anticola":
-                    case "scp207?":
-                    case "antiscp207":
-                        RemoveCoinFromPlayer(player);
-                        player.AddItem(ItemType.AntiSCP207);
-                        break;
-                    default:
-                        response = Scp294.Config.OutOfRange;
-                        return true;
-                }
-
-                return true;
+                response = Plugin.Instance.Config.OutOfRange;
             }
+
+            return true;
         }
 
         private Player GetPlayer(CommandSender sender)
@@ -124,17 +99,15 @@ namespace scp_294.Commands
 
         private string GetAllDrinkNames()
         {
-            string drinks = "\n" + string.Join("\n", Drinks.Select(item => "<color=#00ff00>" + item + "</color>"));
-            drinks += "\n" + "<color=#00ff00>scp207</color>";
-            drinks += "\n" + "<color=#00ff00>scp207?</color>";
+            string drinks = "\n" + string.Join("\n", Plugin.Instance.Config.Drinks.Select(drink => drink.Name));
             return drinks;
         }
 
-        private CustomItem GetDrink(string name)
+        private Drink GetDrink(string name)
         {
-            if(Drinks.Contains(name))
+            foreach(Drink drink in Plugin.Instance.Config.Drinks)
             {
-                return CustomItem.Get(name);
+                if(drink.Name == name || drink.Aliases.Contains(name)) return drink;
             }
             return null;
         }

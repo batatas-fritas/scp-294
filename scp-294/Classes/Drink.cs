@@ -7,7 +7,6 @@ using Player = Exiled.Events.Handlers.Player;
 using Exiled.API.Enums;
 using System;
 using Exiled.API.Features;
-using Exiled.API.Features.Attributes;
 using CustomPlayerEffects;
 
 namespace scp_294.Classes
@@ -17,10 +16,12 @@ namespace scp_294.Classes
         [Description("Name of the drink, this is what the player has to write in order to receive it")]
         public override string Name { get; set; } = "drink of scp173";
 
+        public string[] Aliases { get; set; } = { "drink of 173" };
+
         [Description("Description of the drink, this is what appears when holding the drink")]
         public override string Description { get; set; } = "REEEEEEEEEE";
 
-        [Description("Whether or not the drink is enabled on your server")]
+        [Description("Whether or not the drink is enabled on your server. If this is set to false, drinks won't even register so you won't be able to have it through RA")]
         public bool IsEnabled { get; set; } = true;
 
         [Description("Make sure this is different from any other drink/Custom item")]
@@ -40,6 +41,9 @@ namespace scp_294.Classes
         [Description("Whether or not the player should explode")]
         public bool ShouldPlayerExplode { get; set; } = false;
 
+        [Description("Whether or not the a tantrum puddle from scp173 spawns")]
+        public bool SpawnScp173Tantrum { get; set; } = false;
+
         [Description("List of effects that will be applied to the player")]
         public List<Effect> Effects { get; set; } = new()
         {
@@ -53,6 +57,23 @@ namespace scp_294.Classes
                 },
                 Chance = 100,
             }
+        };
+
+        [Description("Whether or not the player will be teleported to the pocket dimension")]
+        public bool TeleportToPocketDimension { get; set; } = false;
+
+        [Description("Teleport Options")]
+        public Teleport TeleportOptions { get; set; } = new()
+        {
+            PlayerTeleport = false,
+            Zone = ZoneType.Unspecified,
+            Room = RoomType.Unknown
+        };
+
+        [Description("Appearance Options")]
+        public AppearanceManager AppearanceOptions { get; set; } = new()
+        {
+            ChangePlayerAppearance = false,
         };
 
         protected override void SubscribeEvents()
@@ -71,16 +92,23 @@ namespace scp_294.Classes
         {
             if (!Check(ev.Item)) return;
 
-            RemoveAntiScp207(ev.Player);
+            if(RemoveAntiColaEffect) RemoveAntiScp207(ev.Player);
 
-            if(ShouldPlayerExplode)
+            if (SpawnScp173Tantrum) ev.Player.PlaceTantrum();
+
+            if (TeleportToPocketDimension) ev.Player.EnableEffect(EffectType.PocketCorroding);
+
+            if (TeleportOptions.PlayerTeleport) ev.Player.Teleport(TeleportOptions.GetTeleportLocation());
+
+            if (AppearanceOptions.ChangePlayerAppearance) AppearanceOptions.ChangeAppearance(ev.Player);
+
+            if (ShouldPlayerExplode)
             {
                 ev.Player.Explode();
                 return;
             }
 
             ApplyEffects(ev.Player);
-
         }
 
         private void ApplyEffects(Exiled.API.Features.Player player)

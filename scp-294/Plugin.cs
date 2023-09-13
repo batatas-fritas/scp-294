@@ -6,6 +6,7 @@ using Server = Exiled.Events.Handlers.Server;
 using Schematic = MapEditorReborn.Events.Handlers.Schematic;
 using scp_294.Handlers;
 using PluginAPI.Core;
+using scp_294.Classes;
 
 namespace scp_294
 {
@@ -33,19 +34,10 @@ namespace scp_294
 
         private void RegisterItems()
         {
-            Config.ThickJuice.Register();
-            Config.CandyJuice.Register();
-            Config.CandyRainbowJuice.Register();
-            Config.CandyYellowJuice.Register();
-            Config.CandyPurpleJuice.Register();
-            Config.CandyRedJuice.Register();
-            Config.CandyGreenJuice.Register();
-            Config.CandyBlueJuice.Register();
-            Config.CandyPinkJuice.Register();
-            Config.TeleportationDrink.Register();
-            Config.ScpDrink.Register();
-            Config.Scp173Drink.Register();
-            Config.Scp106Drink.Register();
+            foreach (Drink drink in Config.Drinks)
+            {
+                if (drink.IsEnabled) drink.Register();
+            }
         }
 
         private void DisableEvents()

@@ -13,7 +13,6 @@ namespace scp_294.Classes
 {
     public class Drink : CustomItem
     {
-        [Description("Name of the drink, this is what the player has to write in order to receive it")]
         public override string Name { get; set; } = "drink of scp173";
 
         public string[] Aliases { get; set; } = { "drink of 173" };
@@ -24,24 +23,19 @@ namespace scp_294.Classes
         [Description("Whether or not the drink is enabled on your server. If this is set to false, drinks won't even register so you won't be able to have it through RA")]
         public bool IsEnabled { get; set; } = true;
 
-        [Description("Make sure this is different from any other drink/Custom item")]
         public override uint Id { get; set; } = 69;
 
         public override ItemType Type { get; set; } = ItemType.AntiSCP207;
 
-        [Description("Weight of the drink. The higher the value the slower you move when holding it")]
         public override float Weight { get; set; } = 1f;
 
         [Description("Ignore this. Unless you want drinks to spawn in the map, kinda defies the whole point of the machine.")]
         public override SpawnProperties SpawnProperties { get; set; } = new();
 
-        [Description("Whether or not, the anticola effect should be removed")]
         public bool RemoveAntiColaEffect { get; set; } = true;
 
-        [Description("Whether or not the player should explode")]
         public bool ShouldPlayerExplode { get; set; } = false;
 
-        [Description("Whether or not the a tantrum puddle from scp173 spawns")]
         public bool SpawnScp173Tantrum { get; set; } = false;
 
         [Description("List of effects that will be applied to the player")]
@@ -59,10 +53,8 @@ namespace scp_294.Classes
             }
         };
 
-        [Description("Whether or not the player will be teleported to the pocket dimension")]
         public bool TeleportToPocketDimension { get; set; } = false;
 
-        [Description("Teleport Options")]
         public Teleport TeleportOptions { get; set; } = new()
         {
             PlayerTeleport = false,
@@ -70,7 +62,6 @@ namespace scp_294.Classes
             Room = RoomType.Unknown
         };
 
-        [Description("Appearance Options")]
         public AppearanceManager AppearanceOptions { get; set; } = new()
         {
             ChangePlayerAppearance = false,

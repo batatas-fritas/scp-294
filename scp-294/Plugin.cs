@@ -5,8 +5,8 @@ using System;
 using Server = Exiled.Events.Handlers.Server;
 using Schematic = MapEditorReborn.Events.Handlers.Schematic;
 using scp_294.Handlers;
-using PluginAPI.Core;
 using scp_294.Classes;
+using Exiled.CustomItems;
 
 namespace scp_294
 {
@@ -36,7 +36,11 @@ namespace scp_294
         {
             foreach (Drink drink in Config.Drinks)
             {
-                if (drink.IsEnabled) drink.Register();
+                if (drink.IsEnabled)
+                {
+                    Log.Debug($"Registering {drink.Name} with id {drink.Id}");
+                    drink.Register();
+                }
             }
         }
 

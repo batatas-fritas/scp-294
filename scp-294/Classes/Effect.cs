@@ -5,10 +5,8 @@ namespace scp_294.Classes
 {
     public class Effect
     {
-        [Description("Which effect is going to be applied.")]
         public EffectType Type { get; set; }
 
-        [Description("For how long the effect will be applied")]
         public float Duration { get; set; }
 
         public Intensity Intensity { get; set; }

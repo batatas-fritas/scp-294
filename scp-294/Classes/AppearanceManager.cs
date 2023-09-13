@@ -15,7 +15,7 @@ namespace scp_294.Classes
         public bool ChangePlayerAppearance {  get; set; }
 
         [Description("List of roles the player can turn to. As you can imagine scp-079 is not an option.")]
-        public List<RoleTypeId> PossibleRoles { get; set; }
+        public List<RoleTypeId> PossibleRoles { get; set; } = new();
 
         [Description("Amount of time the player's appearance will be changed")]
         public int Duration { get; set; }

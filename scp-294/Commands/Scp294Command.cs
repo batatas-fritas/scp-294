@@ -5,6 +5,8 @@ using Exiled.API.Features.Items;
 using System.Linq;
 using scp_294.Scp;
 using scp_294.Classes;
+using MapEditorReborn.Commands.UtilityCommands;
+using System.Collections.Generic;
 
 namespace scp_294.Commands
 {
@@ -28,13 +30,14 @@ namespace scp_294.Commands
                 return false;
             }
 
-            if(arguments.Count == 0) 
+            if (player.CurrentRoom != Scp294.Room || !Scp294.InRange(player.Position))
             {
-                response = Plugin.Instance.Config.UsageMessage;
+                response = Plugin.Instance.Config.PlayerOutOfRange;
                 return false;
             }
-           
-            if (arguments.At(0).ToLower() == "list")
+
+                     
+            if (arguments.Count > 0 && arguments.At(0).ToLower() == "list")
             {
                 if(arguments.Count == 1)
                 {
@@ -45,13 +48,7 @@ namespace scp_294.Commands
                     response = Plugin.Instance.Config.UsageMessage;
                     return false;
                 }
-            }
-
-            if (player.CurrentRoom != Scp294.Room || !Scp294.InRange(player.Position))
-            {
-                response = Plugin.Instance.Config.PlayerOutOfRange;
-                return false;
-            }
+            }         
 
             if(player.CurrentItem == null || player.CurrentItem.Type != ItemType.Coin)
             {
@@ -59,21 +56,46 @@ namespace scp_294.Commands
                 return false;
             }
 
+            if(Plugin.Instance.Config.RandomMode)
+            {
+                if (arguments.Count > 0)
+                {
+                    response = Plugin.Instance.Config.UsageMessage;
+                    return false;
+                }
+
+                Drink random_drink = GetRandomDrink();
+
+                response = Plugin.Instance.Config.EnjoyDrinkMessage;
+                RemoveCoinFromPlayer(player);
+                random_drink.Give(player);
+
+                return true;              
+            }
+
+            if (arguments.Count == 0)
+            {
+                response = Plugin.Instance.Config.UsageMessage;
+                return false;
+            }
+
             string drink_name = string.Join(" ", arguments);
             Log.Debug($"{player.Nickname} ordered a {drink_name}");
             Drink drink = GetDrink(drink_name);
 
-            if(drink != null) 
+            if (drink != null)
             {
                 response = Plugin.Instance.Config.EnjoyDrinkMessage;
                 RemoveCoinFromPlayer(player);
                 drink.Give(player);
-            } else
+            }
+            else
             {
                 response = Plugin.Instance.Config.OutOfRange;
             }
 
             return true;
+
         }
 
         private Player GetPlayer(CommandSender sender)
@@ -99,7 +121,7 @@ namespace scp_294.Commands
 
         private string GetAllDrinkNames()
         {
-            string drinks = "\n" + string.Join("\n", Plugin.Instance.Config.Drinks.Select(drink => drink.Name));
+            string drinks = "\n" + string.Join("\n", Plugin.Instance.Config.Drinks.Where(drink => drink.IsEnabled).Select(drink => drink.Name));
             return drinks;
         }
 
@@ -107,9 +129,15 @@ namespace scp_294.Commands
         {
             foreach(Drink drink in Plugin.Instance.Config.Drinks)
             {
-                if(drink.Name == name || drink.Aliases.Contains(name)) return drink;
+                if((drink.Name == name || drink.Aliases.Contains(name)) && drink.IsEnabled) return drink;
             }
             return null;
+        }
+
+        private Drink GetRandomDrink()
+        {
+            List<Drink> available_drinks = Plugin.Instance.Config.Drinks.Where(drink => drink.IsEnabled).ToList();
+            return available_drinks[new Random().Next(0, available_drinks.Count())];
         }
     }
 }

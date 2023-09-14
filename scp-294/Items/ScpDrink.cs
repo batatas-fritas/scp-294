@@ -24,7 +24,7 @@ namespace scp_294.Items
         [Description("Text that shows once you hold the drink")]
         public override string Description { get; set; } = "Disguise yourself as a random scp.";
 
-        [Description("Weight of the drink. Higher weights -> move slower")]
+        public bool IsEnable { get; set; } = true;
         public override float Weight { get; set; } = 1f;
 
         [Description("Text that appears once you're in disguise. If you change this, make sure to add '$new_role_name' and '$time_left', these will be replaced by the actual values")]
@@ -39,6 +39,8 @@ namespace scp_294.Items
         {
             Limit = 1, // Irrelevant: determines the maximum of how many will spawn (they will not spawn in the map)
         };
+
+        public int DisguiseDuration { get; set; } = 10;
 
         protected override void SubscribeEvents()
         {
@@ -73,7 +75,7 @@ namespace scp_294.Items
 
                 Log.Debug($"{ev.Player.Nickname} disguised himself as {disguise.GetFullName()}");
 
-                Timing.RunCoroutine(DurationTimer(10, ev.Player, disguise));
+                Timing.RunCoroutine(DurationTimer(DisguiseDuration, ev.Player, disguise));
             }
         }
 

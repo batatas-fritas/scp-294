@@ -6,6 +6,9 @@ namespace scp_294
 {
     public class Config : IConfig
     {
+        [Description("Set this to true if you want Random Mode enabled. Random Mode only allows the command '.scp294' and it gives you a random drink every time")]
+        public bool RandomMode { get; set; } = false;
+
         [Description("Range to be able to use the machine")]
         public int Range { get; set; } = 2;
 
@@ -31,7 +34,7 @@ namespace scp_294
         public string ErrorMessage { get; set; } = "<color=#ff0000>error occurred</color>";
 
         [Description("Message that appears if a player mistypes or uses the command incorrectly")]
-        public string UsageMessage { get; set; } = "<color=#ff0000>Incorrect Usage. Try .scp294 [drink you want]. You can also use .scp294 list to print every drink currently available</color>";
+        public string UsageMessage { get; set; } = "<color=#ff0000>Incorrect Usage. Try .scp294 [drink you want]. You can also use .scp294 list to print every drink currently available. If random mode is enabled, use .scp294 to get a random drink. (you cannot get a specific drink in random mode)</color>";
 
         public ThickJuice ThickJuice { get; set; } = new();
         public CandyJuice CandyJuice { get; set; } = new();

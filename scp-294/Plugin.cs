@@ -4,6 +4,7 @@ using Exiled.CustomItems.API.Features;
 using System;
 using Server = Exiled.Events.Handlers.Server;
 using Schematic = MapEditorReborn.Events.Handlers.Schematic;
+using System.Collections.Generic;
 
 namespace scp_294
 {
@@ -19,40 +20,50 @@ namespace scp_294
 
         public override Version RequiredExiledVersion => new Version(8, 0, 0);
 
+        public static Plugin Instance { get; private set; }
+
+        public List<CustomItem> CustomItems { get; private set; } = new();
 
         private void RegisterEvents()
         {
-            _handler = new EventHandler(Config);
+            _handler = new EventHandler();
             Server.RoundEnded += _handler.OnRoundEnded;
             Schematic.SchematicSpawned += _handler.SchematicSpawned;
         }
 
         private void RegisterItems()
         {
-            Config.ThickJuice.Register();
-            Config.CandyJuice.Register();
-            Config.CandyRainbowJuice.Register();
-            Config.CandyYellowJuice.Register();
-            Config.CandyPurpleJuice.Register();
-            Config.CandyRedJuice.Register();
-            Config.CandyGreenJuice.Register();
-            Config.CandyBlueJuice.Register();
-            Config.CandyPinkJuice.Register();
-            Config.TeleportationDrink.Register();
-            Config.ScpDrink.Register();
-            Config.Scp173Drink.Register();
-            Config.Scp106Drink.Register();
+            if (Config.ThickJuice.IsEnable) CustomItems.Add(Config.ThickJuice);
+            if (Config.TeleportationDrink.IsEnable) CustomItems.Add(Config.TeleportationDrink);
+            if (Config.ScpDrink.IsEnable) CustomItems.Add(Config.ScpDrink);
+            if (Config.Scp173Drink.IsEnable) CustomItems.Add(Config.Scp173Drink);
+            if (Config.Scp106Drink.IsEnable) CustomItems.Add(Config.Scp106Drink);
+            if (Config.CandyYellowJuice.IsEnable) CustomItems.Add(Config.CandyYellowJuice);
+            if (Config.CandyRedJuice.IsEnable) CustomItems.Add(Config.CandyRedJuice);
+            if (Config.CandyRainbowJuice.IsEnable) CustomItems.Add(Config.CandyRainbowJuice);
+            if (Config.CandyPurpleJuice.IsEnable) CustomItems.Add(Config.CandyPurpleJuice);
+            if (Config.CandyPinkJuice.IsEnable) CustomItems.Add(Config.CandyPinkJuice);
+            if (Config.CandyJuice.IsEnable) CustomItems.Add(Config.CandyJuice);
+            if (Config.CandyGreenJuice.IsEnable) CustomItems.Add(Config.CandyGreenJuice);
+            if (Config.CandyBlueJuice.IsEnable) CustomItems.Add(Config.CandyBlueJuice);
+
+            foreach (CustomItem item in CustomItems)
+            {
+                Log.Debug($"Registering {item.Name}");
+                item.Register();
+            }
         }
 
         private void DisableEvents()
         {
-            _handler = null;
             Server.RoundEnded -= _handler.OnRoundEnded;
             Schematic.SchematicSpawned -= _handler.SchematicSpawned;
+            _handler = null;
         }
 
         public override void OnEnabled()
         {
+            Instance = this;
             RegisterEvents();
             RegisterItems();
             base.OnEnabled();
@@ -60,6 +71,7 @@ namespace scp_294
 
         public override void OnDisabled()
         {
+            Instance = null!;
             DisableEvents();
             CustomItem.UnregisterItems();
             base.OnDisabled();

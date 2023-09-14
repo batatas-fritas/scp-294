@@ -24,6 +24,8 @@ namespace scp_294
 
         public static Plugin Instance { get; private set; }
 
+        public Drink Drink { get; private set; } = new();
+
 
         private void RegisterEvents()
         {
@@ -34,14 +36,7 @@ namespace scp_294
 
         private void RegisterItems()
         {
-            foreach (Drink drink in Config.Drinks)
-            {
-                if (drink.IsEnabled)
-                {
-                    Log.Debug($"Registering {drink.Name} with id {drink.Id}");
-                    drink.Register();
-                }
-            }
+            Drink.Register();
         }
 
         private void DisableEvents()

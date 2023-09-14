@@ -70,6 +70,12 @@ namespace scp_294.Commands
                 }
             }
 
+            if (arguments.Count == 0)
+            {
+                response = Plugin.Instance.Config.UsageMessage;
+                return false;
+            }
+
             string drink_name = string.Join(" ", arguments);
             Log.Debug($"{player.Nickname} ordered a {drink_name}");
             CustomItem drink = GetDrink(drink_name);

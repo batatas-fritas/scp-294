@@ -79,7 +79,7 @@ namespace scp_294.Items
             }
         }
 
-        public IEnumerator<float> DurationTimer(int duration, Exiled.API.Features.Player player, RoleTypeId new_role)
+        private IEnumerator<float> DurationTimer(int duration, Exiled.API.Features.Player player, RoleTypeId new_role)
         {
             int time_left = duration;
             while (true)

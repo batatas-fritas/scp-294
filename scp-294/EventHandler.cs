@@ -6,10 +6,6 @@ namespace scp_294
 {
     public class EventHandler
     {
-        private static Config Config { get; set; }
-
-        public EventHandler(Config config) { Config = config; }
-
         public void OnRoundEnded(RoundEndedEventArgs ev)
         {
             Scp294.End();
@@ -19,9 +15,9 @@ namespace scp_294
         {
             if(ev == null) return;
 
-            if(ev.Schematic.Name == Config.SchematicName) 
+            if(ev.Schematic.Name == Plugin.Instance.Config.SchematicName) 
             {
-                Scp294.Create(ev.Schematic.CurrentRoom, ev.Schematic.Position, Config.Range, Config);
+                Scp294.Create(ev.Schematic.CurrentRoom, ev.Schematic.Position);
                 Scp294.Start();
             }
         }

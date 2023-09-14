@@ -15,7 +15,9 @@ namespace scp_294.Items
         public override string Name { get; set; } = "drink of blue candy";
         [Description("Text that shows once you hold the drink")]
         public override string Description { get; set; } = "It smells soft and sweet, something akin to a marshmallow.";
-        [Description("Weight of the drink. Higher weights -> move slower")]
+
+        public bool IsEnabled { get; set; } = true;
+
         public override float Weight { get; set; } = 1f;
         public override ItemType Type { get; set; } = ItemType.AntiSCP207;
         public override SpawnProperties SpawnProperties { get; set; } = new()

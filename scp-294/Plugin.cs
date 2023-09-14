@@ -16,7 +16,7 @@ namespace scp_294
 
         public override string Author => "batatas-fritas";
 
-        public override Version Version => new Version(1, 1, 3);
+        public override Version Version => new Version(1, 2, 0);
 
         public override Version RequiredExiledVersion => new Version(8, 0, 0);
 

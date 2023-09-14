@@ -33,19 +33,19 @@ namespace scp_294
 
         private void RegisterItems()
         {
-            if (Config.ThickJuice.IsEnable) CustomItems.Add(Config.ThickJuice);
-            if (Config.TeleportationDrink.IsEnable) CustomItems.Add(Config.TeleportationDrink);
-            if (Config.ScpDrink.IsEnable) CustomItems.Add(Config.ScpDrink);
-            if (Config.Scp173Drink.IsEnable) CustomItems.Add(Config.Scp173Drink);
-            if (Config.Scp106Drink.IsEnable) CustomItems.Add(Config.Scp106Drink);
-            if (Config.CandyYellowJuice.IsEnable) CustomItems.Add(Config.CandyYellowJuice);
-            if (Config.CandyRedJuice.IsEnable) CustomItems.Add(Config.CandyRedJuice);
-            if (Config.CandyRainbowJuice.IsEnable) CustomItems.Add(Config.CandyRainbowJuice);
-            if (Config.CandyPurpleJuice.IsEnable) CustomItems.Add(Config.CandyPurpleJuice);
-            if (Config.CandyPinkJuice.IsEnable) CustomItems.Add(Config.CandyPinkJuice);
-            if (Config.CandyJuice.IsEnable) CustomItems.Add(Config.CandyJuice);
-            if (Config.CandyGreenJuice.IsEnable) CustomItems.Add(Config.CandyGreenJuice);
-            if (Config.CandyBlueJuice.IsEnable) CustomItems.Add(Config.CandyBlueJuice);
+            if (Config.ThickJuice.IsEnabled) CustomItems.Add(Config.ThickJuice);
+            if (Config.TeleportationDrink.IsEnabled) CustomItems.Add(Config.TeleportationDrink);
+            if (Config.ScpDrink.IsEnabled) CustomItems.Add(Config.ScpDrink);
+            if (Config.Scp173Drink.IsEnabled) CustomItems.Add(Config.Scp173Drink);
+            if (Config.Scp106Drink.IsEnabled) CustomItems.Add(Config.Scp106Drink);
+            if (Config.CandyYellowJuice.IsEnabled) CustomItems.Add(Config.CandyYellowJuice);
+            if (Config.CandyRedJuice.IsEnabled) CustomItems.Add(Config.CandyRedJuice);
+            if (Config.CandyRainbowJuice.IsEnabled) CustomItems.Add(Config.CandyRainbowJuice);
+            if (Config.CandyPurpleJuice.IsEnabled) CustomItems.Add(Config.CandyPurpleJuice);
+            if (Config.CandyPinkJuice.IsEnabled) CustomItems.Add(Config.CandyPinkJuice);
+            if (Config.CandyJuice.IsEnabled) CustomItems.Add(Config.CandyJuice);
+            if (Config.CandyGreenJuice.IsEnabled) CustomItems.Add(Config.CandyGreenJuice);
+            if (Config.CandyBlueJuice.IsEnabled) CustomItems.Add(Config.CandyBlueJuice);
 
             foreach (CustomItem item in CustomItems)
             {

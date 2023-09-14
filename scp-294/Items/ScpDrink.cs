@@ -24,7 +24,7 @@ namespace scp_294.Items
         [Description("Text that shows once you hold the drink")]
         public override string Description { get; set; } = "Disguise yourself as a random scp.";
 
-        public bool IsEnable { get; set; } = true;
+        public bool IsEnabled { get; set; } = true;
         public override float Weight { get; set; } = 1f;
 
         [Description("Text that appears once you're in disguise. If you change this, make sure to add '$new_role_name' and '$time_left', these will be replaced by the actual values")]

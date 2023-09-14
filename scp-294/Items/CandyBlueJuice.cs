@@ -16,7 +16,7 @@ namespace scp_294.Items
         [Description("Text that shows once you hold the drink")]
         public override string Description { get; set; } = "It smells soft and sweet, something akin to a marshmallow.";
 
-        public bool IsEnable { get; set; } = true;
+        public bool IsEnabled { get; set; } = true;
 
         public override float Weight { get; set; } = 1f;
         public override ItemType Type { get; set; } = ItemType.AntiSCP207;

@@ -5,8 +5,6 @@ using Exiled.CustomItems.API.Features;
 using Exiled.API.Features.Items;
 using System.Linq;
 using scp_294.Scp;
-using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
 
 namespace scp_294.Commands
 {

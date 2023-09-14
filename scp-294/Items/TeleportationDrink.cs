@@ -21,7 +21,7 @@ namespace scp_294.Items
         public override string Name { get; set; } = "drink of chorus fruit";
         [Description("Text that shows once you hold the drink")]
         public override string Description { get; set; } = "Ever played minecraft? Then you know what's about to go down.";
-        public bool IsEnable { get; set; } = true;
+        public bool IsEnabled { get; set; } = true;
         public override float Weight { get; set; } = 1f;
         public override ItemType Type { get; set; } = ItemType.AntiSCP207;
         public override SpawnProperties SpawnProperties { get; set; } = new()
@@ -34,6 +34,12 @@ namespace scp_294.Items
 
         [Description("Ignored if zone is anything other than Unspecified. Room that the player will teleport too. Set this to Unknown along with Zone Unspecified to teleport to a random place across the entire facility")]
         public RoomType Room { get; set; } = RoomType.Unknown;
+
+        [Description("If the player can drink this to escape the pocket dimension")]
+        public bool AllowEscapeFromPocketDimension { get; set;} = false;
+
+        [Description("Message that appears when player is prevented from leaving the pocket dimension")]
+        public string MessagePreventingPlayer { get; set; } = "You are prevented by a magical force from being teleported out of the pocket dimension";
 
         protected override void SubscribeEvents()
         {
@@ -52,6 +58,12 @@ namespace scp_294.Items
             if (Check(ev.Item))
             {
                 Scp294.RemoveAntiScp207(ev.Player);
+
+                if (!AllowEscapeFromPocketDimension && ev.Player.CurrentRoom.Type == RoomType.Pocket)
+                {
+                    ev.Player.ShowHint(MessagePreventingPlayer);
+                    return;
+                }
              
                 ev.Player.Teleport(GetTeleportLocation());
             }

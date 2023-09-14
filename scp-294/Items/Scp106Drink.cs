@@ -16,7 +16,7 @@ namespace scp_294.Items
         public override string Name { get; set; } = "drink of scp106";
         [Description("Text that shows once you hold the drink")]
         public override string Description { get; set; } = "Old man sludge. Yum!";
-        public bool IsEnable { get; set; } = true;
+        public bool IsEnabled { get; set; } = true;
         public override float Weight { get; set; } = 1f;
         public override ItemType Type { get; set; } = ItemType.AntiSCP207;
         public override SpawnProperties SpawnProperties { get; set; } = new()

@@ -18,6 +18,9 @@ namespace scp_294
         [Description("Message that appears once you approach Scp-294")]
         public string ApproachMessage { get; set; } = "You have approached SCP-294. Use .scp294 to get a drink";
 
+        [Description("Message that appears once you approach Scp-294 with random mode enabled")]
+        public string ApproachMessageRandomMode { get; set; } = "You have approached SCP-294. However the keyboard is broken, use '.scp294' to get a random drink";
+
         [Description("Message that appears after you get a drink")]
         public string EnjoyDrinkMessage { get; set; } = "<color=#00ff00>Enjoy your drink</color>";
 

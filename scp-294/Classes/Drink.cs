@@ -12,7 +12,7 @@ namespace scp_294.Classes
     public class Drink : CustomItem
     {
         public DrinkOptions Options { get; set; } = new();
-        public override uint Id { get => Options.Id; set => Id = value; }
+        public override uint Id { get; set; } = 30;
         public override string Name { get => Options.Name; set => Name = value; }
         public override string Description { get => Options.Description; set => Description = value; }
         public override float Weight { get => Options.Weight; set => Weight = value; }

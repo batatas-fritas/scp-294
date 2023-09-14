@@ -16,8 +16,6 @@ namespace scp_294.Classes
         [Description("Whether or not the drink is enabled on your server. If this is set to false, drinks won't even register so you won't be able to have it through RA")]
         public bool IsEnabled { get; set; } = true;
 
-        public uint Id { get; set; } = 69;
-
         public ItemType Type { get; set; } = ItemType.AntiSCP207;
 
         public float Weight { get; set; } = 1f;

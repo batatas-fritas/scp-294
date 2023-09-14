@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Classes\AppearanceManager.cs" />
     <Compile Include="Classes\Drink.cs" />
+    <Compile Include="Classes\DrinkOptions.cs" />
     <Compile Include="Classes\Effect.cs" />
     <Compile Include="Classes\Intensity.cs" />
     <Compile Include="Classes\Teleport.cs" />

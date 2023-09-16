@@ -6,6 +6,7 @@ using System.Linq;
 using scp_294.Scp;
 using scp_294.Classes;
 using System.Collections.Generic;
+using scp_294.Configs;
 
 namespace scp_294.Commands
 {
@@ -81,7 +82,6 @@ namespace scp_294.Commands
             string drink_name = string.Join(" ", arguments);
             Log.Debug($"{player.Nickname} ordered a {drink_name}");
             Drink drink = GetDrink(drink_name);
-            drink.teste();
 
             if (drink != null)
             {
@@ -121,23 +121,22 @@ namespace scp_294.Commands
 
         private string GetAllDrinkNames()
         {
-            string drinks = "\n" + string.Join("\n", Plugin.Instance.Config.Drinks.Where(drink => drink.IsEnabled).Select(drink => drink.Name));
+            string drinks = "\n" + string.Join("\n", Plugin.Instance.Drinks.Select(drink => drink.Name));
             return drinks;
         }
 
         private Drink GetDrink(string name)
         {
-            foreach(Drink drink in Plugin.Instance.Config.Drinks)
+            foreach(Drink drink in Plugin.Instance.Drinks)
             {
-                if((drink.Name == name || drink.Aliases.Contains(name)) && drink.IsEnabled) return drink;
+                if(drink.Name == name || drink.Aliases.Contains(name)) return drink;
             }
             return null;
         }
 
         private Drink GetRandomDrink()
         {
-            List<Drink> available_drinks = Plugin.Instance.Config.Drinks.Where(drink => drink.IsEnabled).ToList();
-            return available_drinks[new Random().Next(0, available_drinks.Count())];
+            return Plugin.Instance.Drinks.RandomItem();
         }
     }
 }

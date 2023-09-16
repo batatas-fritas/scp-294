@@ -13,7 +13,7 @@ namespace scp_294.Classes
 {
     public class Drink : CustomItem
     {
-        public override uint Id { get; set; } = 30;
+        public override uint Id { get; set; } = 1;
         public override SpawnProperties SpawnProperties { get; set; } = new();
         public override string Name { get; set; } = "drink of scp173";
 
@@ -64,12 +64,12 @@ namespace scp_294.Classes
             ChangePlayerAppearance = false,
         };
 
-        public void Register()
+        public override void Init()
         {
             SubscribeEvents();
         }
 
-        public void Unregister()
+        public override void Destroy()
         {
             UnsubscribeEvents();
         }

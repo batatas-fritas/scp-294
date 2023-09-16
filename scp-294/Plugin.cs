@@ -1,12 +1,12 @@
 ﻿using Exiled.API.Features;
-using Exiled.CustomItems.API;
 using Exiled.CustomItems.API.Features;
 using System;
 using Server = Exiled.Events.Handlers.Server;
 using Schematic = MapEditorReborn.Events.Handlers.Schematic;
 using scp_294.Handlers;
+using scp_294.Configs;
+using System.Collections.Generic;
 using scp_294.Classes;
-using Exiled.CustomItems;
 
 namespace scp_294
 {
@@ -24,7 +24,9 @@ namespace scp_294
 
         public static Plugin Instance { get; private set; }
 
+        public Dictionary<uint, Drink> LookupIdTable = new();
 
+        public List<Drink> Drinks = new();
 
         private void RegisterEvents()
         {
@@ -35,7 +37,23 @@ namespace scp_294
 
         private void RegisterItems()
         {
-            // custom register
+            foreach(Drink drink in Config.DrinksConfig.Drinks)
+            {
+                if (!drink.IsEnabled) continue;
+
+                // validate method
+
+                LookupIdTable.Add(drink.Id, drink);
+                Drinks.Add(drink);
+                drink.Init();
+            }
+        }
+
+        private void UnregisterItems()
+        {
+            foreach (Drink drink in Drinks) drink.Destroy();
+            LookupIdTable = null;
+            Drinks = null;
         }
 
         private void DisableEvents()
@@ -47,6 +65,8 @@ namespace scp_294
         public override void OnEnabled()
         {
             Instance = this;
+            Config.LoadConfigs();
+
             RegisterEvents();
             RegisterItems();
             base.OnEnabled();
@@ -55,9 +75,11 @@ namespace scp_294
         public override void OnDisabled()
         {
             DisableEvents();
-            CustomItem.UnregisterItems();
+            UnregisterItems();
+
             _handler = null!;
             Instance = null!;
+
             base.OnDisabled();
         }
     }

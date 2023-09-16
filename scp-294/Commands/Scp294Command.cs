@@ -16,8 +16,8 @@ namespace scp_294.Commands
         public string[] Aliases => new string[] { "SCP294" };
 
         public string Description => "Allows to order drinks from SCP-294";
-       
-            {
+
+
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             Player player = GetPlayer((CommandSender)sender);
@@ -27,36 +27,35 @@ namespace scp_294.Commands
                 response = Plugin.Instance.Config.ErrorMessage;
                 return true;
             }
-        }
 
-        public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+            if (player.CurrentRoom != Scp294.Room || !Scp294.InRange(player.Position))
+            {
                 response = Plugin.Instance.Config.PlayerOutOfRange;
                 return true;
+            }
 
 
-                     
             if (arguments.Count > 0 && arguments.At(0).ToLower() == "list")
-                response = Scp294.Config.ErrorMessage;
-                return false;
-            }
-
-            if(arguments.Count == 0) 
             {
-                response = Scp294.Config.UsageMessage;
-                return false;
-            }
+                if (arguments.Count == 1)
+                {
+                    response = GetAllDrinkNames();
+                    return true;
+                }
+                else
+                {
                     response = Plugin.Instance.Config.UsageMessage;
                     return true;
-            {
-            }         
+                }
+            }
 
-            if(player.CurrentItem == null || player.CurrentItem.Type != ItemType.Coin)
+            if (player.CurrentItem == null || player.CurrentItem.Type != ItemType.Coin)
             {
                 response = Plugin.Instance.Config.PlayerNotHoldingCoin;
                 return true;
             }
 
-            if(Plugin.Instance.Config.RandomMode)
+            if (Plugin.Instance.Config.RandomMode)
             {
                 if (arguments.Count > 0)
                 {
@@ -70,24 +69,24 @@ namespace scp_294.Commands
                 RemoveCoinFromPlayer(player);
                 random_drink.Give(player);
 
-                return true;              
-                } else
-                {
-                    response = Scp294.Config.UsageMessage;
-                    return false;
-                response = Plugin.Instance.Config.UsageMessage;
                 return true;
-
-            if (player.CurrentRoom != Scp294.Room || !Scp294.InRange(player.Position))
-            {
-            Log.Debug($"{player.Nickname} ordered a {drink_name}");
-            Drink drink = GetDrink(drink_name);
             }
 
             if (arguments.Count == 0)
             {
-                response = Scp294.Config.PlayerNotHoldingCoin;
-                return false;
+                response = Plugin.Instance.Config.UsageMessage;
+                return true;
+            }
+
+            string drink_name = string.Join(" ", arguments);
+            Log.Debug($"{player.Nickname} ordered a {drink_name}");
+            Drink drink = GetDrink(drink_name);
+
+            if (drink != null)
+            {
+                response = Plugin.Instance.Config.EnjoyDrinkMessage;
+                RemoveCoinFromPlayer(player);
+                drink.Give(player);
             }
             else
             {
@@ -96,46 +95,14 @@ namespace scp_294.Commands
 
             return true;
         }
-                RemoveCoinFromPlayer(player);
-                drink.Give(player);
-                return true;
-            } else
-            {
-                response = Scp294.Config.EnjoyDrinkMessage;
-                switch (drink_name)
-                {
-                    case "cola":
-                    case "scp207":
-                        RemoveCoinFromPlayer(player);
-                        player.AddItem(ItemType.SCP207);
-                        break;
-                    case "anticola":
-                    case "scp207?":
-                    case "antiscp207":
-                        RemoveCoinFromPlayer(player);
-                        player.AddItem(ItemType.AntiSCP207);
-                        break;
-                    default:
-                        response = Scp294.Config.OutOfRange;
-                        return true;
-        private string GetAllDrinkNames()
-        {
-            string drinks = "\n" + string.Join("\n", Plugin.Instance.Drinks.Select(drink => drink.Name));
-            return drinks;
-        }
 
         private Player GetPlayer(CommandSender sender)
         {
-            foreach(Drink drink in Plugin.Instance.Drinks)
+            foreach (Player player in Player.List)
             {
                 if (player.Sender.SenderId == sender.SenderId) return player;
             }
             return null;
-        }
-
-        private Drink GetRandomDrink()
-        {
-            return Plugin.Instance.Drinks.RandomItem();
         }
 
         private void RemoveCoinFromPlayer(Player player)
@@ -152,19 +119,22 @@ namespace scp_294.Commands
 
         private string GetAllDrinkNames()
         {
-            string drinks = "\n" + string.Join("\n", Drinks.Select(item => "<color=#00ff00>" + item + "</color>"));
-            drinks += "\n" + "<color=#00ff00>scp207</color>";
-            drinks += "\n" + "<color=#00ff00>scp207?</color>";
+            string drinks = "\n" + string.Join("\n", Plugin.Instance.Drinks.Select(drink => drink.Name));
             return drinks;
         }
 
         private Drink GetDrink(string name)
         {
-            if(Drinks.Contains(name))
+            foreach (Drink drink in Plugin.Instance.Drinks)
             {
-                if(drink.Name == name || drink.Aliases.Contains(name)) return drink;
+                if (drink.Name == name || drink.Aliases.Contains(name)) return drink;
             }
             return null;
+        }
+
+        private Drink GetRandomDrink()
+        {
+            return Plugin.Instance.Drinks.RandomItem();
         }
     }
 }

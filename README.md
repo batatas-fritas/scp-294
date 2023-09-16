@@ -36,7 +36,7 @@ These commands are:
 There is also a **random mode**: Random mode does not allow you to choose the drink you want. Players must use the command '.scp294' and they will receive a random drink.
 This option is toggleable from the config.
 ## Adding your own drinks
-You create your own drinks and modify existing ones through the drinks config. Assuming default values, this config is located in .../EXILED/Configs/Drinks. *Note: the path and file name is also customizable through the original config*. To create your own drinks simply **add** to the list by copying and pasting an existing one as a base and change its values. Here's a [template](#template) you can copy.
+You create your own drinks and modify existing ones through the drinks config. Assuming default values, this config is located in .../EXILED/Configs/Drinks. *Note: the path and file name is also customizable through the original config*. To create your own drinks simply **add** to the list by copying and pasting an existing one as a base and change its values. Here's a [template](#template) you can copy. You can also find a list of every EffectType, ZoneType, RoomType that you will need to use while creating your drinks in this [section](#resources)
 ## This is a list with every default prompt and its respective drink. Keep in mind that everything is customizable.
 | Prompt   |  Result drink  |
 | :------: | :------------: |
@@ -139,6 +139,121 @@ Effect template to add to the effects list. You can add multiple of these.
     highest_amount: 0
     # The chance of this effect to be applied, in %
     chance: 100
+```
+
+</details>
+
+## Resources <a name="resources"></a>
+# You can also view these at [EXILED repo](https://github.com/Exiled-Team/EXILED) and their [discord server](https://discord.gg/PyUkWTg)
+<details>
+<summary>EffectTypes</summary>
+
+```
+AmnesiaItems
+AmnesiaVision
+Asphyxiated
+Bleeding
+Blinded
+Burned
+Concussed
+Corroding
+Deafened
+Decontaminating
+Disabled
+Ensnared
+Exhausted
+Flashed
+Hemorrhage
+Invigorated
+BodyshotReduction
+Poisoned
+Scp207
+Invisible
+SinkHole
+DamageReduction
+MovementBoost
+RainbowTaste
+SeveredHands
+Stained
+Vitality
+Hypothermia
+Scp1853
+CardiacArrest
+InsufficientLighting
+SoundtrackMute
+AntiScp207
+Scanned
+```
+
+</details>
+<details>
+<summary>ZoneTypes</summary>
+
+```
+Unspecified      
+LightContainment 
+HeavyContainment 
+Entrance         
+Surface          
+Other           
+```
+
+</details>
+<summary>RoomTypes</summary>
+
+```
+Unknown
+LczArmory
+LczCurve
+LczStraight
+Lcz330
+Lcz914
+LczCrossing
+LczTCross
+LczCafe
+LczPlants
+LczToilets
+LczAirlock
+Lcz173
+LczClassDSpawn
+LczCheckpointB
+LczGlassBox
+LczCheckpointA
+Hcz079
+HczEzCheckpointA
+HczEzCheckpointB
+HczArmory
+Hcz939
+HczHid
+Hcz049
+HczChkpA
+HczCrossing
+Hcz106
+HczNuke
+HczTesla
+HczServers
+HczChkpB
+HczTCross
+HczCurve
+Hcz096
+EzVent
+EzIntercom
+EzGateA
+EzDownstairsPcs
+EzCurve
+EzPcs
+EzCrossing
+EzCollapsedTunnel
+EzConference
+EzStraight
+EzCafeteria
+EzUpstairsPcs
+EzGateB
+EzShelter
+Pocket
+Surface
+EzCheckpointHallway
+HczTestRoom        
 ```
 
 </details>

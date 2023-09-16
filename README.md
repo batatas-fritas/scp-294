@@ -55,92 +55,92 @@ You create your own drinks and modify existing ones through the drinks config. A
 | drink of scp106 | teleports the player to the pocket dimension |
 ## Template <a name="template"></a>
 <details>
-	<summary>Drink</summary>
+<summary>Drink</summary>
 
-    ```yml
-	- name: 'drink of air'
-	  aliases:
-	  - 'nothing'
-	  - 'drink of emptiness'
-	  id: 1
-	  # Description of the drink, this is what appears when holding the drink
-	  description: 'There is nothing to drink in the bottle.'
-	  # Whether or not the drink is enabled on your server. If this is set to false, drinks won't even register so you won't be able to have it through RA
-	  is_enabled: true
-	  type: AntiSCP207
-	  weight: 1
-	  remove_anti_cola_effect: true
-	  # List of effects that will be applied to the player
-	  effects: []
-	  teleport_manager:
-	  # Whether or not the player is teleported
-		player_teleport: false
-		# Whether or not the player can teleport out of the pocket dimension
-		can_player_escape_pocket_dimension: false
-		# Message that appears when player is prevented from leaving the pocket dimension
-		message_preventing_pocket_teleport: ''
-		# The zone to which the player will be teleported to. If this is anything but Unspecified it will teleport the player to a random room within that zone
-		zone: Unspecified
-		# Ignored if zone is anything other than Unspecified. Room that the player will teleport too. Set this to Unknown along with Zone Unspecified to teleport to a random place across the entire facility
-		room: Unknown
-	  appearance_options:
-	  # Whether or not the player should change appearance
-		change_player_appearance: false
-		# List of roles the player can turn to. As you can imagine scp-079 is not an option.
-		possible_roles: []
-		# Amount of time the player's appearance will be changed
-		duration: 0
-		# Hint displayed once the player changes appearance and counts the time left. Make sure to add '$new_role_name' and '$time_left', these will be replaced by the actual values
-		disguise_message: ''
-		# Hint displayed once you're no longer in disguise
-		no_longer_in_disguise: ''
-	  extra_effects:
-	  # Whether or not the player explodes after drinking.
-		player_explode: false
-		# Whether or not the player gains Ahp. Set this to 0 if no Ahp.
-		ahp_gain: 0
-		# Whether or not the player gains/loses stamina. Value between -1 and 1. 0 for no change.
-		stamina_change: 0
-		# Whether or not tantrum is placed beneath the player.
-		place_tantrum: false
-		# Whether or not the player receives HP.
-		heal_amount: 0
-		# Whether or not the player receives passive regeneration.
-		regeneration:
-		# Rate of the regeneration.
-		  rate: 0
-		  # Duration of the regeneration.
-		  duration: 0
-		# Whether or not the player gets teleported to pocket dimension.
-		teleport_to_pocket_dimension: false
-	  spawn_properties:
-		limit: 0
-		dynamic_spawn_points: []
-		static_spawn_points: []
-		role_spawn_points: []
-	  scale:
-		x: 1
-		y: 1
-		z: 1
-    ```
+```yml
+- name: 'drink of air'
+  aliases:
+  - 'nothing'
+  - 'drink of cup'
+  - 'drink of emptiness'
+  - 'drink of vacuum'
+  - 'HL3'
+  - 'Half Life 3'
+  id: 1
+  # Description of the drink, this is what appears when holding the drink
+  description: 'There is nothing to drink in the bottle.'
+  # Whether or not the drink is enabled on your server. If this is set to false, drinks won't even register so you won't be able to have it through RA
+  is_enabled: true
+  type: AntiSCP207
+  weight: 1
+  remove_anti_cola_effect: true
+  # List of effects that will be applied to the player
+  effects: []
+  teleport_manager:
+  # Whether or not the player is teleported
+    player_teleport: false
+    # Whether or not the player can teleport out of the pocket dimension
+    can_player_escape_pocket_dimension: false
+    # Message that appears when player is prevented from leaving the pocket dimension
+    message_preventing_pocket_teleport: ''
+    # The zone to which the player will be teleported to. If this is anything but Unspecified it will teleport the player to a random room within that zone
+    zone: Unspecified
+    # Ignored if zone is anything other than Unspecified. Room that the player will teleport too. Set this to Unknown along with Zone Unspecified to teleport to a random place across the entire facility
+    room: Unknown
+  appearance_options:
+  # Whether or not the player should change appearance
+    change_player_appearance: false
+    # List of roles the player can turn to. As you can imagine scp-079 is not an option.
+    possible_roles: []
+    # Amount of time the player's appearance will be changed
+    duration: 0
+    # Hint displayed once the player changes appearance and counts the time left. Make sure to add '$new_role_name' and '$time_left', these will be replaced by the actual values
+    disguise_message: ''
+    # Hint displayed once you're no longer in disguise
+    no_longer_in_disguise: ''
+  extra_effects:
+  # Whether or not the player explodes after drinking.
+    player_explode: false
+    # Whether or not the player gains Ahp. Set this to 0 if no Ahp.
+    ahp_gain: 0
+    # Whether or not the player gains/loses stamina. Value between -1 and 1. 0 for no change.
+    stamina_change: 0
+    # Whether or not tantrum is placed beneath the player.
+    place_tantrum: false
+    # Whether or not the player receives HP.
+    heal_amount: 0
+    # Whether or not the player gets teleported to pocket dimension.
+    teleport_to_pocket_dimension: false
+  spawn_properties:
+    limit: 0
+    dynamic_spawn_points: []
+    static_spawn_points: []
+    role_spawn_points: []
+  scale:
+    x: 1
+    y: 1
+    z: 1
+```
 
 </details>
 <details>
-	<summary>**Effect**</summary>
-	Effect template to add to the effects value. this value is a list, therefore you can add several effects.
-	```yml
-	- type: Vitality
-	  duration: 40
-	  intensity:
-	  # If you want a random intensity in a specific range, set this to -1
-	    fixed_amount: 1
-	    # This is the lowest amount of the range of intensity possible. If Fixed Amount is 0 or above these will be ignored
-	    lowest_amount: 0
-	    # This is the highest amount of the range of intensity possible. If Fixed Amount is 0 or above these will be ignored
-	    highest_amount: 0
-	  # The chance of this effect to be applied, in %
-	  chance: 100
-	```
+<summary>Effect</summary>
+Effect template to add to the effects value. this value is a list, therefore you can add several effects.
+
+```yml
+- type: Vitality
+    duration: 40
+    intensity:
+    # If you want a random intensity in a specific range, set this to -1
+    fixed_amount: 1
+    # This is the lowest amount of the range of intensity possible. If Fixed Amount is 0 or above these will be ignored
+    lowest_amount: 0
+    # This is the highest amount of the range of intensity possible. If Fixed Amount is 0 or above these will be ignored
+    highest_amount: 0
+    # The chance of this effect to be applied, in %
+    chance: 100
+```
+
 </details>
 
 

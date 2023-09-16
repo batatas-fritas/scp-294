@@ -108,7 +108,7 @@ namespace scp_294.Commands
 
         private string GetDrinkList()
         {
-            return "\n" + string.Join("\n", Plugin.Instance.Drinks.Select(drink => $"[{drink.Id}] Name: {drink.Name} | Aliases: {string.Join(" ", drink.Aliases)}"));
+            return "\n" + string.Join("\n", Plugin.Instance.Drinks.Select(drink => $"[{drink.Id}] Name: {drink.Name} | Aliases: {string.Join(" | ", drink.Aliases)}"));
         }
 
         private Player GetPlayer(int id)

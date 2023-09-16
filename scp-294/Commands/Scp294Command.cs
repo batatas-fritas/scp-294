@@ -28,13 +28,6 @@ namespace scp_294.Commands
                 return true;
             }
 
-            if (player.CurrentRoom != Scp294.Room || !Scp294.InRange(player.Position))
-            {
-                response = Plugin.Instance.Config.PlayerOutOfRange;
-                return true;
-            }
-
-
             if (arguments.Count > 0 && arguments.At(0).ToLower() == "list")
             {
                 if (arguments.Count == 1)
@@ -47,6 +40,12 @@ namespace scp_294.Commands
                     response = Plugin.Instance.Config.UsageMessage;
                     return true;
                 }
+            }
+
+            if (player.CurrentRoom != Scp294.Room || !Scp294.InRange(player.Position))
+            {
+                response = Plugin.Instance.Config.PlayerOutOfRange;
+                return true;
             }
 
             if (player.CurrentItem == null || player.CurrentItem.Type != ItemType.Coin)

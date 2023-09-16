@@ -132,11 +132,11 @@ Effect template to add to the effects list. You can add multiple of these.
     duration: 40
     intensity:
     # If you want a random intensity in a specific range, set this to -1
-    fixed_amount: 1
-    # This is the lowest amount of the range of intensity possible. If Fixed Amount is 0 or above these will be ignored
-    lowest_amount: 0
-    # This is the highest amount of the range of intensity possible. If Fixed Amount is 0 or above these will be ignored
-    highest_amount: 0
+      fixed_amount: 1
+      # This is the lowest amount of the range of intensity possible. If Fixed Amount is 0 or above these will be ignored
+      lowest_amount: 0
+      # This is the highest amount of the range of intensity possible. If Fixed Amount is 0 or above these will be ignored
+      highest_amount: 0
     # The chance of this effect to be applied, in %
     chance: 100
 ```

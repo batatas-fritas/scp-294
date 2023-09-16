@@ -62,8 +62,6 @@ namespace scp_294.Scp
 
                 foreach (Player player in Player.List)
                 {
-                    Log.Debug("Checking player");
-
                     if (player.IsDead || player.IsScp || player == null) continue;
 
                     if (InRange(player.Position) && player.CurrentRoom == Room && !PlayersInRange.Contains(player))
@@ -79,7 +77,6 @@ namespace scp_294.Scp
                         PlayersInRange.Add(player);
                     }
                 }
-
                 PlayersInRange = PlayersInRange.Where(player => InRange(player.Position)).ToList();
             }
         }
@@ -87,20 +84,8 @@ namespace scp_294.Scp
         public static bool InRange(Vector3 position)
         {
             if (_instance == null) return false;
-            return Vector3.Distance(position, Position) < Plugin.Instance.Config.Range;
-        }
-
-        public static void RemoveAntiScp207(Player player)
-        {
-            int intensity = player.GetEffectIntensity<Scp207>();
-
-            if (intensity > 0)
-            {
-                player.ChangeEffectIntensity<Scp207>(0);
-            }
-
-            player.ChangeEffectIntensity<AntiScp207>(0);
-            player.ChangeEffectIntensity<Scp207>((byte)intensity);
+            float res = Vector3.Distance(position, Position);
+            return res < Plugin.Instance.Config.Range;
         }
     }
 }

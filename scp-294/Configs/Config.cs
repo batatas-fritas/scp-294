@@ -1,12 +1,24 @@
-﻿using Exiled.API.Interfaces;
-using scp_294.Items;
+﻿using Exiled.API.Features;
+using Exiled.API.Interfaces;
+using Exiled.Loader;
 using System.ComponentModel;
+using System.IO;
+using YamlDotNet.Serialization;
 
-namespace scp_294
+namespace scp_294.Configs
 {
     public class Config : IConfig
     {
-        [Description("Set this to true if you want Random Mode enabled. Random Mode only allows the command '.scp294' and it gives you a random drink every time")]
+        public bool IsEnabled { get; set; } = true;
+        public bool Debug { get; set; } = false;
+
+        [Description("The path of the folder where the drinks will be stored.")]
+        public string DrinksFolder { get; set; } = Path.Combine(Paths.Configs, "Drinks");
+
+        [Description("The name of the file to load the drinks configs from")]
+        public string DrinksFile { get; set; } = "global.yml";
+
+        [Description("Whether or not random mode is enabled. Random Mode makes it so that every drink is random. This is false by default")]
         public bool RandomMode { get; set; } = false;
 
         [Description("Range to be able to use the machine")]
@@ -37,23 +49,28 @@ namespace scp_294
         public string ErrorMessage { get; set; } = "<color=#ff0000>error occurred</color>";
 
         [Description("Message that appears if a player mistypes or uses the command incorrectly")]
-        public string UsageMessage { get; set; } = "<color=#ff0000>Incorrect Usage. Try .scp294 [drink you want]. You can also use .scp294 list to print every drink currently available. If random mode is enabled, use .scp294 to get a random drink. (you cannot get a specific drink in random mode)</color>";
+        public string UsageMessage { get; set; } = "<color=#ff0000>Incorrect Usage. Try .scp294 [drink you want]. You can also use .scp294 list to print every drink currently available. If random mode is enabled you should type only '.scp294' to get your random drink</color>";
 
-        public ThickJuice ThickJuice { get; set; } = new();
-        public CandyJuice CandyJuice { get; set; } = new();
-        public CandyRainbowJuice CandyRainbowJuice { get; set; } = new();
-        public CandyYellowJuice CandyYellowJuice { get; set; } = new();
-        public CandyPurpleJuice CandyPurpleJuice { get; set; } = new();
-        public CandyRedJuice CandyRedJuice { get; set; } = new();
-        public CandyGreenJuice CandyGreenJuice { get; set; } = new();
-        public CandyBlueJuice CandyBlueJuice { get; set; } = new();
-        public CandyPinkJuice CandyPinkJuice { get; set; } = new();
-        public TeleportationDrink TeleportationDrink { get; set; } = new();
-        public ScpDrink ScpDrink { get; set; } = new();
-        public Scp173Drink Scp173Drink { get; set; } = new();
-        public Scp106Drink Scp106Drink { get; set; } = new();
+        [YamlIgnore]
+        public DrinksConfig DrinksConfig { get; set; } = null!;
 
-        public bool IsEnabled { get; set; } = true;
-        public bool Debug { get; set; } = false;
+        public void LoadConfigs()
+        {
+            if (!Directory.Exists(DrinksFolder))
+                Directory.CreateDirectory(DrinksFolder);
+
+            string filePath = Path.Combine(DrinksFolder, DrinksFile);
+
+            if (!File.Exists(filePath))
+            {
+                DrinksConfig = new DrinksConfig();
+                File.WriteAllText(filePath, Loader.Serializer.Serialize(DrinksConfig));
+            }
+            else
+            {
+                DrinksConfig = Loader.Deserializer.Deserialize<DrinksConfig>(File.ReadAllText(filePath));
+                File.WriteAllText(filePath, Loader.Serializer.Serialize(DrinksConfig));
+            }
+        }
     }
 }

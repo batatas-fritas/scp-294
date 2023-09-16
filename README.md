@@ -199,6 +199,7 @@ Other
 ```
 
 </details>
+<details>
 <summary>RoomTypes</summary>
 
 ```

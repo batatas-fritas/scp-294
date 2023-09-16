@@ -144,7 +144,7 @@ Effect template to add to the effects list. You can add multiple of these.
 </details>
 
 ## Resources <a name="resources"></a>
-# You can also view these at [EXILED repo](https://github.com/Exiled-Team/EXILED) and their [discord server](https://discord.gg/PyUkWTg)
+You can also view these at [EXILED repo](https://github.com/Exiled-Team/EXILED) and their [discord server](https://discord.gg/PyUkWTg)
 <details>
 <summary>EffectTypes</summary>
 

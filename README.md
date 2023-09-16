@@ -55,9 +55,9 @@ You create your own drinks and modify existing ones through the drinks config. A
 | drink of scp106 | teleports the player to the pocket dimension |
 ## Template <a name="template"></a>
 <details>
-	<summary>**Drink**</summary>
+	<summary>Drink</summary>
 
-	```yml
+    ```yml
 	- name: 'drink of air'
 	  aliases:
 	  - 'nothing'
@@ -122,13 +122,12 @@ You create your own drinks and modify existing ones through the drinks config. A
 		x: 1
 		y: 1
 		z: 1
-	```
+    ```
 
 </details>
 <details>
 	<summary>**Effect**</summary>
 	Effect template to add to the effects value. this value is a list, therefore you can add several effects.
-
 	```yml
 	- type: Vitality
 	  duration: 40
@@ -142,7 +141,6 @@ You create your own drinks and modify existing ones through the drinks config. A
 	  # The chance of this effect to be applied, in %
 	  chance: 100
 	```
-
 </details>
 
 

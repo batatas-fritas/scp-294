@@ -7,11 +7,12 @@ using System.Linq;
 namespace scp_294.Commands
 {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
+    [CommandHandler(typeof(GameConsoleCommandHandler))]
     public class DrinksCommand : ICommand
     {
         public string Command => "customdrinks";
 
-        public string[] Aliases => new string[] { "customdrinks" };
+        public string[] Aliases => new string[] {  };
 
         public string Description => "Allows admins to spawn in drinks from scp294 and see registered drinks";
 
@@ -107,7 +108,7 @@ namespace scp_294.Commands
 
         private string GetDrinkList()
         {
-            return "\n" + string.Join("\n", Plugin.Instance.Drinks.Select(drink => $"{drink.Id} {drink.Name} Aliases:{string.Join(" ", drink.Aliases)}"));
+            return "\n" + string.Join("\n", Plugin.Instance.Drinks.Select(drink => $"[{drink.Id}] Name: {drink.Name} | Aliases: {string.Join(" ", drink.Aliases)}"));
         }
 
         private Player GetPlayer(int id)

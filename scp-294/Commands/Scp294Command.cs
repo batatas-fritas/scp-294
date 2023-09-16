@@ -5,8 +5,6 @@ using Exiled.API.Features.Items;
 using System.Linq;
 using scp_294.Scp;
 using scp_294.Classes;
-using System.Collections.Generic;
-using scp_294.Configs;
 
 namespace scp_294.Commands
 {
@@ -15,7 +13,7 @@ namespace scp_294.Commands
     {
         public string Command => "scp294";
 
-        public string[] Aliases => new string[] { "scp294", "SCP294" };
+        public string[] Aliases => new string[] { "SCP294" };
 
         public string Description => "Allows to order drinks from SCP-294";
        
@@ -27,13 +25,13 @@ namespace scp_294.Commands
             if (Scp294.Get() == null || player == null || player.IsDead || !player.IsHuman)
             {
                 response = Plugin.Instance.Config.ErrorMessage;
-                return false;
+                return true;
             }
 
             if (player.CurrentRoom != Scp294.Room || !Scp294.InRange(player.Position))
             {
                 response = Plugin.Instance.Config.PlayerOutOfRange;
-                return false;
+                return true;
             }
 
                      
@@ -46,14 +44,14 @@ namespace scp_294.Commands
                 } else
                 {
                     response = Plugin.Instance.Config.UsageMessage;
-                    return false;
+                    return true;
                 }
             }         
 
             if(player.CurrentItem == null || player.CurrentItem.Type != ItemType.Coin)
             {
                 response = Plugin.Instance.Config.PlayerNotHoldingCoin;
-                return false;
+                return true;
             }
 
             if(Plugin.Instance.Config.RandomMode)
@@ -61,7 +59,7 @@ namespace scp_294.Commands
                 if (arguments.Count > 0)
                 {
                     response = Plugin.Instance.Config.UsageMessage;
-                    return false;
+                    return true;
                 }
 
                 Drink random_drink = GetRandomDrink();
@@ -76,7 +74,7 @@ namespace scp_294.Commands
             if (arguments.Count == 0)
             {
                 response = Plugin.Instance.Config.UsageMessage;
-                return false;
+                return true;
             }
 
             string drink_name = string.Join(" ", arguments);
@@ -95,7 +93,6 @@ namespace scp_294.Commands
             }
 
             return true;
-
         }
 
         private Player GetPlayer(CommandSender sender)

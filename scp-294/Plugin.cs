@@ -1,5 +1,4 @@
 ﻿using Exiled.API.Features;
-using Exiled.CustomItems.API.Features;
 using System;
 using Server = Exiled.Events.Handlers.Server;
 using Schematic = MapEditorReborn.Events.Handlers.Schematic;
@@ -41,6 +40,7 @@ namespace scp_294
             {
                 if (!drink.IsEnabled) continue;
 
+                Log.Debug($"{drink.Name} enabled");
                 // validate method
 
                 LookupIdTable.Add(drink.Id, drink);
@@ -51,7 +51,10 @@ namespace scp_294
 
         private void UnregisterItems()
         {
-            foreach (Drink drink in Drinks) drink.Destroy();
+            foreach (Drink drink in Drinks) 
+            {
+                if (drink.IsEnabled) drink.Destroy(); 
+            }
             LookupIdTable = null;
             Drinks = null;
         }

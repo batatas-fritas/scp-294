@@ -11,11 +11,11 @@ namespace scp_294.Classes
 {
     public class Drink : CustomItem
     {
-        public override uint Id { get; set; } = 0;
-        public override SpawnProperties SpawnProperties { get; set; } = new();
         public override string Name { get; set; } = "";
 
         public List<string> Aliases { get; set; } = new();
+
+        public override uint Id { get; set; } = 0;
 
         [Description("Description of the drink, this is what appears when holding the drink")]
         public override string Description { get; set; } = "";
@@ -37,6 +37,8 @@ namespace scp_294.Classes
         public AppearanceManager AppearanceOptions { get; set; } = new();
 
         public SpecialEffects ExtraEffects { get; set; } = new();
+
+        public override SpawnProperties SpawnProperties { get; set; } = new();
 
         public override void Init()
         {

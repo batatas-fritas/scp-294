@@ -38,9 +38,9 @@ namespace scp_294
         public string UsageMessage { get; set; } = "<color=#ff0000>Incorrect Usage. Try .scp294 [drink you want]. You can also use .scp294 list to print every drink currently available. If random mode is enabled you should type only '.scp294' to get your random drink</color>";
 
         [Description("Your entire collection of drinks.")]
-        public List<DrinkOptions> Drinks { get; set; } = new()
+        public List<Drink> Drinks { get; set; } = new()
         {
-            new DrinkOptions(),
+            new Drink(),
         };
 
         public bool IsEnabled { get; set; } = true;

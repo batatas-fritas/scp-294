@@ -24,7 +24,6 @@ namespace scp_294
 
         public static Plugin Instance { get; private set; }
 
-        public Drink Drink { get; private set; } = new();
 
 
         private void RegisterEvents()
@@ -36,7 +35,7 @@ namespace scp_294
 
         private void RegisterItems()
         {
-            Drink.Register();
+            // custom register
         }
 
         private void DisableEvents()

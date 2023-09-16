@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using CustomPlayerEffects;
 using Exiled.API.Enums;
 using Exiled.API.Features;
@@ -11,12 +13,66 @@ namespace scp_294.Classes
 {
     public class Drink : CustomItem
     {
-        public DrinkOptions Options { get; set; } = new();
         public override uint Id { get; set; } = 30;
-        public override string Name { get => Options.Name; set => Name = value; }
-        public override string Description { get => Options.Description; set => Description = value; }
-        public override float Weight { get => Options.Weight; set => Weight = value; }
         public override SpawnProperties SpawnProperties { get; set; } = new();
+        public override string Name { get; set; } = "drink of scp173";
+
+        public string[] Aliases { get; set; } = { "drink of 173" };
+
+        [Description("Description of the drink, this is what appears when holding the drink")]
+        public override string Description { get; set; } = "REEEEEEEEEE";
+
+        [Description("Whether or not the drink is enabled on your server. If this is set to false, drinks won't even register so you won't be able to have it through RA")]
+        public bool IsEnabled { get; set; } = true;
+
+        public override ItemType Type { get; set; } = ItemType.AntiSCP207;
+
+        public override float Weight { get; set; } = 1f;
+
+        public bool RemoveAntiColaEffect { get; set; } = true;
+
+        public bool ShouldPlayerExplode { get; set; } = false;
+
+        public bool SpawnScp173Tantrum { get; set; } = false;
+
+        [Description("List of effects that will be applied to the player")]
+        public List<Effect> Effects { get; set; } = new()
+        {
+            new Effect()
+            {
+                Type = EffectType.MovementBoost,
+                Duration = 30,
+                Intensity = new Intensity()
+                {
+                    FixedAmount = 20
+                },
+                Chance = 100,
+            }
+        };
+
+        public bool TeleportToPocketDimension { get; set; } = false;
+
+        public Teleport TeleportOptions { get; set; } = new()
+        {
+            PlayerTeleport = false,
+            Zone = ZoneType.Unspecified,
+            Room = RoomType.Unknown
+        };
+
+        public AppearanceManager AppearanceOptions { get; set; } = new()
+        {
+            ChangePlayerAppearance = false,
+        };
+
+        public void Register()
+        {
+            SubscribeEvents();
+        }
+
+        public void Unregister()
+        {
+            UnsubscribeEvents();
+        }
 
         protected override void SubscribeEvents()
         {
@@ -34,17 +90,17 @@ namespace scp_294.Classes
         {
             if (!Check(ev.Item)) return;
 
-            if (Options.RemoveAntiColaEffect) RemoveAntiScp207(ev.Player);
+            if (RemoveAntiColaEffect) RemoveAntiScp207(ev.Player);
 
-            if (Options.SpawnScp173Tantrum) ev.Player.PlaceTantrum();
+            if (SpawnScp173Tantrum) ev.Player.PlaceTantrum();
 
-            if (Options.TeleportToPocketDimension) ev.Player.EnableEffect(EffectType.PocketCorroding);
+            if (TeleportToPocketDimension) ev.Player.EnableEffect(EffectType.PocketCorroding);
 
-            if (Options.TeleportOptions.PlayerTeleport) ev.Player.Teleport(Options.TeleportOptions.GetTeleportLocation());
+            if (TeleportOptions.PlayerTeleport) ev.Player.Teleport(TeleportOptions.GetTeleportLocation());
 
-            if (Options.AppearanceOptions.ChangePlayerAppearance) Options.AppearanceOptions.ChangeAppearance(ev.Player);
+            if (AppearanceOptions.ChangePlayerAppearance) AppearanceOptions.ChangeAppearance(ev.Player);
 
-            if (Options.ShouldPlayerExplode)
+            if (ShouldPlayerExplode)
             {
                 ev.Player.Explode();
                 return;
@@ -55,7 +111,7 @@ namespace scp_294.Classes
 
         private void ApplyEffects(Exiled.API.Features.Player player)
         {
-            foreach (Effect effect in Options.Effects)
+            foreach (Effect effect in Effects)
             {
                 Log.Debug($"Trying to apply {effect.Type}. Chance: {effect.Chance}");
                 if (Roll(effect.Chance))

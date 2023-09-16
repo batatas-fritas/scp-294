@@ -63,12 +63,11 @@ namespace scp_294.Commands
                     return false;
                 }
 
-                DrinkOptions random_drink = GetRandomDrink();
+                Drink random_drink = GetRandomDrink();
 
                 response = Plugin.Instance.Config.EnjoyDrinkMessage;
                 RemoveCoinFromPlayer(player);
-                Plugin.Instance.Drink.Options = random_drink;
-                Plugin.Instance.Drink.Give(player);
+                random_drink.Give(player);
 
                 return true;              
             }
@@ -81,14 +80,14 @@ namespace scp_294.Commands
 
             string drink_name = string.Join(" ", arguments);
             Log.Debug($"{player.Nickname} ordered a {drink_name}");
-            DrinkOptions drink = GetDrink(drink_name);
+            Drink drink = GetDrink(drink_name);
+            drink.teste();
 
             if (drink != null)
             {
                 response = Plugin.Instance.Config.EnjoyDrinkMessage;
                 RemoveCoinFromPlayer(player);
-                Plugin.Instance.Drink.Options = drink;
-                Plugin.Instance.Drink.Give(player);
+                drink.Give(player);
             }
             else
             {
@@ -126,18 +125,18 @@ namespace scp_294.Commands
             return drinks;
         }
 
-        private DrinkOptions GetDrink(string name)
+        private Drink GetDrink(string name)
         {
-            foreach(DrinkOptions drink in Plugin.Instance.Config.Drinks)
+            foreach(Drink drink in Plugin.Instance.Config.Drinks)
             {
                 if((drink.Name == name || drink.Aliases.Contains(name)) && drink.IsEnabled) return drink;
             }
             return null;
         }
 
-        private DrinkOptions GetRandomDrink()
+        private Drink GetRandomDrink()
         {
-            List<DrinkOptions> available_drinks = Plugin.Instance.Config.Drinks.Where(drink => drink.IsEnabled).ToList();
+            List<Drink> available_drinks = Plugin.Instance.Config.Drinks.Where(drink => drink.IsEnabled).ToList();
             return available_drinks[new Random().Next(0, available_drinks.Count())];
         }
     }

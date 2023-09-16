@@ -38,21 +38,21 @@ This option is toggleable from the config.
 ## Adding your own drinks
 You create your own drinks and modify existing ones through the drinks config. Assuming default values, this config is located in .../EXILED/Configs/Drinks. *Note: the path and file name is also customizable through the original config*. To create your own drinks simply **add** to the list by copying and pasting an existing one as a base and change its values. Here's a [template](#template) you can copy. You can also find a list of every EffectType, ZoneType, RoomType that you will need to use while creating your drinks in this [section](#resources)
 ## This is a list with every default prompt and its respective drink. Keep in mind that everything is customizable.
-| Prompt   |  Result drink  |
-| :------: | :------------: |
-| drink of air | literally does nothing, it servers as a template for the player to create their own drinks |
-| drink of blue candy | gives the player a boosted blue candy effect |
-| drink of green candy | gives the player a boosted green candy effect | 
-| drink of pink candy | weirdly pink green, I wonder what happens when you drink it |
-| drink of purple candy | gives the player a boosted purple candy effect |
-| drink of rainbow candy | gives the player a boosted rainbow candy effect |
-| drink of red candy | gives the player a boosted red candy effect |
-| drink of yellow candy | gives the player a boosted yellow candy effect |
-| drink of candy | gives the player a random combination of candy effects |
-| drink of scp173 | gives the player a massive movement boost |
-| drink of chorus fruit | teleports the player to a random room |
-| scp drink | disguises the player as a random scp |
-| drink of scp106 | teleports the player to the pocket dimension |
+| Id | Prompt   |  Result drink  |
+| :--: | :------: | :------------: |
+| 1 | drink of air | literally does nothing, it servers as a template for the player to create their own drinks |
+| 2 | scp drink | disguises the player as a random scp |
+| 3 | drink of scp173 | gives the player a massive movement boost |
+| 4 | drink of scp106 | teleports the player to the pocket dimension |
+| 6 | drink of chorus fruit | teleports the player to a random room |
+| 7 | drink of candy | gives the player a random combination of candy effects |
+| 8 | drink of rainbow candy | gives the player a boosted rainbow candy effect |
+| 9 | drink of yellow candy | gives the player a boosted yellow candy effect |
+| 10 | drink of purple candy | gives the player a boosted purple candy effect |
+| 11 | drink of red candy | gives the player a boosted red candy effect |
+| 12 | drink of green candy | gives the player a boosted green candy effect | 
+| 13 | drink of blue candy | gives the player a boosted blue candy effect |
+| 14 | drink of pink candy | weirdly pink green, I wonder what happens when you drink it |
 ## Template <a name="template"></a>
 <details>
 <summary>Drink</summary>

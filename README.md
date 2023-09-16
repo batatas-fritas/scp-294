@@ -125,7 +125,7 @@ You create your own drinks and modify existing ones through the drinks config. A
 </details>
 <details>
 <summary>Effect</summary>
-Effect template to add to the effects value. This value is a list, therefore you can add several effects.
+Effect template to add to the effects list. You can add multiple of these.
 
 ```yml
 - type: Vitality

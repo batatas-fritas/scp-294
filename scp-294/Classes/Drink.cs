@@ -11,14 +11,14 @@ namespace scp_294.Classes
 {
     public class Drink : CustomItem
     {
-        public override uint Id { get; set; } = 1;
+        public override uint Id { get; set; } = 0;
         public override SpawnProperties SpawnProperties { get; set; } = new();
-        public override string Name { get; set; } = "drink of air";
+        public override string Name { get; set; } = "";
 
-        public string[] Aliases { get; set; } = { "nothing", "drink of cup", "drink of emptiness", "drink of vacuum", "HL3", "Half Life 3" };
+        public List<string> Aliases { get; set; } = new();
 
         [Description("Description of the drink, this is what appears when holding the drink")]
-        public override string Description { get; set; } = "There is nothing to drink in the bottle.";
+        public override string Description { get; set; } = "";
 
         [Description("Whether or not the drink is enabled on your server. If this is set to false, drinks won't even register so you won't be able to have it through RA")]
         public bool IsEnabled { get; set; } = true;
@@ -29,18 +29,14 @@ namespace scp_294.Classes
 
         public bool RemoveAntiColaEffect { get; set; } = true;
 
-        public bool ShouldPlayerExplode { get; set; } = false;
-
-        public bool SpawnScp173Tantrum { get; set; } = false;
-
         [Description("List of effects that will be applied to the player")]
         public List<Effect> Effects { get; set; } = new();
 
-        public bool TeleportToPocketDimension { get; set; } = false;
-
-        public Teleport TeleportOptions { get; set; } = new();
+        public Teleport TeleportManager { get; set; } = new();
 
         public AppearanceManager AppearanceOptions { get; set; } = new();
+
+        public SpecialEffects ExtraEffects { get; set; } = new();
 
         public override void Init()
         {
@@ -70,25 +66,16 @@ namespace scp_294.Classes
 
             if (RemoveAntiColaEffect) RemoveAntiScp207(ev.Player);
 
-            if (SpawnScp173Tantrum) ev.Player.PlaceTantrum();
-
-            if (TeleportToPocketDimension) ev.Player.EnableEffect(EffectType.PocketCorroding);
-
-            if (TeleportOptions.PlayerTeleport) TeleportOptions.TryTeleport(ev.Player);
+            if (TeleportManager.PlayerTeleport) TeleportManager.TryTeleport(ev.Player);
 
             if (AppearanceOptions.ChangePlayerAppearance) AppearanceOptions.ChangeAppearance(ev.Player);
-
-            if (ShouldPlayerExplode)
-            {
-                ev.Player.Explode();
-                return;
-            }
 
             ApplyEffects(ev.Player);
         }
 
         private void ApplyEffects(Exiled.API.Features.Player player)
         {
+            ExtraEffects.ApplySpecialEffects(player);
             foreach (Effect effect in Effects)
             {
                 effect.ApplyEffect(player, effect.Type == EffectType.MovementBoost || effect.Type == EffectType.BodyshotReduction);

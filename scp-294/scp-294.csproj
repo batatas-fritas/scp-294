@@ -59,9 +59,12 @@
     <Compile Include="Classes\Drink.cs" />
     <Compile Include="Classes\Effect.cs" />
     <Compile Include="Classes\Intensity.cs" />
+    <Compile Include="Classes\SpecialEffects.cs" />
     <Compile Include="Classes\Teleport.cs" />
+    <Compile Include="Commands\DrinksCommand.cs" />
     <Compile Include="Commands\Scp294Command.cs" />
-    <Compile Include="Config.cs" />
+    <Compile Include="Configs\Config.cs" />
+    <Compile Include="Configs\DrinksConfig.cs" />
     <Compile Include="Handlers\EventsHandler.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

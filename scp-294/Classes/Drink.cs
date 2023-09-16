@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using CustomPlayerEffects;
 using Exiled.API.Enums;
-using Exiled.API.Features;
 using Exiled.API.Features.Spawn;
 using Exiled.CustomItems.API.Features;
 using Exiled.Events.EventArgs.Player;
@@ -15,12 +13,12 @@ namespace scp_294.Classes
     {
         public override uint Id { get; set; } = 1;
         public override SpawnProperties SpawnProperties { get; set; } = new();
-        public override string Name { get; set; } = "drink of scp173";
+        public override string Name { get; set; } = "drink of air";
 
-        public string[] Aliases { get; set; } = { "drink of 173" };
+        public string[] Aliases { get; set; } = { "nothing", "drink of cup", "drink of emptiness", "drink of vacuum", "HL3", "Half Life 3" };
 
         [Description("Description of the drink, this is what appears when holding the drink")]
-        public override string Description { get; set; } = "REEEEEEEEEE";
+        public override string Description { get; set; } = "There is nothing to drink in the bottle.";
 
         [Description("Whether or not the drink is enabled on your server. If this is set to false, drinks won't even register so you won't be able to have it through RA")]
         public bool IsEnabled { get; set; } = true;
@@ -36,33 +34,13 @@ namespace scp_294.Classes
         public bool SpawnScp173Tantrum { get; set; } = false;
 
         [Description("List of effects that will be applied to the player")]
-        public List<Effect> Effects { get; set; } = new()
-        {
-            new Effect()
-            {
-                Type = EffectType.MovementBoost,
-                Duration = 30,
-                Intensity = new Intensity()
-                {
-                    FixedAmount = 20
-                },
-                Chance = 100,
-            }
-        };
+        public List<Effect> Effects { get; set; } = new();
 
         public bool TeleportToPocketDimension { get; set; } = false;
 
-        public Teleport TeleportOptions { get; set; } = new()
-        {
-            PlayerTeleport = false,
-            Zone = ZoneType.Unspecified,
-            Room = RoomType.Unknown
-        };
+        public Teleport TeleportOptions { get; set; } = new();
 
-        public AppearanceManager AppearanceOptions { get; set; } = new()
-        {
-            ChangePlayerAppearance = false,
-        };
+        public AppearanceManager AppearanceOptions { get; set; } = new();
 
         public override void Init()
         {
@@ -96,7 +74,7 @@ namespace scp_294.Classes
 
             if (TeleportToPocketDimension) ev.Player.EnableEffect(EffectType.PocketCorroding);
 
-            if (TeleportOptions.PlayerTeleport) ev.Player.Teleport(TeleportOptions.GetTeleportLocation());
+            if (TeleportOptions.PlayerTeleport) TeleportOptions.TryTeleport(ev.Player);
 
             if (AppearanceOptions.ChangePlayerAppearance) AppearanceOptions.ChangeAppearance(ev.Player);
 
@@ -113,16 +91,9 @@ namespace scp_294.Classes
         {
             foreach (Effect effect in Effects)
             {
-                Log.Debug($"Trying to apply {effect.Type}. Chance: {effect.Chance}");
-                if (Roll(effect.Chance))
-                {
-                    Log.Debug($"Applying effect to player. Duration: {effect.Duration}. Intensity fixed amount: {effect.Intensity.FixedAmount}. Intensity range: {effect.Intensity.LowestAmount} to {effect.Intensity.HighestAmount}");
-                    player.ChangeEffectIntensity(effect.Type, (byte)effect.Intensity.GetIntensity(), effect.Duration);
-                }
+                effect.ApplyEffect(player, effect.Type == EffectType.MovementBoost || effect.Type == EffectType.BodyshotReduction);
             }
         }
-
-        private bool Roll(int chance) => new Random().Next(0, 101) < chance;
 
         private void RemoveAntiScp207(Exiled.API.Features.Player player)
         {

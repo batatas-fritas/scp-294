@@ -1,4 +1,5 @@
 ﻿using Exiled.API.Enums;
+using Exiled.API.Features;
 using Exiled.API.Features.Doors;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,13 +11,19 @@ namespace scp_294.Classes
     public class Teleport
     {
         [Description("Whether or not the player is teleported")]
-        public bool PlayerTeleport { get; set; }
+        public bool PlayerTeleport { get; set; } = false;
+
+        [Description("Whether or not the player can teleport out of the pocket dimension")]
+        public bool CanPlayerEscapePocketDimension { get; set; } = false;
+
+        [Description("Message that appears when player is prevented from leaving the pocket dimension")]
+        public string MessagePreventingPocketTeleport { get; set; } = "";
 
         [Description("The zone to which the player will be teleported to. If this is anything but Unspecified it will teleport the player to a random room within that zone")]
-        public ZoneType Zone { get; set; }
+        public ZoneType Zone { get; set; } = ZoneType.Unspecified;
 
         [Description("Ignored if zone is anything other than Unspecified. Room that the player will teleport too. Set this to Unknown along with Zone Unspecified to teleport to a random place across the entire facility")]
-        public RoomType Room { get; set; }
+        public RoomType Room { get; set; } = RoomType.Unknown;
 
         public Vector3? GetTeleportLocation()
         {
@@ -43,6 +50,18 @@ namespace scp_294.Classes
             }
 
             return null;
+        }
+
+        public void TryTeleport(Player player)
+        {
+            if (!CanPlayerEscapePocketDimension && player.CurrentRoom.Type == RoomType.Pocket)
+            {
+                Log.Debug($"TryTeleport: {MessagePreventingPocketTeleport}");
+                player.ShowHint(MessagePreventingPocketTeleport);
+                return;
+            }
+
+            player.Teleport(GetTeleportLocation());
         }
     }
 }

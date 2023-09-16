@@ -12,19 +12,19 @@ namespace scp_294.Classes
     public class AppearanceManager
     {
         [Description("Whether or not the player should change appearance")]
-        public bool ChangePlayerAppearance {  get; set; }
+        public bool ChangePlayerAppearance { get; set; } = false;
 
         [Description("List of roles the player can turn to. As you can imagine scp-079 is not an option.")]
         public List<RoleTypeId> PossibleRoles { get; set; } = new();
 
         [Description("Amount of time the player's appearance will be changed")]
-        public int Duration { get; set; }
+        public int Duration { get; set; } = 0;
 
         [Description("Hint displayed once the player changes appearance and counts the time left. Make sure to add '$new_role_name' and '$time_left', these will be replaced by the actual values")]
-        public string DisguiseMessage { get; set; }
+        public string DisguiseMessage { get; set; } = "";
 
         [Description("Hint displayed once you're no longer in disguise")]
-        public string NoLongerInDisguise { get; set; }
+        public string NoLongerInDisguise { get; set; } = "";
 
         public void ChangeAppearance(Player player)
         {

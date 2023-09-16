@@ -17,7 +17,7 @@ namespace scp_294
 
         public override string Author => "batatas-fritas";
 
-        public override Version Version => new Version(1, 1, 3);
+        public override Version Version => new Version(1, 2, 0);
 
         public override Version RequiredExiledVersion => new Version(8, 0, 0);
 
@@ -63,6 +63,7 @@ namespace scp_294
         {
             Server.RoundEnded -= _handler.OnRoundEnded;
             Schematic.SchematicSpawned -= _handler.SchematicSpawned;
+            _handler = null;
         }
 
         public override void OnEnabled()
@@ -77,6 +78,7 @@ namespace scp_294
 
         public override void OnDisabled()
         {
+            Instance = null!;
             DisableEvents();
             UnregisterItems();
 

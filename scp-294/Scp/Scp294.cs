@@ -66,7 +66,14 @@ namespace scp_294.Scp
 
                     if (InRange(player.Position) && player.CurrentRoom == Room && !PlayersInRange.Contains(player))
                     {
-                        player.ShowHint(Plugin.Instance.Config.ApproachMessage);
+                        if(Plugin.Instance.Config.RandomMode)
+                        {
+                            player.ShowHint(Plugin.Instance.Config.ApproachMessageRandomMode);
+                        } else
+                        {
+                            player.ShowHint(Plugin.Instance.Config.ApproachMessage);
+                        }
+                        
                         PlayersInRange.Add(player);
                     }
                 }

@@ -55,22 +55,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\AppearanceManager.cs" />
+    <Compile Include="Classes\Drink.cs" />
+    <Compile Include="Classes\Effect.cs" />
+    <Compile Include="Classes\Intensity.cs" />
+    <Compile Include="Classes\Regeneration.cs" />
+    <Compile Include="Classes\SpecialEffects.cs" />
+    <Compile Include="Classes\Teleport.cs" />
+    <Compile Include="Commands\DrinksCommand.cs" />
     <Compile Include="Commands\Scp294Command.cs" />
-    <Compile Include="Config.cs" />
-    <Compile Include="EventHandler.cs" />
-    <Compile Include="Items\CandyDrinks\CandyBlueJuice.cs" />
-    <Compile Include="Items\CandyDrinks\CandyGreenJuice.cs" />
-    <Compile Include="Items\CandyDrinks\CandyJuice.cs" />
-    <Compile Include="Items\CandyDrinks\CandyPinkJuice.cs" />
-    <Compile Include="Items\CandyDrinks\CandyPurpleJuice.cs" />
-    <Compile Include="Items\CandyDrinks\CandyRainbowJuice.cs" />
-    <Compile Include="Items\CandyDrinks\CandyRedJuice.cs" />
-    <Compile Include="Items\CandyDrinks\CandyYellowJuice.cs" />
-    <Compile Include="Items\Scp106Drink.cs" />
-    <Compile Include="Items\Scp173Drink.cs" />
-    <Compile Include="Items\ScpDrink.cs" />
-    <Compile Include="Items\TeleportationDrink.cs" />
-    <Compile Include="Items\ThickJuice.cs" />
+    <Compile Include="Configs\Config.cs" />
+    <Compile Include="Configs\DrinksConfig.cs" />
+    <Compile Include="Handlers\EventsHandler.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scp\Scp294.cs" />

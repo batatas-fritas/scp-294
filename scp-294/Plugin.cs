@@ -17,7 +17,7 @@ namespace scp_294
 
         public override string Author => "batatas-fritas";
 
-        public override Version Version => new Version(1, 2, 0);
+        public override Version Version => new Version(2, 0, 0);
 
         public override Version RequiredExiledVersion => new Version(8, 0, 0);
 
@@ -41,7 +41,6 @@ namespace scp_294
                 if (!drink.IsEnabled) continue;
 
                 Log.Debug($"{drink.Name} enabled");
-                // validate method
 
                 LookupIdTable.Add(drink.Id, drink);
                 Drinks.Add(drink);

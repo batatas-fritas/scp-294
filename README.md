@@ -5,7 +5,7 @@ This plugin adds SCP-294 to the game. SCP-294 is a vending machine that will giv
 Besides the release, we also provide a model **made by Scout Trooper (@scouttrooperrp) from MER discord** and make sure it spawns in the map otherwise the plugin will not work. The plugin also **supports** custom models for the machine, so if you already have your own model just change the 'SchematicName' field in the config to the name of your model.
 **Keep in mind that the model has to spawn for the plugin to work.** It essentially waits for a spawned schematic with the name equal to the one in the config. **If this is your first time working with custom models and schematics you should probably read the section below.**
 
-## Setup Guide on how to place the schematic in your server and start using the plugin.
+## Setup guide on how to place the schematic in your server and start using the plugin.
 1. Make sure you have MapEditorReborn Plugin in your server. If you've just downloaded it and placed it in your plugins folder, run it once so it generates the required configs and files.
 2. Download the zip and extract it into .../EXILED/Configs/MapEditorReborn/Schematics. You must now have inside said schematics folder, a folder with a json file inside both with the name scp294.
 3. Go in game and spawn the schematic in whichever room you want using the command: mp create scp294
@@ -55,7 +55,8 @@ You create your own drinks and modify existing ones through the drinks config. A
 | drink of scp106 | teleports the player to the pocket dimension |
 ## Template <a name="template"></a>
 <details>
-	<summary>Drink</summary>
+	<summary>## Drink</summary>
+
 	```yaml
 	- name: 'drink of air'
 	  aliases:
@@ -122,10 +123,12 @@ You create your own drinks and modify existing ones through the drinks config. A
 		y: 1
 		z: 1
 	```
+
 </details>
 <details>
-	<summary>Effect</summary>
+	<summary>## Effect</summary>
 	Effect template to add to the effects value. this value is a list, therefore you can add several effects.
+
 	```yaml
 	- type: Vitality
 	  duration: 40
@@ -139,6 +142,7 @@ You create your own drinks and modify existing ones through the drinks config. A
 	  # The chance of this effect to be applied, in %
 	  chance: 100
 	```
+
 </details>
 
 

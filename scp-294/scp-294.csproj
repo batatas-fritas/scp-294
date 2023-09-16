@@ -59,6 +59,7 @@
     <Compile Include="Classes\Drink.cs" />
     <Compile Include="Classes\Effect.cs" />
     <Compile Include="Classes\Intensity.cs" />
+    <Compile Include="Classes\Regeneration.cs" />
     <Compile Include="Classes\SpecialEffects.cs" />
     <Compile Include="Classes\Teleport.cs" />
     <Compile Include="Commands\DrinksCommand.cs" />

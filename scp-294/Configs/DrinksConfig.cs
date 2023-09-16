@@ -202,35 +202,20 @@ namespace scp_294.Configs
                 {
                     new Effect()
                     {
-                        Type = EffectType.Vitality,
-                        Intensity = new() { FixedAmount = 2 },
-                        Duration = 15f,
-                        Chance = 100
-                    },
-                    new Effect()
-                    {
                         Type = EffectType.DamageReduction,
                         Intensity = new() { FixedAmount = 40 },
                         Duration = 30f,
                         Chance = 100
                     }
-                }
+                },
+                ExtraEffects = { Regeneration = { Rate = 1.5f, Duration = 20 } }
             },
             new Drink()
             {
                 Id = 11,
                 Name = "drink of red candy",
                 Description = "A strong scent of cherry fills the room. It’s a bit... too strong.",
-                Effects =
-                {
-                    new Effect()
-                    {
-                        Type = EffectType.Vitality,
-                        Intensity = new() { FixedAmount = 9 },
-                        Duration = 10f,
-                        Chance = 100
-                    }
-                }
+                ExtraEffects = { Regeneration = { Rate = 9f, Duration = 10 } }
             },
             new Drink()
             {
@@ -242,11 +227,12 @@ namespace scp_294.Configs
                     new Effect()
                     {
                         Type = EffectType.Vitality,
-                        Intensity = new() { FixedAmount = 3 },
-                        Duration = 40f,
+                        Intensity = new() { FixedAmount = 1 },
+                        Duration = 45f,
                         Chance = 100
                     }
-                }
+                },
+                ExtraEffects = { Regeneration = { Rate = 2.25f, Duration = 80 } }
             },
             new Drink()
             {

@@ -1,5 +1,6 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
+using System;
 using System.ComponentModel;
 
 namespace scp_294.Classes
@@ -21,6 +22,9 @@ namespace scp_294.Classes
         [Description("Whether or not the player receives HP.")]
         public int HealAmount { get; set; } = 0;
 
+        [Description("Whether or not the player receives passive regeneration.")]
+        public Regeneration Regeneration { get; set; } = new();
+
         [Description("Whether or not the player gets teleported to pocket dimension.")]
         public bool TeleportToPocketDimension { get; set; } = false;
 
@@ -31,6 +35,7 @@ namespace scp_294.Classes
             if (StaminaChange != 0) player.StaminaStat.ModifyAmount(StaminaChange);
             if (PlaceTantrum) player.PlaceTantrum();
             if (HealAmount > 0) player.Heal(HealAmount);
+            if (Regeneration.Rate > 0) Regeneration.ApplyRegeneration(player.ReferenceHub);
             if (TeleportToPocketDimension) player.EnableEffect(EffectType.PocketCorroding);
         }
     }

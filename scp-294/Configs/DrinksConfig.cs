@@ -247,6 +247,28 @@ namespace scp_294.Configs
                 Name = "drink of pink candy",
                 Description = "The strawberry scent is as gentle as it looks.",
                 ExtraEffects = { PlayerExplode = true }
+            },
+            new Drink()
+            {
+                Id = 15,
+                Name = "drink of blood",
+                Description = "You feel tired as if you've lost some of your blood.",
+                ExtraEffects = { DamageAmount = 30 }
+            },
+            new Drink()
+            {
+                Id = 16,
+                Name = "drink of life",
+                Description = "You feel refreshed.",
+                ExtraEffects = { HealAmount = 100 }              
+            },
+            new Drink()
+            {
+                Id = 17,
+                Name = "antimatter",
+                Aliases = { "anti-matter", "void" },
+                Description = "You feel as if you are being sucked into the drink",
+                ExtraEffects = { ExplodeOnDispensing = true }
             }
         };
     }

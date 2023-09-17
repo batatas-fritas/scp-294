@@ -53,6 +53,9 @@ You create your own drinks and modify existing ones through the drinks config. A
 | 12 | drink of green candy | gives the player a boosted green candy effect | 
 | 13 | drink of blue candy | gives the player a boosted blue candy effect |
 | 14 | drink of pink candy | weirdly pink green, I wonder what happens when you drink it |
+| 15 | drink of blood | removes 30 hp from the player |
+| 16 | drink of life | heals the player for 100 hp |
+| 17 | antimatter | explodes when dispensed from the machine |
 ## Template <a name="template"></a>
 <details>
 <summary>Drink</summary>

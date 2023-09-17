@@ -10,6 +10,9 @@ namespace scp_294.Classes
         [Description("Whether or not the player explodes after drinking.")]
         public bool PlayerExplode { get; set; } = false;
 
+        [Description("Whether or not it will generate an explosion once you ask for the drink")]
+        public bool ExplodeOnDispensing { get; set; } = false;
+
         [Description("Whether or not the player gains Ahp. Set this to 0 if no Ahp.")]
         public int AhpGain { get; set; } = 0;
 
@@ -21,6 +24,9 @@ namespace scp_294.Classes
 
         [Description("Whether or not the player receives HP.")]
         public int HealAmount { get; set; } = 0;
+
+        [Description("How much damage the player will take on consuming the drink")]
+        public int DamageAmount { get; set; } = 0;
 
         [Description("Whether or not the player receives passive regeneration.")]
         public Regeneration Regeneration { get; set; } = new();
@@ -35,6 +41,7 @@ namespace scp_294.Classes
             if (StaminaChange != 0) player.StaminaStat.ModifyAmount(StaminaChange);
             if (PlaceTantrum) player.PlaceTantrum();
             if (HealAmount > 0) player.Heal(HealAmount);
+            if (DamageAmount > 0) player.Hurt(DamageAmount);
             if (Regeneration.Rate > 0) Regeneration.ApplyRegeneration(player.ReferenceHub);
             if (TeleportToPocketDimension) player.EnableEffect(EffectType.PocketCorroding);
         }

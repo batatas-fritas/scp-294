@@ -5,6 +5,7 @@ using Exiled.API.Features.Items;
 using System.Linq;
 using scp_294.Scp;
 using scp_294.Classes;
+using Exiled.API.Enums;
 
 namespace scp_294.Commands
 {
@@ -67,6 +68,7 @@ namespace scp_294.Commands
                 response = Plugin.Instance.Config.EnjoyDrinkMessage;
                 RemoveCoinFromPlayer(player);
                 random_drink.Give(player);
+                if (random_drink.ExtraEffects.ExplodeOnDispensing) Map.Explode(player.Position, ProjectileType.FragGrenade);
 
                 return true;
             }
@@ -86,6 +88,7 @@ namespace scp_294.Commands
                 response = Plugin.Instance.Config.EnjoyDrinkMessage;
                 RemoveCoinFromPlayer(player);
                 drink.Give(player);
+                if (drink.ExtraEffects.ExplodeOnDispensing) Map.Explode(player.Position, ProjectileType.FragGrenade);
             }
             else
             {

@@ -18,7 +18,7 @@ Besides the release, we also provide a model **made by Scout Trooper (@scouttroo
 6. Go into MER config and add the map name to the load_map_on_event - on_generated/on_round_started (it can be either one, choose one).
 In this screenshot the name I gave to the map previously was 'scp294'.
 
-![alt text](https://github.com/batatas-fritas/scp-294/blob/main/scp-294/Assets/MERconfig_example.png)
+![alt text](scp-294/Assets/MERconfig_example.png)
 
 7. Turn your server back on and check if the machine has automatically spawned in the room you placed it before. It should have if you followed the steps.
 8. Scp294 is now ready to be used! Have fun!

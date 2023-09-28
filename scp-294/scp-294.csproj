@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Features\Machine.cs" />
     <Compile Include="Classes\AppearanceManager.cs" />
     <Compile Include="Classes\Drink.cs" />
     <Compile Include="Classes\Effect.cs" />
@@ -67,7 +68,7 @@
     <Compile Include="Configs\Config.cs" />
     <Compile Include="Configs\DrinksConfig.cs" />
     <Compile Include="Handlers\EventsHandler.cs" />
-    <Compile Include="Plugin.cs" />
+    <Compile Include="Scp294.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scp\Scp294.cs" />
   </ItemGroup>
@@ -76,5 +77,6 @@
       <Version>8.0.1</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

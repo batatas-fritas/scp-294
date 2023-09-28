@@ -1,6 +1,5 @@
 ﻿using Exiled.Events.EventArgs.Server;
 using MapEditorReborn.Events.EventArgs;
-using scp_294.Scp;
 
 namespace scp_294.Handlers
 {

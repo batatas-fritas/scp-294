@@ -67,10 +67,14 @@
     <Compile Include="Commands\Scp294Command.cs" />
     <Compile Include="Configs\Config.cs" />
     <Compile Include="Configs\DrinksConfig.cs" />
+    <Compile Include="Events\EventArgs\Drinks\ConsumedDrinkEventArgs.cs" />
+    <Compile Include="Events\EventArgs\Machines\PlayerEnteredRangeEventArgs.cs" />
+    <Compile Include="Events\EventArgs\Machines\PlayerLeftEventArgs.cs" />
+    <Compile Include="Events\Handlers\Drinks.cs" />
+    <Compile Include="Events\Handlers\Machines.cs" />
     <Compile Include="Handlers\EventsHandler.cs" />
     <Compile Include="Scp294.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scp\Scp294.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EXILED">

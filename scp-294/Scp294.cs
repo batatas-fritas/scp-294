@@ -24,7 +24,7 @@ namespace scp_294
         /// <summary>
         /// Gets the version of the Plugin.
         /// </summary>
-        public override Version Version => new Version(2, 0, 1);
+        public override Version Version => new Version(3, 0, 0);
 
         /// <summary>
         /// Gets the required Exiled Version of the Plugin.
@@ -49,9 +49,6 @@ namespace scp_294
             Handler = new EventsHandler();
             Schematic.SchematicSpawned += Handler.SchematicSpawned;
             Server.RoundEnded += Handler.OnRoundEnded;
-            Machines.PlayerEnteredRange += Handler.PlayerEnteredRange;
-            Machines.DispensedDrink += Handler.OnMachineDispensedDrink;
-            
         }
 
         /// <summary>
@@ -60,8 +57,6 @@ namespace scp_294
         private void UnsubscribeEvents()
         {
             Schematic.SchematicSpawned -= Handler.SchematicSpawned;
-            Machines.PlayerEnteredRange -= Handler.PlayerEnteredRange;
-            Machines.DispensedDrink -= Handler.OnMachineDispensedDrink;
             Server.RoundEnded -= Handler.OnRoundEnded;
             Handler = null!;
         }

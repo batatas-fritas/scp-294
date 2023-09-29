@@ -6,6 +6,7 @@ using scp_294.API.Features;
 using scp_294.Items;
 using scp_294.Events.EventArgs.Machines;
 using scp_294.Events.Handlers;
+using Exiled.API.Enums;
 
 namespace scp_294.Commands
 {
@@ -86,6 +87,7 @@ namespace scp_294.Commands
                 DispensedDrinkEventArgs dispensedDrinkEventArgs = new DispensedDrinkEventArgs(player, random_drink);
                 Log.Debug("Dispensed drink event about to be invoked...");
                 Machines.OnMachineDispensedDrink(dispensedDrinkEventArgs);
+                if (random_drink.ExtraEffects.ExplodeOnDispensing) Map.Explode(player.Position, ProjectileType.FragGrenade);
                 return true;
             }
 
@@ -108,6 +110,7 @@ namespace scp_294.Commands
                 DispensedDrinkEventArgs dispensedDrinkEventArgs = new DispensedDrinkEventArgs(player, drink);
                 Log.Debug("Dispensed drink event about to be invoked...");
                 Machines.OnMachineDispensedDrink(dispensedDrinkEventArgs);
+                if (drink.ExtraEffects.ExplodeOnDispensing) Map.Explode(player.Position, ProjectileType.FragGrenade);
             }
             else
             {

@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using MapEditorReborn.API.Features.Objects;
 
 namespace scp_294.API.Features
 {
@@ -261,6 +260,14 @@ namespace scp_294.API.Features
                         Log.Debug("Player has entered range... Invoking the event");
                         Machines.OnPlayerEnteredRange(playerEnteredRangeEventArgs);
                         PlayersInRange.Add(player);
+                        if (Scp294.Instance.Config.RandomMode)
+                        {
+                            player.ShowHint(Scp294.Instance.Config.ApproachMessageRandomMode);
+                        }
+                        else
+                        {
+                            player.ShowHint(Scp294.Instance.Config.ApproachMessage);
+                        }
                     }
 
                     if(!InRange(player) && PlayersInRange.Contains(player))

@@ -29,7 +29,7 @@ namespace scp_294
         /// <summary>
         /// Gets the required Exiled Version of the Plugin.
         /// </summary>
-        public override Version RequiredExiledVersion => new Version(8, 0, 0);
+        public override Version RequiredExiledVersion => new Version(8, 2, 1);
 
         /// <summary>
         /// Gets or sets the instance of the Plugin.
@@ -47,10 +47,10 @@ namespace scp_294
         private void SubscribeEvents()
         {
             Handler = new EventsHandler();
-            Machines.PlayerEnteredRange += Handler.PlayerEnteredRange;
-            Machines.DispensedDrink += Handler.OnMachineDispensedDrink;
             Schematic.SchematicSpawned += Handler.SchematicSpawned;
             Server.RoundEnded += Handler.OnRoundEnded;
+            Machines.PlayerEnteredRange += Handler.PlayerEnteredRange;
+            Machines.DispensedDrink += Handler.OnMachineDispensedDrink;
             
         }
 
@@ -63,7 +63,7 @@ namespace scp_294
             Machines.PlayerEnteredRange -= Handler.PlayerEnteredRange;
             Machines.DispensedDrink -= Handler.OnMachineDispensedDrink;
             Server.RoundEnded -= Handler.OnRoundEnded;
-            Handler = null;
+            Handler = null!;
         }
 
         /// <summary>
@@ -74,7 +74,6 @@ namespace scp_294
             Instance = this;
             Config.LoadConfigs();
             Machine.RegisterDrinks(Config.DrinksConfig.Drinks);
-            Machine.SyncSchematicsWithMachines();
             SubscribeEvents();
             base.OnEnabled();
         }
@@ -86,7 +85,7 @@ namespace scp_294
         {
             UnsubscribeEvents();
             Machine.UnregisterDrinks();
-            Machine.DestroyMachines();
+            Machine.StopMachines();
             Instance = null!;
             base.OnDisabled();
         }

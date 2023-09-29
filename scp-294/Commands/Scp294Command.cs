@@ -84,6 +84,7 @@ namespace scp_294.Commands
                 random_drink.Give(player);
                 
                 DispensedDrinkEventArgs dispensedDrinkEventArgs = new DispensedDrinkEventArgs(player, random_drink);
+                Log.Debug("Dispensed drink event about to be invoked...");
                 Machines.OnMachineDispensedDrink(dispensedDrinkEventArgs);
                 return true;
             }
@@ -105,6 +106,7 @@ namespace scp_294.Commands
                 drink.Give(player);
 
                 DispensedDrinkEventArgs dispensedDrinkEventArgs = new DispensedDrinkEventArgs(player, drink);
+                Log.Debug("Dispensed drink event about to be invoked...");
                 Machines.OnMachineDispensedDrink(dispensedDrinkEventArgs);
             }
             else

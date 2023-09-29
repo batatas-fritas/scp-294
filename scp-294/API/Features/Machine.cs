@@ -20,11 +20,6 @@ namespace scp_294.API.Features
         public static List<Machine> List = new();
 
         /// <summary>
-        /// Gets or sets the list of machine schematics that have been spawned.
-        /// </summary>
-        public static List<SchematicObject> MachinesSchematics { get; set; } = new();
-
-        /// <summary>
         /// Table that keeps every <see cref="Drink"/> registered by Id.
         /// </summary>
         private static Dictionary<uint, Drink> LookupIdTable = new();
@@ -56,6 +51,7 @@ namespace scp_294.API.Features
             Position = position;
             PlayersInRangeCoroutine = Timing.RunCoroutine(CheckPlayersAroundMachine());
             List.Add(this);
+            Log.Debug($"Created a machine at {position.x} {position.y} {position.z} in {room.RoomName}");
         }
 
         /// <summary>
@@ -74,27 +70,15 @@ namespace scp_294.API.Features
         private CoroutineHandle PlayersInRangeCoroutine { get; set; }
 
         /// <summary>
-        /// If there is a schematic spawned without a machine. It will create a machine there.
-        /// This method will be called from OnEnabled. Most of the time it won't do anything because there will be no machines schematics.
-        /// However, when the plugin is reloaded all machines class instances are cleared but schematics are not, so this will sync them up.
-        /// </summary>
-        public static void SyncSchematicsWithMachines()
-        {
-            foreach(SchematicObject schematic in MachinesSchematics)
-            {
-                if(!List.Any(machine => machine.Position == schematic.Position && machine.Room == schematic.CurrentRoom))
-                {
-                    new Machine(schematic.CurrentRoom, schematic.Position);
-                }
-            }
-        }
-
-        /// <summary>
         /// Destroys every <see cref="Machine"> in <see cref="List">. Stops their coroutines.
         /// </summary>
-        public static void DestroyMachines()
+        public static void StopMachines()
         {
-            foreach (Machine machine in Machine.List) machine.Destroy();
+            foreach (Machine machine in List)
+            {
+                machine.Stop();
+            }
+            List.Clear();
         }
 
         /// <summary>
@@ -105,10 +89,10 @@ namespace scp_294.API.Features
         {
             if (LookupIdTable.ContainsKey(drink.Id) || LookupStringTable.ContainsKey(drink.Name))
             {
-                Debug.Log($"Tried registering item that already exists: {drink.Name} {drink.Id}");
+                Log.Debug($"Tried registering item that already exists: {drink.Name} {drink.Id}");
                 return;
             }
-
+            Log.Debug($"Registering {drink.Name} with Id: {drink.Id}");
             LookupIdTable.Add(drink.Id, drink);
             LookupStringTable.Add(drink.Name, drink);
             drink.Init();
@@ -133,6 +117,7 @@ namespace scp_294.API.Features
             LookupIdTable.Clear();
             LookupStringTable.Clear();
             Drinks.Clear();
+            Log.Debug("Unregistered drinks.");
         }
 
         /// <summary>
@@ -244,12 +229,11 @@ namespace scp_294.API.Features
         }
 
         /// <summary>
-        /// Destroys the machine. Stops coroutine and removes it from <see cref="List"/>.
+        /// Stops the machine. Stops coroutine.
         /// </summary>
-        public void Destroy()
+        public void Stop()
         {
             Timing.KillCoroutines(PlayersInRangeCoroutine);
-            List.Remove(this);
         }
 
         /// <summary>
@@ -274,6 +258,7 @@ namespace scp_294.API.Features
                     if (InRange(player) && player.CurrentRoom == Room && !PlayersInRange.Contains(player))
                     {
                         PlayerEnteredRangeEventArgs playerEnteredRangeEventArgs = new PlayerEnteredRangeEventArgs(player, this);
+                        Log.Debug("Player has entered range... Invoking the event");
                         Machines.OnPlayerEnteredRange(playerEnteredRangeEventArgs);
                         PlayersInRange.Add(player);
                     }
@@ -281,6 +266,7 @@ namespace scp_294.API.Features
                     if(!InRange(player) && PlayersInRange.Contains(player))
                     {
                         PlayerLeftEventArgs playerLeftEventArgs = new PlayerLeftEventArgs(player, this);
+                        Log.Debug("Player has left range... Invoking the event");
                         Machines.OnPlayerLeft(playerLeftEventArgs);
                         PlayersInRange.Remove(player);
                     }

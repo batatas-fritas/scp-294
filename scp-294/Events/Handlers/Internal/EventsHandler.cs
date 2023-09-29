@@ -15,8 +15,7 @@ namespace scp_294.Events.Handlers.Internal
         /// <param name="ev">The <see cref="RoundEndedEventArgs"/> instance.</param>
         public void OnRoundEnded(RoundEndedEventArgs ev)
         {
-            Machine.DestroyMachines();
-            Machine.MachinesSchematics.Clear();
+            Machine.StopMachines();
         }
 
         /// <summary>
@@ -30,7 +29,6 @@ namespace scp_294.Events.Handlers.Internal
             if (ev.Schematic.Name == Scp294.Instance.Config.SchematicName)
             {
                 new Machine(ev.Schematic.CurrentRoom, ev.Schematic.Position);
-                Machine.MachinesSchematics.Add(ev.Schematic);
             }
         }
 
@@ -40,6 +38,7 @@ namespace scp_294.Events.Handlers.Internal
         /// <param name="ev">The <see cref="PlayerEnteredRangeEventArgs"/> instance.</param>
         public void PlayerEnteredRange(PlayerEnteredRangeEventArgs ev)
         {
+            Log.Debug("Player entered range event invoked successfully");
             if (Scp294.Instance.Config.RandomMode)
             {
                 ev.Player.ShowHint(Scp294.Instance.Config.ApproachMessageRandomMode);
@@ -55,6 +54,7 @@ namespace scp_294.Events.Handlers.Internal
         /// <param name="ev">The <see cref="DispensedDrinkEventArgs"/> instance.</param>
         public void OnMachineDispensedDrink(DispensedDrinkEventArgs ev)
         {
+            Log.Debug("On machine dispensing drink event invoked successfully");
             if (ev.Drink.ExtraEffects.ExplodeOnDispensing) Map.Explode(ev.Player.Position, ProjectileType.FragGrenade);
         }
     }

@@ -8,7 +8,7 @@ namespace scp_294.Events.Handlers
         /// <summary>
         /// Invoked after player has consumed a drink.
         /// </summary>
-        public static Event<ConsumedDrinkEventArgs> ConsumedDrink { get; set; } = new();
+        public static Event<ConsumedDrinkEventArgs> ConsumedDrink { get; set; } = new Event<ConsumedDrinkEventArgs>();
 
         /// <summary>
         /// Called after player has consumed a drink.

@@ -8,17 +8,17 @@ namespace scp_294.Events.Handlers
         /// <summary>
         /// Invoked after player has entered the range of a machine.
         /// </summary>
-        public static Event<PlayerEnteredRangeEventArgs> PlayerEnteredRange { get; set; } = new();
+        public static Event<PlayerEnteredRangeEventArgs> PlayerEnteredRange { get; set; } = new Event<PlayerEnteredRangeEventArgs>();
 
         /// <summary>
         /// Invoked after player has left the machine.
         /// </summary>
-        public static Event<PlayerLeftEventArgs> PlayerLeft { get; set; } = new();
+        public static Event<PlayerLeftEventArgs> PlayerLeft { get; set; } = new Event<PlayerLeftEventArgs>();
 
         /// <summary>
         /// Invoked after machine has dispensed a drink to a player.
         /// </summary>
-        public static Event<DispensedDrinkEventArgs> DispensedDrink { get; set; } = new();
+        public static Event<DispensedDrinkEventArgs> DispensedDrink { get; set; } = new Event<DispensedDrinkEventArgs>();
 
         /// <summary>
         /// Called after player has entered the range of a machine.

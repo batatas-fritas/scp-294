@@ -1,13 +1,14 @@
 ﻿using Exiled.API.Extensions;
 using Exiled.API.Features;
 using MEC;
-using scp_294.Classes;
+using scp_294.Items;
 using scp_294.Events.EventArgs.Machines;
 using scp_294.Events.Handlers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using MapEditorReborn.API.Features.Objects;
 
 namespace scp_294.API.Features
 {
@@ -17,6 +18,11 @@ namespace scp_294.API.Features
         /// List of every <see cref="Machine"/> spawned.
         /// </summary>
         public static List<Machine> List = new();
+
+        /// <summary>
+        /// Gets or sets the list of machine schematics that have been spawned.
+        /// </summary>
+        public static List<SchematicObject> MachinesSchematics { get; set; } = new();
 
         /// <summary>
         /// Table that keeps every <see cref="Drink"/> registered by Id.
@@ -68,6 +74,30 @@ namespace scp_294.API.Features
         private CoroutineHandle PlayersInRangeCoroutine { get; set; }
 
         /// <summary>
+        /// If there is a schematic spawned without a machine. It will create a machine there.
+        /// This method will be called from OnEnabled. Most of the time it won't do anything because there will be no machines schematics.
+        /// However, when the plugin is reloaded all machines class instances are cleared but schematics are not, so this will sync them up.
+        /// </summary>
+        public static void SyncSchematicsWithMachines()
+        {
+            foreach(SchematicObject schematic in MachinesSchematics)
+            {
+                if(!List.Any(machine => machine.Position == schematic.Position && machine.Room == schematic.CurrentRoom))
+                {
+                    new Machine(schematic.CurrentRoom, schematic.Position);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Destroys every <see cref="Machine"> in <see cref="List">. Stops their coroutines.
+        /// </summary>
+        public static void DestroyMachines()
+        {
+            foreach (Machine machine in Machine.List) machine.Destroy();
+        }
+
+        /// <summary>
         /// Registers a new drink into the lookup tables
         /// </summary>
         /// <param name="drink">Drink you want to register.</param>
@@ -85,10 +115,10 @@ namespace scp_294.API.Features
         }
 
         /// <summary>
-        /// Registers a enumerable of drinks into the lookup tables.
+        /// Registers a list of drinks into the lookup tables.
         /// </summary>
-        /// <param name="drinks">Enumerable of drinks</param>
-        public static void RegisterDrinks(IEnumerable<Drink> drinks)
+        /// <param name="drinks">List of drinks</param>
+        public static void RegisterDrinks(List<Drink> drinks)
         {
             foreach (Drink drink in drinks) RegisterDrink(drink);
         }
@@ -100,10 +130,21 @@ namespace scp_294.API.Features
         {
             foreach (Drink drink in Drinks) drink.Destroy();
 
-            LookupIdTable = new();
-            LookupStringTable = new();
-            Drinks = new();
+            LookupIdTable.Clear();
+            LookupStringTable.Clear();
+            Drinks.Clear();
         }
+
+        /// <summary>
+        /// Returns a list of <see cref="Drink"/>.
+        /// </summary>
+        public static List<Drink> GetDrinks() => Drinks;
+
+        /// <summary>
+        /// Returns a string with every <see cref="Drink"/>.
+        /// </summary>
+        /// <param name="separator">The separator between each drink name</param>
+        public static string GetDrinksToString(string separator) => string.Join(separator, Drinks.Select(d => d.Name));
 
         /// <summary>
         /// Gets a drink by name or alias.
@@ -118,6 +159,50 @@ namespace scp_294.API.Features
                 if(drink.Aliases.Contains(name)) return drink;
             }
             return null;
+        }
+
+        /// <summary>
+        /// Try and gets a drink by name or alias.
+        /// </summary>
+        /// <param name="name">Name or alias of the drink.</param>
+        /// <param name="drink">Drink that will be assigned.</param>
+        /// <returns>True if successful, false otherwise.</returns>
+        public static bool TryGetDrink(string name, out Drink drink)
+        {
+            if (LookupStringTable.ContainsKey(name))
+            {
+                drink = LookupStringTable[name];
+                return true;
+            }
+
+            foreach (Drink d in Drinks)
+            {
+                if (d.Aliases.Contains(name))
+                {
+                    drink = d;
+                    return true;
+                }
+            }
+            drink = null;
+            return false;
+        }
+
+        /// <summary>
+        /// Try and gets a drink by Id.
+        /// </summary>
+        /// <param name="id">Id of the drink.</param>
+        /// <param name="drink">Drink that will be assigned.</param>
+        /// <returns>True if successful, false otherwise.</returns>
+        public static bool TryGetDrink(uint id, out Drink drink)
+        {
+            if(LookupIdTable.ContainsKey(id))
+            {
+                drink = LookupIdTable[id];
+                return true;
+            }
+
+            drink = null;
+            return false;
         }
 
         /// <summary>
@@ -159,9 +244,17 @@ namespace scp_294.API.Features
         }
 
         /// <summary>
+        /// Destroys the machine. Stops coroutine and removes it from <see cref="List"/>.
+        /// </summary>
+        public void Destroy()
+        {
+            Timing.KillCoroutines(PlayersInRangeCoroutine);
+            List.Remove(this);
+        }
+
+        /// <summary>
         /// Checks if given player is in range of this machine
         /// </summary>
-        /// <returns></returns>
         private bool InRange(Player player)
         {
             return Vector3.Distance(player.Position, Position) < Scp294.Instance.Config.Range;

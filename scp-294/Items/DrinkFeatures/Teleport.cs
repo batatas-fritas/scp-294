@@ -6,25 +6,43 @@ using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 
-namespace scp_294.Classes
+namespace scp_294.Items.DrinkFeatures
 {
     public class Teleport
     {
+        /// <summary>
+        /// Gets or sets whether or not the player should be teleported.
+        /// </summary>
         [Description("Whether or not the player is teleported")]
         public bool PlayerTeleport { get; set; } = false;
 
+        /// <summary>
+        /// Gets or sets whether or not the player can teleport out of the pocket dimension.
+        /// </summary>
         [Description("Whether or not the player can teleport out of the pocket dimension")]
         public bool CanPlayerEscapePocketDimension { get; set; } = false;
 
+        /// <summary>
+        /// Gets or sets the message that appears when a player is prevented from leaving the pocket dimension.
+        /// </summary>
         [Description("Message that appears when player is prevented from leaving the pocket dimension")]
         public string MessagePreventingPocketTeleport { get; set; } = "";
 
+        /// <summary>
+        /// Gets or sets the ZoneType the player will be teleported to.
+        /// </summary>
         [Description("The zone to which the player will be teleported to. If this is anything but Unspecified it will teleport the player to a random room within that zone")]
         public ZoneType Zone { get; set; } = ZoneType.Unspecified;
 
+        /// <summary>
+        /// Gets or sets the RoomType the player will be teleported to.
+        /// </summary>
         [Description("Ignored if zone is anything other than Unspecified. Room that the player will teleport too. Set this to Unknown along with Zone Unspecified to teleport to a random place across the entire facility")]
         public RoomType Room { get; set; } = RoomType.Unknown;
 
+        /// <summary>
+        /// Gets the teleport location.
+        /// </summary>
         public Vector3? GetTeleportLocation()
         {
             if(Zone == ZoneType.Unspecified && Room == RoomType.Unknown)
@@ -52,6 +70,10 @@ namespace scp_294.Classes
             return null;
         }
 
+        /// <summary>
+        /// Tries to teleport the player.
+        /// </summary>
+        /// <param name="player">The <see cref="Player"/> instance.</param>
         public void TryTeleport(Player player)
         {
             if (!CanPlayerEscapePocketDimension && player.CurrentRoom.Type == RoomType.Pocket)

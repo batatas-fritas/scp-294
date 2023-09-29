@@ -16,6 +16,11 @@ namespace scp_294.Events.Handlers
         public static Event<PlayerLeftEventArgs> PlayerLeft { get; set; } = new();
 
         /// <summary>
+        /// Invoked after machine has dispensed a drink to a player.
+        /// </summary>
+        public static Event<DispensedDrinkEventArgs> DispensedDrink { get; set; } = new();
+
+        /// <summary>
         /// Called after player has entered the range of a machine.
         /// </summary>
         /// <param name="ev">The <see cref="PlayerEnteredRangeEventArgs"/> instance.</param>
@@ -26,6 +31,12 @@ namespace scp_294.Events.Handlers
         /// </summary>
         /// <param name="ev">The <see cref="PlayerLeftEventArgs"/> instance.</param>
         public static void OnPlayerLeft(PlayerLeftEventArgs ev) => PlayerLeft.InvokeSafely(ev);
+
+        /// <summary>
+        /// Called after machine has dispensed a drink to a player.
+        /// </summary>
+        /// <param name="ev">The <see cref="DispensedDrinkEventArgs"/> instance.</param>
+        public static void OnMachineDispensedDrink(DispensedDrinkEventArgs ev) => DispensedDrink.InvokeSafely(ev);
 
     }
 }

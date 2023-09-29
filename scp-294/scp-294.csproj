@@ -56,13 +56,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\Features\Machine.cs" />
-    <Compile Include="Classes\AppearanceManager.cs" />
-    <Compile Include="Classes\Drink.cs" />
-    <Compile Include="Classes\Effect.cs" />
-    <Compile Include="Classes\Intensity.cs" />
-    <Compile Include="Classes\Regeneration.cs" />
-    <Compile Include="Classes\SpecialEffects.cs" />
-    <Compile Include="Classes\Teleport.cs" />
+    <Compile Include="Events\EventArgs\Machines\DispensedDrinkEventArgs.cs" />
+    <Compile Include="Items\DrinkFeatures\AppearanceManager.cs" />
+    <Compile Include="Items\Drink.cs" />
+    <Compile Include="Items\DrinkFeatures\Effect.cs" />
+    <Compile Include="Items\DrinkFeatures\Intensity.cs" />
+    <Compile Include="Items\DrinkFeatures\Regeneration.cs" />
+    <Compile Include="Items\DrinkFeatures\SpecialEffects.cs" />
+    <Compile Include="Items\DrinkFeatures\Teleport.cs" />
     <Compile Include="Commands\DrinksCommand.cs" />
     <Compile Include="Commands\Scp294Command.cs" />
     <Compile Include="Configs\Config.cs" />
@@ -72,7 +73,7 @@
     <Compile Include="Events\EventArgs\Machines\PlayerLeftEventArgs.cs" />
     <Compile Include="Events\Handlers\Drinks.cs" />
     <Compile Include="Events\Handlers\Machines.cs" />
-    <Compile Include="Handlers\EventsHandler.cs" />
+    <Compile Include="Events\Handlers\Internal\EventsHandler.cs" />
     <Compile Include="Scp294.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

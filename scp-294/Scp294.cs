@@ -1,19 +1,16 @@
 ﻿using Exiled.API.Features;
 using System;
-using Server = Exiled.Events.Handlers.Server;
 using Schematic = MapEditorReborn.Events.Handlers.Schematic;
-using scp_294.Handlers;
+using Server = Exiled.Events.Handlers.Server;
 using scp_294.Configs;
+using scp_294.Events.Handlers;
+using scp_294.API.Features;
+using scp_294.Events.Handlers.Internal;
 
 namespace scp_294
 {
     public class Scp294 : Plugin<Config>
     {
-        /// <summary>
-        /// Gets or sets the event handler of the plugin.
-        /// </summary>
-        private EventsHandler Handler {  get; set; }
-
         /// <summary>
         /// Gets the name of the Plugin.
         /// </summary>
@@ -40,13 +37,21 @@ namespace scp_294
         public static Scp294 Instance { get; private set; }
 
         /// <summary>
+        /// Gets or sets the event handler of the plugin.
+        /// </summary>
+        private EventsHandler Handler { get; set; }
+
+        /// <summary>
         /// Subscribes to all events necessary.
         /// </summary>
         private void SubscribeEvents()
         {
             Handler = new EventsHandler();
-            Server.RoundEnded += Handler.OnRoundEnded;
+            Machines.PlayerEnteredRange += Handler.PlayerEnteredRange;
+            Machines.DispensedDrink += Handler.OnMachineDispensedDrink;
             Schematic.SchematicSpawned += Handler.SchematicSpawned;
+            Server.RoundEnded += Handler.OnRoundEnded;
+            
         }
 
         /// <summary>
@@ -54,8 +59,10 @@ namespace scp_294
         /// </summary>
         private void UnsubscribeEvents()
         {
-            Server.RoundEnded -= Handler.OnRoundEnded;
             Schematic.SchematicSpawned -= Handler.SchematicSpawned;
+            Machines.PlayerEnteredRange -= Handler.PlayerEnteredRange;
+            Machines.DispensedDrink -= Handler.OnMachineDispensedDrink;
+            Server.RoundEnded -= Handler.OnRoundEnded;
             Handler = null;
         }
 
@@ -66,6 +73,8 @@ namespace scp_294
         {
             Instance = this;
             Config.LoadConfigs();
+            Machine.RegisterDrinks(Config.DrinksConfig.Drinks);
+            Machine.SyncSchematicsWithMachines();
             SubscribeEvents();
             base.OnEnabled();
         }
@@ -76,6 +85,8 @@ namespace scp_294
         public override void OnDisabled()
         {
             UnsubscribeEvents();
+            Machine.UnregisterDrinks();
+            Machine.DestroyMachines();
             Instance = null!;
             base.OnDisabled();
         }

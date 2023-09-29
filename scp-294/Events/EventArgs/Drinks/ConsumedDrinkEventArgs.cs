@@ -1,6 +1,6 @@
 ﻿using Exiled.API.Features;
 using Exiled.Events.EventArgs.Interfaces;
-using scp_294.Classes;
+using scp_294.Items;
 
 namespace scp_294.Events.EventArgs.Drinks
 {

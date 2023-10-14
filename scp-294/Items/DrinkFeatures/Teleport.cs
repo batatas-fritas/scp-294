@@ -95,7 +95,7 @@ namespace scp_294.Items.DrinkFeatures
                 return;
             }
 
-            if(!CanPlayerTeleportAfterNuke)
+            if(!CanPlayerTeleportAfterNuke && Warhead.IsDetonated)
             {
                 player.ShowHint(MessagePreventingTeleportAfterNuke);
                 return;

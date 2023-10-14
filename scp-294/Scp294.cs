@@ -24,7 +24,7 @@ namespace scp_294
         /// <summary>
         /// Gets the version of the Plugin.
         /// </summary>
-        public override Version Version => new Version(3, 0, 0);
+        public override Version Version => new Version(3, 0, 1);
 
         /// <summary>
         /// Gets the required Exiled Version of the Plugin.

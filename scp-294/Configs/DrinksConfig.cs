@@ -1,12 +1,17 @@
 ﻿using Exiled.API.Enums;
 using PlayerRoles;
-using scp_294.Classes;
+using scp_294.Items;
+using scp_294.Items.DrinkFeatures;
 using System.Collections.Generic;
 
 namespace scp_294.Configs
 {
     public class DrinksConfig
     {
+
+        /// <summary>
+        /// Default drinks that will be loaded upon initializing the plugin.
+        /// </summary>
         public List<Drink> Drinks { get; set; } = new()
         {
             new Drink()
@@ -269,7 +274,36 @@ namespace scp_294.Configs
                 Aliases = { "anti-matter", "void" },
                 Description = "You feel as if you are being sucked into the drink",
                 ExtraEffects = { ExplodeOnDispensing = true }
-            }
+            },
+            new Drink()
+            {
+                Id = 18,
+                Name = "shrink potion",
+                Description = "God! That looks tasty",
+                ScalingOptions =
+                {
+                    x = 0.2,
+                    y = 0.2,
+                    z = 0.2,
+                }
+            },
+            new Drink()
+            {
+                Id = 19,
+                Name = "drink of chaos",
+                Description = "I wonder what it tastes like",
+                RoleManagerOptions =
+                {
+                    PlayerChangeRoles = true,
+                    Roles =
+                    {
+                        RoleTypeId.ChaosRifleman,
+                        RoleTypeId.ChaosMarauder,
+                        RoleTypeId.ChaosConscript,
+                        RoleTypeId.ChaosRepressor,
+                    }
+                },
+            },
         };
     }
 }

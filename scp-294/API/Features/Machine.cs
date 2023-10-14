@@ -94,6 +94,7 @@ namespace scp_294.API.Features
             Log.Debug($"Registering {drink.Name} with Id: {drink.Id}");
             LookupIdTable.Add(drink.Id, drink);
             LookupStringTable.Add(drink.Name, drink);
+            Drinks.Add(drink);
             drink.Init();
         }
 

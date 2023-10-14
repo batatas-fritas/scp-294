@@ -1,6 +1,7 @@
 ﻿using CommandSystem;
 using Exiled.API.Features;
-using scp_294.Classes;
+using scp_294.API.Features;
+using scp_294.Items;
 using System;
 using System.Linq;
 
@@ -10,14 +11,32 @@ namespace scp_294.Commands
     [CommandHandler(typeof(GameConsoleCommandHandler))]
     public class DrinksCommand : ICommand
     {
+        /// <summary>
+        /// Gets command name.
+        /// </summary>
         public string Command => "customdrinks";
 
+        /// <summary>
+        /// Gets aliases.
+        /// </summary>
         public string[] Aliases => new string[] {  };
 
+        /// <summary>
+        /// Gets command's description.
+        /// </summary>
         public string Description => "Allows admins to spawn in drinks from scp294 and see registered drinks";
 
+        /// <summary>
+        /// Gets command's usage.
+        /// </summary>
         private string Usage => "\ncustomdrinks:\ncustomdrinks give [id] [player_name/player_id/all] -> gives the indicated player the drink with the id provided. If player occulted, it will give it to the command sender.\ncustomdrinks list -> lists every registered drink.";
 
+        /// <summary>
+        /// Executes the command.
+        /// </summary>
+        /// <param name="arguments">Players input.</param>
+        /// <param name="sender">Sender of the command.</param>
+        /// <param name="response">Response of the command.</param>
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             if(arguments.Count == 0)
@@ -28,7 +47,7 @@ namespace scp_294.Commands
             
             if(arguments.At(0) == "list")
             {
-                response = GetDrinkList();
+                response = "\n" + Machine.GetDrinksToString("\n");
                 return true;
             }
 
@@ -45,7 +64,7 @@ namespace scp_294.Commands
                     {
                         Player player = GetPlayer(player_id);
 
-                        if (!Plugin.Instance.LookupIdTable.TryGetValue(drink_id, out drink))
+                        if (!Machine.TryGetDrink(drink_id, out drink))
                         {
                             response = $"Drink with id: {drink_id} not registered";
                             return true;
@@ -59,7 +78,7 @@ namespace scp_294.Commands
                         }
                     } else
                     {
-                        if (!Plugin.Instance.LookupIdTable.TryGetValue(drink_id, out drink))
+                        if (!Machine.TryGetDrink(drink_id, out drink))
                         {
                             response = $"Drink with id: {drink_id} not registered";
                             return true;
@@ -79,14 +98,13 @@ namespace scp_294.Commands
                             response = $"Gave {drink.Name} to player {player.Nickname}";
                             return true;
                         }
-
                     }
                 }
 
                 if(arguments.Count == 2) {
                     Drink drink;
 
-                    if (!Plugin.Instance.LookupIdTable.TryGetValue(drink_id, out drink))
+                    if (!Machine.TryGetDrink(drink_id, out drink))
                     {
                         response = $"Drink with id: {drink_id} not registered";
                         return true;
@@ -106,11 +124,12 @@ namespace scp_294.Commands
             return true;
         }
 
-        private string GetDrinkList()
-        {
-            return "\n" + string.Join("\n", Plugin.Instance.Drinks.Select(drink => $"[{drink.Id}] Name: {drink.Name} | Aliases: {string.Join(" | ", drink.Aliases)}"));
-        }
 
+        /// <summary>
+        /// Gets the player by Id.
+        /// </summary>
+        /// <param name="id">Player Id.</param>
+        /// <returns>If found, returns the player else null.</returns>
         private Player GetPlayer(int id)
         {
             foreach(Player player in Player.List)
@@ -120,6 +139,11 @@ namespace scp_294.Commands
             return null;
         }
 
+        /// <summary>
+        /// Gets the player by <see cref="CommandSender"/> instance.
+        /// </summary>
+        /// <param name="sender">The <see cref="CommandSender"> instance.</param>
+        /// <returns>If found, returns the player else null.</returns>
         private Player GetPlayer(CommandSender sender) 
         {
             foreach (Player player in Player.List)
@@ -129,6 +153,11 @@ namespace scp_294.Commands
             return null;
         }
 
+        /// <summary>
+        /// Gets the player by name.
+        /// </summary>
+        /// <param name="name">The name of the player.</param>
+        /// <returns>If found, returns the player else null.</returns>
         private Player GetPlayer(string name)
         {
             foreach (Player player in Player.List)

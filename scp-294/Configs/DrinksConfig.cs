@@ -1,12 +1,17 @@
 ﻿using Exiled.API.Enums;
 using PlayerRoles;
-using scp_294.Classes;
+using scp_294.Items;
+using scp_294.Items.DrinkFeatures;
 using System.Collections.Generic;
 
 namespace scp_294.Configs
 {
     public class DrinksConfig
     {
+
+        /// <summary>
+        /// Default drinks that will be loaded upon initializing the plugin.
+        /// </summary>
         public List<Drink> Drinks { get; set; } = new()
         {
             new Drink()

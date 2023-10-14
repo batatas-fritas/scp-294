@@ -26,7 +26,7 @@ namespace scp_294.Items.DrinkFeatures
         /// Gets or sets the message that appears when a player is prevented from leaving the pocket dimension.
         /// </summary>
         [Description("Message that appears when player is prevented from leaving the pocket dimension")]
-        public string MessagePreventingPocketTeleport { get; set; } = "";
+        public string MessagePreventingPocketTeleport { get; set; } = "A magical force prevents you from teleporting out of the pocket dimension";
 
         /// <summary>
         /// Gets or sets whether or not the player is able to teleport after the nuke has exploded.

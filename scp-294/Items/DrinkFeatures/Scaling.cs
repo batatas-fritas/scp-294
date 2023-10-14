@@ -10,19 +10,19 @@ namespace scp_294.Items.DrinkFeatures
         /// Gets or sets the amount the player will be scaled on x-axis.
         /// </summary>
         [Description("How much the player should be scaled on x-axis")]
-        public float x { get; set; } = 1;
+        public double x { get; set; } = 1;
 
         /// <summary>
         /// Gets or sets the amount the player will be scaled on y-axis.
         /// </summary>
         [Description("How much the player should be scaled on y-axis")]
-        public float y { get; set; } = 1;
+        public double y { get; set; } = 1;
 
         /// <summary>
         /// Gets or sets the amount the player will be scaled on z-axis.
         /// </summary>
         [Description("How much the player should be scaled on z-axis")]
-        public float z { get; set; } = 1;
+        public double z { get; set; } = 1;
 
         /// <summary>
         /// Applies the scale to the player.

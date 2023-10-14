@@ -25,7 +25,7 @@ namespace scp_294.Items.DrinkFeatures
         /// <param name="player">The <see cref="Player"/> instance.</param>
         public void ChangeRole(Player player)
         {
-            player.Role.Set(Roles.RandomItem());
+            player.Role.Set(Roles.RandomItem(), RoleSpawnFlags.None);
         }
     }
 }

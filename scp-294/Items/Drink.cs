@@ -68,6 +68,16 @@ namespace scp_294.Items
         /// </summary>
         public SpecialEffects ExtraEffects { get; set; } = new();
 
+        /// <summary>
+        /// Gets or sets the <see cref="Scaling"/> instance.
+        /// </summary>
+        public Scaling ScalingOptions { get; set; } = new();
+
+        /// <summary>
+        /// Gets or sets the <see cref="RoleManager"/> instance.
+        /// </summary>
+        public RoleManager RoleManagerOptions { get; set; } = new();
+
         /// <inheritdoc/>
         public override SpawnProperties SpawnProperties { get; set; } = new();
 
@@ -118,6 +128,10 @@ namespace scp_294.Items
             if (TeleportManager.PlayerTeleport) TeleportManager.TryTeleport(ev.Player);
 
             if (AppearanceOptions.ChangePlayerAppearance) AppearanceOptions.ChangeAppearance(ev.Player);
+
+            if (RoleManagerOptions.PlayerChangeRoles) RoleManagerOptions.ChangeRole(ev.Player);
+
+            ScalingOptions.ScalePlayer(ev.Player);
 
             ApplyEffects(ev.Player);
 

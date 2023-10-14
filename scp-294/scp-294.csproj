@@ -62,6 +62,8 @@
     <Compile Include="Items\DrinkFeatures\Effect.cs" />
     <Compile Include="Items\DrinkFeatures\Intensity.cs" />
     <Compile Include="Items\DrinkFeatures\Regeneration.cs" />
+    <Compile Include="Items\DrinkFeatures\RoleManager.cs" />
+    <Compile Include="Items\DrinkFeatures\Scaling.cs" />
     <Compile Include="Items\DrinkFeatures\SpecialEffects.cs" />
     <Compile Include="Items\DrinkFeatures\Teleport.cs" />
     <Compile Include="Commands\DrinksCommand.cs" />

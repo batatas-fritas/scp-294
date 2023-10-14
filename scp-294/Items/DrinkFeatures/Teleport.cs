@@ -29,6 +29,18 @@ namespace scp_294.Items.DrinkFeatures
         public string MessagePreventingPocketTeleport { get; set; } = "";
 
         /// <summary>
+        /// Gets or sets whether or not the player is able to teleport after the nuke has exploded.
+        /// </summary>
+        [Description("Whether or not the player is able to teleport after the nuke has exploded.")]
+        public bool CanPlayerTeleportAfterNuke { get; set; } = false;
+
+        /// <summary>
+        /// Gets or sets the message that appears when a player is prevented from teleporting after the nuke has exploded.
+        /// </summary>
+        [Description("The message that appears when a player is prevented from teleporting after the nuke has exploded..")]
+        public string MessagePreventingTeleportAfterNuke { get; set; } = "The nuke has exploded, you would end up locked up in the facility along with toxic gas.";
+
+        /// <summary>
         /// Gets or sets the ZoneType the player will be teleported to.
         /// </summary>
         [Description("The zone to which the player will be teleported to. If this is anything but Unspecified it will teleport the player to a random room within that zone")]
@@ -80,6 +92,12 @@ namespace scp_294.Items.DrinkFeatures
             {
                 Log.Debug($"TryTeleport: {MessagePreventingPocketTeleport}");
                 player.ShowHint(MessagePreventingPocketTeleport);
+                return;
+            }
+
+            if(!CanPlayerTeleportAfterNuke)
+            {
+                player.ShowHint(MessagePreventingTeleportAfterNuke);
                 return;
             }
 

@@ -230,7 +230,7 @@ namespace scp_294.API.Features
         /// <summary>
         /// Stops the machine. Stops coroutine.
         /// </summary>
-        public void Stop()
+        private void Stop()
         {
             Timing.KillCoroutines(PlayersInRangeCoroutine);
         }

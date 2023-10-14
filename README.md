@@ -56,6 +56,8 @@ You create your own drinks and modify existing ones through the drinks config. A
 | 15 | drink of blood | removes 30 hp from the player |
 | 16 | drink of life | heals the player for 100 hp |
 | 17 | antimatter | explodes when dispensed from the machine |
+| 18 | shrink potion | shrinks the player |
+| 19 | drink of chaos | turns the player into a chaos role |
 ## Template <a name="template"></a>
 <details>
 <summary>Drink</summary>
@@ -85,7 +87,11 @@ You create your own drinks and modify existing ones through the drinks config. A
     # Whether or not the player can teleport out of the pocket dimension
     can_player_escape_pocket_dimension: false
     # Message that appears when player is prevented from leaving the pocket dimension
-    message_preventing_pocket_teleport: ''
+    message_preventing_pocket_teleport: 'A magical force prevents you from teleporting.'
+    # Whether or not the player is able to teleport after the nuke has exploded.
+    can_player_teleport_after_nuke: false
+    # The message that appears when a player is prevented from teleporting after the nuke has exploded..
+    message_preventing_teleport_after_nuke: 'The nuke has exploded, you would end up locked up in the facility along with toxic gas.'
     # The zone to which the player will be teleported to. If this is anything but Unspecified it will teleport the player to a random room within that zone
     zone: Unspecified
     # Ignored if zone is anything other than Unspecified. Room that the player will teleport too. Set this to Unknown along with Zone Unspecified to teleport to a random place across the entire facility
@@ -104,6 +110,8 @@ You create your own drinks and modify existing ones through the drinks config. A
   extra_effects:
   # Whether or not the player explodes after drinking.
     player_explode: false
+    # Whether or not it will generate an explosion once you ask for the drink
+    explode_on_dispensing: false
     # Whether or not the player gains Ahp. Set this to 0 if no Ahp.
     ahp_gain: 0
     # Whether or not the player gains/loses stamina. Value between -1 and 1. 0 for no change.
@@ -112,8 +120,28 @@ You create your own drinks and modify existing ones through the drinks config. A
     place_tantrum: false
     # Whether or not the player receives HP.
     heal_amount: 0
+    # How much damage the player will take on consuming the drink
+    damage_amount: 0
+    # Whether or not the player receives passive regeneration.
+    regeneration:
+    # Rate of the regeneration.
+      rate: 0
+      # Duration of the regeneration.
+      duration: 0
     # Whether or not the player gets teleported to pocket dimension.
     teleport_to_pocket_dimension: false
+  scaling_options:
+  # How much the player should be scaled on x-axis
+    x: 1
+    # How much the player should be scaled on y-axis
+    y: 1
+    # How much the player should be scaled on z-axis
+    z: 1
+  role_manager_options:
+  # Whether or not the player should change roles.
+    player_change_roles: false
+    # Roles the player will be able to turn to. It will choose one randomly. If there is only one it will choose that one.
+    roles: []
   spawn_properties:
     limit: 0
     dynamic_spawn_points: []
